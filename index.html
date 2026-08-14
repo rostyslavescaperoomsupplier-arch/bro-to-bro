@@ -241,17 +241,17 @@
         <h3 data-i18n="book.h1">Co chcesz zrobić</h3>
         <p class="hint" data-i18n="book.hint1">Jeśli korzystałeś z konfiguratora, pola są już wypełnione.</p>
         <div class="grid2">
-          <div><label class="field" for="bStyle" style="display:block"><span style="font-size:.8rem;color:var(--muted)" data-i18n="book.fStyle">Styl</span></label>
+          <div><label for="bStyle"><span class="lbl" data-i18n="book.fStyle">Styl</span></label>
             <input class="inp" id="bStyle" value="Linework"></div>
-          <div><label class="field" for="bPlace" style="display:block"><span style="font-size:.8rem;color:var(--muted)" data-i18n="book.fPlace">Miejsce</span></label>
+          <div><label for="bPlace"><span class="lbl" data-i18n="book.fPlace">Miejsce</span></label>
             <input class="inp" id="bPlace" value="przedramię"></div>
-          <div><label class="field" for="bSize" style="display:block"><span style="font-size:.8rem;color:var(--muted)" data-i18n="book.fSize">Rozmiar</span></label>
+          <div><label for="bSize"><span class="lbl" data-i18n="book.fSize">Rozmiar</span></label>
             <input class="inp" id="bSize" value="15 cm"></div>
-          <div><label class="field" for="bFirst" style="display:block"><span style="font-size:.8rem;color:var(--muted)" data-i18n="book.fFirst">Pierwszy tatuaż</span></label>
+          <div><label for="bFirst"><span class="lbl" data-i18n="book.fFirst">Pierwszy tatuaż</span></label>
             <select class="inp" id="bFirst"><option data-i18n="book.no">Nie</option><option data-i18n="book.yes">Tak</option></select></div>
         </div>
         <div class="field" style="margin-top:16px">
-          <label for="bIdea" style="font-size:.8rem;color:var(--muted)" data-i18n="book.fIdea">Opis pomysłu</label>
+          <label for="bIdea" class="lbl" data-i18n="book.fIdea">Opis pomysłu</label>
           <input class="inp" id="bIdea" data-ph="book.phIdea" placeholder="np. wilk w stylu graphic, czerń, na zewnętrznej stronie przedramienia">
         </div>
         <div class="step-nav"><span></span><button class="btn btn-primary" type="button" data-next="2"><span data-i18n="book.next">Dalej</span><i class="ph ph-arrow-right" aria-hidden="true"></i></button></div>
@@ -261,14 +261,14 @@
         <h3 data-i18n="book.h2">Kiedy pasuje</h3>
         <p class="hint" data-i18n="book.hint2">Ekipa często jeździ na konwenty w Europie, więc podaj widełki, a my dopasujemy termin.</p>
         <div class="grid2">
-          <div><label for="bWhen" style="font-size:.8rem;color:var(--muted)" data-i18n="book.fWhen">Preferowany okres</label>
+          <div><label for="bWhen" class="lbl" data-i18n="book.fWhen">Preferowany okres</label>
             <select class="inp" id="bWhen">
               <option data-i18n="book.w1">Najbliższy wolny termin</option>
               <option data-i18n="book.w2">W ciągu 2 tygodni</option>
               <option data-i18n="book.w3">W tym miesiącu</option>
               <option data-i18n="book.w4">Jestem elastyczny</option>
             </select></div>
-          <div><label for="bDay" style="font-size:.8rem;color:var(--muted)" data-i18n="book.fDay">Pora dnia</label>
+          <div><label for="bDay" class="lbl" data-i18n="book.fDay">Pora dnia</label>
             <select class="inp" id="bDay">
               <option data-i18n="book.p1">Rano</option>
               <option data-i18n="book.p2">Popołudnie</option>
@@ -287,12 +287,12 @@
         <p class="hint" data-i18n="book.hint3">Wystarczy imię i jeden kanał kontaktu.</p>
         <div class="grid2">
           <div>
-            <label for="bName" style="font-size:.8rem;color:var(--muted)" data-i18n="book.fName">Imię</label>
+            <label for="bName" class="lbl" data-i18n="book.fName">Imię</label>
             <input class="inp" id="bName" data-ph="book.phName" placeholder="Jak masz na imię">
             <p class="err" id="errName" data-i18n="book.errName">Wpisz imię, żebyśmy wiedzieli, jak się zwracać.</p>
           </div>
           <div>
-            <label for="bContact" style="font-size:.8rem;color:var(--muted)" data-i18n="book.fContact">Instagram lub telefon</label>
+            <label for="bContact" class="lbl" data-i18n="book.fContact">Instagram lub telefon</label>
             <input class="inp" id="bContact" data-ph="book.phContact" placeholder="@nick albo numer">
             <p class="err" id="errContact" data-i18n="book.errContact">Podaj nick na Instagramie albo numer telefonu.</p>
           </div>
@@ -372,7 +372,7 @@
     </div>
 
     <aside class="contact-card rv" data-d="1">
-      <h3 style="font-size:1.25rem" data-i18n="contact.h">Gdzie nas znaleźć</h3>
+      <h3 class="card-h" data-i18n="contact.h">Gdzie nas znaleźć</h3>
       <div class="contact-list">
         <span><i class="ph ph-map-pin" aria-hidden="true"></i><span data-i18n="contact.addr">Grizzly Barber Shop, ul. Mickiewicza 36A, Szczecin<small>Studio działa wewnątrz barbershopu</small></span></span>
         <a href="tel:+48579128368"><i class="ph ph-phone" aria-hidden="true"></i><span>579 128 368<small data-i18n="contact.callHint">Telefon i wiadomości</small></span></a>
@@ -381,7 +381,7 @@
         <span><i class="ph ph-clock" aria-hidden="true"></i><span data-i18n="contact.hours">Codziennie 10:00 - 20:00<small>Sesje po wcześniejszym umówieniu</small></span></span>
         <span><i class="ph ph-airplane-tilt" aria-hidden="true"></i><span data-i18n="contact.tour">Część terminów robimy na konwentach<small>Niemcy, Francja, Belgia, Szwajcaria, Austria</small></span></span>
       </div>
-      <p style="font-size:.82rem;color:var(--muted)" data-i18n="contact.langs">Mówimy po polsku, angielsku, ukraińsku i białorusku.</p>
+      <p class="lbl" data-i18n="contact.langs">Mówimy po polsku, angielsku, ukraińsku i białorusku.</p>
       <a class="btn btn-primary" href="#zapisy" style="margin-top:20px"><span data-i18n="contact.cta">Umów konsultację</span></a>
     </aside>
   </div>
