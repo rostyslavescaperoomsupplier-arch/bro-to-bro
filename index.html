@@ -1,0 +1,1148 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BRO TO BRO Tattoo Art Studio Szczecin | tatuaż, handpoke, piercing</title>
+<meta name="description" content="BRO TO BRO Tattoo Art Studio to kolektyw tatuatorów ze Szczecina. Realism, blackwork, dotwork, old school i handpoke. Konsultacja i projekt gratis, wycena online.">
+<meta name="theme-color" content="#0b0b0c">
+<meta property="og:title" content="BRO TO BRO Tattoo Art Studio Szczecin">
+<meta property="og:image" content="assets/logo-wide.jpg">
+<meta property="og:description" content="Kolektyw tatuatorów ze Szczecina. Wyceń tatuaż online i umów konsultację.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+<link rel="icon" href="assets/logo-mark.png">
+<link rel="search" type="application/opensearchdescription+xml" title="BRO TO BRO" href="opensearch.xml">
+
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<div class="progress" aria-hidden="true"></div>
+<span id="top-sentinel" aria-hidden="true"></span>
+
+<!-- ================= NAV ================= -->
+<header class="topbar" id="topbar">
+  <div class="shell">
+    <a class="brand" href="#top" aria-label="BRO TO BRO Tattoo Art Studio">
+      <img src="assets/logo-mark.png" alt="" width="606" height="616" fetchpriority="high">
+      <span>Bro to Bro<small>TATTOO ART STUDIO</small></span>
+    </a>
+    <nav class="navlinks" id="navlinks">
+      <a href="#style" data-i18n="nav.style">Style</a>
+      <a href="#artysci" data-i18n="nav.crew">Ekipa</a>
+      <a href="#kalkulator" data-i18n="nav.calc">Wycena</a>
+      <a href="#zapisy" data-i18n="nav.book">Zapisy</a>
+      <a href="#gojenie" data-i18n="nav.care">Gojenie</a>
+      <a href="#kontakt" data-i18n="nav.contact">Kontakt</a>
+    </nav>
+    <div class="navtools">
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-lang="pl" aria-pressed="true">PL</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+        <button type="button" data-lang="ua" aria-pressed="false">UA</button>
+      </div>
+      <button class="burger" id="burger" aria-expanded="false" aria-controls="navlinks" aria-label="Menu">
+        <i class="ph ph-list" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="shell">
+    <div class="hero-copy">
+      <h1 class="display rv" data-i18n="hero.h1">Twoja skóra.<br><em>Nasz tusz.</em></h1>
+      <p class="lead rv" data-d="1" data-i18n="hero.lead">Kolektyw tatuatorów ze Szczecina. Realism, blackwork, dotwork i handpoke. Konsultacja i projekt zawsze gratis.</p>
+      <div class="hero-cta rv" data-d="2">
+        <a class="btn btn-primary" href="#kalkulator"><i class="ph ph-calculator" aria-hidden="true"></i><span data-i18n="hero.cta1">Wyceń tatuaż</span></a>
+        <a class="btn btn-ghost" href="#style"><span data-i18n="hero.cta2">Zobacz prace</span></a>
+      </div>
+    </div>
+    <figure class="hero-art rv" data-d="1" style="margin:0">
+      <img src="assets/artists/nikolay-harus/work1.jpg" alt="Rękaw blackwork, autor Nikolay Harus" width="1050" height="1400" fetchpriority="high">
+      <figcaption class="hero-badge">
+        <i class="ph-fill ph-star" aria-hidden="true" style="color:var(--accent)"></i>
+        <span><b>4,8</b> <span data-i18n="hero.badge">z 72 opinii w Google</span></span>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ================= STATS ================= -->
+<section class="stats" aria-label="Bro to Bro w liczbach">
+  <div class="shell">
+    <div class="stat rv"><b class="mono" data-count="35">0</b><span data-i18n="stat.artists">artystów w kolektywie</span></div>
+    <div class="stat rv" data-d="1"><b class="mono" data-count="37">0</b><span data-i18n="stat.awards">nagrody z konwentów</span></div>
+    <div class="stat rv" data-d="2"><b class="mono" data-count="96">0</b><span data-i18n="stat.conv">konwentów w roku</span></div>
+    <div class="stat rv" data-d="3"><b class="mono" data-count="6">0</b><span data-i18n="stat.countries">krajów: PL, DE, FR, BE, CH, AT</span></div>
+  </div>
+</section>
+
+<!-- ================= WORKS ================= -->
+<section class="styles" id="style">
+  <div class="shell">
+    <div class="styles-head">
+      <div class="rv">
+        <p class="eyebrow" data-i18n="styles.eyebrow">Portfolio</p>
+        <h2 class="display" data-i18n="styles.h">Prace naszej<br>ekipy</h2>
+      </div>
+      <div class="gal-tools rv" data-d="1">
+        <p class="gal-state" id="galState"></p>
+      </div>
+    </div>
+    <div class="gal rv" id="gal"></div>
+    <div class="gal-more"><button class="btn btn-ghost" type="button" id="galMore"><span data-i18n="gal.more">Pokaż więcej</span></button></div>
+  </div>
+</section>
+
+<!-- ================= CREW ================= -->
+<section class="crew" id="artysci">
+  <div class="shell">
+    <div class="crew-head rv">
+      <h2 class="display" data-i18n="crew.h">Ekipa</h2>
+      <p class="lead" style="margin-top:18px" data-i18n="crew.lead">Rezydenci w Szczecinie i artyści, których łapiecie na konwentach w Niemczech, Francji czy Szwajcarii. Kliknij mistrza, żeby zobaczyć jego prace.</p>
+      <div class="crew-search">
+        <i class="ph ph-magnifying-glass" aria-hidden="true"></i>
+        <input class="inp" id="crewSearch" type="search" data-ph="crew.search" placeholder="Szukaj mistrza" aria-label="Szukaj mistrza">
+      </div>
+    </div>
+    <div class="crew-grid rv" data-d="1" id="crewGrid"></div>
+    <p class="crew-empty" id="crewEmpty" hidden data-i18n="crew.empty">Nie znaleźliśmy takiego mistrza.</p>
+  </div>
+</section>
+
+<!-- ================= CONFIGURATOR ================= -->
+<section class="cfg" id="kalkulator">
+  <div class="shell">
+    <div class="rv" style="max-width:60ch">
+      <p class="eyebrow" data-i18n="cfg.eyebrow">Konfigurator</p>
+      <h2 class="display" data-i18n="cfg.h">Zaznacz miejsce,<br>poznaj widełki</h2>
+      <p class="lead" style="margin-top:20px" data-i18n="cfg.lead">Kliknij część ciała na sylwetce, ustaw rozmiar i styl. Policzymy orientacyjny czas, cenę i poziom bólu.</p>
+    </div>
+
+    <div class="cfg-grid">
+      <div class="body-wrap rv">
+        <svg viewBox="0 0 300 600" role="group" aria-label="Wybierz miejsce na ciele">
+          <g id="zones">
+            <ellipse class="zone" data-z="glowa" cx="150" cy="42" rx="29" ry="36" tabindex="0" role="button" aria-label="Głowa"></ellipse>
+            <rect class="zone" data-z="szyja" x="134" y="76" width="32" height="26" rx="11" tabindex="0" role="button" aria-label="Szyja"></rect>
+            <rect class="zone" data-z="bark" x="78" y="100" width="46" height="30" rx="14" tabindex="0" role="button" aria-label="Bark lewy"></rect>
+            <rect class="zone" data-z="bark" x="176" y="100" width="46" height="30" rx="14" tabindex="0" role="button" aria-label="Bark prawy"></rect>
+            <rect class="zone" data-z="klatka" x="106" y="100" width="88" height="60" rx="16" tabindex="0" role="button" aria-label="Klatka piersiowa"></rect>
+            <rect class="zone" data-z="zebra" x="106" y="164" width="88" height="44" rx="12" tabindex="0" role="button" aria-label="Żebra"></rect>
+            <rect class="zone" data-z="brzuch" x="110" y="212" width="80" height="56" rx="14" tabindex="0" role="button" aria-label="Brzuch"></rect>
+            <rect class="zone" data-z="biodra" x="106" y="272" width="88" height="38" rx="16" tabindex="0" role="button" aria-label="Biodra"></rect>
+            <rect class="zone" data-z="ramie" x="70" y="134" width="32" height="76" rx="16" tabindex="0" role="button" aria-label="Ramię lewe"></rect>
+            <rect class="zone" data-z="ramie" x="198" y="134" width="32" height="76" rx="16" tabindex="0" role="button" aria-label="Ramię prawe"></rect>
+            <rect class="zone" data-z="przedramie" x="62" y="214" width="30" height="74" rx="15" tabindex="0" role="button" aria-label="Przedramię lewe"></rect>
+            <rect class="zone" data-z="przedramie" x="208" y="214" width="30" height="74" rx="15" tabindex="0" role="button" aria-label="Przedramię prawe"></rect>
+            <rect class="zone" data-z="dlon" x="58" y="292" width="28" height="34" rx="12" tabindex="0" role="button" aria-label="Dłoń lewa"></rect>
+            <rect class="zone" data-z="dlon" x="214" y="292" width="28" height="34" rx="12" tabindex="0" role="button" aria-label="Dłoń prawa"></rect>
+            <rect class="zone" data-z="udo" x="107" y="314" width="41" height="94" rx="18" tabindex="0" role="button" aria-label="Udo lewe"></rect>
+            <rect class="zone" data-z="udo" x="152" y="314" width="41" height="94" rx="18" tabindex="0" role="button" aria-label="Udo prawe"></rect>
+            <rect class="zone" data-z="kolano" x="109" y="412" width="37" height="30" rx="14" tabindex="0" role="button" aria-label="Kolano lewe"></rect>
+            <rect class="zone" data-z="kolano" x="154" y="412" width="37" height="30" rx="14" tabindex="0" role="button" aria-label="Kolano prawe"></rect>
+            <rect class="zone" data-z="lydka" x="111" y="446" width="33" height="90" rx="16" tabindex="0" role="button" aria-label="Łydka lewa"></rect>
+            <rect class="zone" data-z="lydka" x="156" y="446" width="33" height="90" rx="16" tabindex="0" role="button" aria-label="Łydka prawa"></rect>
+            <rect class="zone" data-z="stopa" x="105" y="540" width="39" height="26" rx="10" tabindex="0" role="button" aria-label="Stopa lewa"></rect>
+            <rect class="zone" data-z="stopa" x="156" y="540" width="39" height="26" rx="10" tabindex="0" role="button" aria-label="Stopa prawa"></rect>
+          </g>
+        </svg>
+        <p class="body-legend"><span data-i18n="cfg.picked">Wybrane miejsce</span><b id="zoneName">przedramię</b></p>
+      </div>
+
+      <div class="panel rv" data-d="1">
+        <div class="field">
+          <label for="size"><span data-i18n="cfg.size">Rozmiar, dłuższy bok</span><span class="val"><span id="sizeVal">15</span> cm</span></label>
+          <input type="range" id="size" min="3" max="45" value="15" step="1">
+        </div>
+
+        <div class="field">
+          <label data-i18n="cfg.style">Styl</label>
+          <div class="seg" id="segStyle" role="group">
+            <button type="button" data-v="realism" data-i18n="f.realism">Realism</button>
+            <button type="button" data-v="blackwork" data-i18n="f.blackwork">Blackwork</button>
+            <button type="button" data-v="dotwork" data-i18n="f.dotwork">Dotwork</button>
+            <button type="button" data-v="oldschool" data-i18n="f.oldschool">Old school</button>
+            <button type="button" data-v="linework" aria-pressed="true" data-i18n="f.linework">Linework</button>
+            <button type="button" data-v="graphic" data-i18n="f.graphic">Graphic</button>
+            <button type="button" data-v="abstract" data-i18n="f.abstract">Abstract</button>
+            <button type="button" data-v="handpoke" data-i18n="f.handpoke">Handpoke</button>
+          </div>
+        </div>
+
+        <div class="grid2">
+          <div class="field">
+            <label data-i18n="cfg.color">Kolorystyka</label>
+            <div class="seg" id="segColor" role="group">
+              <button type="button" data-v="bw" aria-pressed="true" data-i18n="cfg.bw">Czerń i szarości</button>
+              <button type="button" data-v="color" data-i18n="cfg.rgb">Kolor</button>
+            </div>
+          </div>
+          <div class="field">
+            <label data-i18n="cfg.detail">Poziom detalu</label>
+            <div class="seg" id="segDetail" role="group">
+              <button type="button" data-v="1" data-i18n="cfg.d1">Prosty</button>
+              <button type="button" data-v="2" aria-pressed="true" data-i18n="cfg.d2">Średni</button>
+              <button type="button" data-v="3" data-i18n="cfg.d3">Bardzo detaliczny</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="readout">
+          <div class="accent"><small data-i18n="cfg.price">Widełki cenowe</small><b id="outPrice">700 - 950 zł</b></div>
+          <div><small data-i18n="cfg.time">Czas pracy</small><b id="outTime">2 h</b></div>
+          <div><small data-i18n="cfg.sessions">Sesje</small><b id="outSessions">1</b></div>
+          <div>
+            <small data-i18n="cfg.pain">Ból w tym miejscu</small>
+            <b id="outPain">4 / 10</b>
+            <div class="pain-meter" id="painMeter" aria-hidden="true"></div>
+          </div>
+        </div>
+
+        <p class="disclaimer" data-i18n="cfg.note">Wycena orientacyjna, liczona od stawki 350 zł za godzinę przy minimum 400 zł. Ostateczną cenę artysta podaje po konsultacji i zobaczeniu projektu.</p>
+
+        <div class="cfg-actions">
+          <a class="btn btn-primary" href="#zapisy" id="toBooking"><i class="ph ph-paper-plane-tilt" aria-hidden="true"></i><span data-i18n="cfg.send">Przenieś do zapisów</span></a>
+          <button class="btn btn-ghost" type="button" id="resetCfg"><span data-i18n="cfg.reset">Wyczyść</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BOOKING STEPPER ================= -->
+<section class="book" id="zapisy">
+  <div class="shell">
+    <div class="rv" style="max-width:56ch">
+      <h2 class="display" data-i18n="book.h">Zapisy</h2>
+      <p class="lead" style="margin-top:18px" data-i18n="book.lead">Trzy kroki i masz gotową wiadomość. Wysyłasz ją na Instagram albo dzwonisz. Konsultacja nic nie kosztuje.</p>
+    </div>
+
+    <div class="stepper rv" data-d="1">
+      <div class="steps-bar" id="stepsBar">
+        <div class="active" data-i18n="book.s1">1. Pomysł</div>
+        <div data-i18n="book.s2">2. Termin</div>
+        <div data-i18n="book.s3">3. Kontakt</div>
+        <div data-i18n="book.s4">4. Wyślij</div>
+      </div>
+
+      <div class="step on" data-step="1">
+        <h3 data-i18n="book.h1">Co chcesz zrobić</h3>
+        <p class="hint" data-i18n="book.hint1">Jeśli korzystałeś z konfiguratora, pola są już wypełnione.</p>
+        <div class="grid2">
+          <div><label class="field" for="bStyle" style="display:block"><span style="font-size:.8rem;color:var(--muted)" data-i18n="book.fStyle">Styl</span></label>
+            <input class="inp" id="bStyle" value="Linework"></div>
+          <div><label class="field" for="bPlace" style="display:block"><span style="font-size:.8rem;color:var(--muted)" data-i18n="book.fPlace">Miejsce</span></label>
+            <input class="inp" id="bPlace" value="przedramię"></div>
+          <div><label class="field" for="bSize" style="display:block"><span style="font-size:.8rem;color:var(--muted)" data-i18n="book.fSize">Rozmiar</span></label>
+            <input class="inp" id="bSize" value="15 cm"></div>
+          <div><label class="field" for="bFirst" style="display:block"><span style="font-size:.8rem;color:var(--muted)" data-i18n="book.fFirst">Pierwszy tatuaż</span></label>
+            <select class="inp" id="bFirst"><option data-i18n="book.no">Nie</option><option data-i18n="book.yes">Tak</option></select></div>
+        </div>
+        <div class="field" style="margin-top:16px">
+          <label for="bIdea" style="font-size:.8rem;color:var(--muted)" data-i18n="book.fIdea">Opis pomysłu</label>
+          <input class="inp" id="bIdea" data-ph="book.phIdea" placeholder="np. wilk w stylu graphic, czerń, na zewnętrznej stronie przedramienia">
+        </div>
+        <div class="step-nav"><span></span><button class="btn btn-primary" type="button" data-next="2"><span data-i18n="book.next">Dalej</span><i class="ph ph-arrow-right" aria-hidden="true"></i></button></div>
+      </div>
+
+      <div class="step" data-step="2">
+        <h3 data-i18n="book.h2">Kiedy pasuje</h3>
+        <p class="hint" data-i18n="book.hint2">Ekipa często jeździ na konwenty w Europie, więc podaj widełki, a my dopasujemy termin.</p>
+        <div class="grid2">
+          <div><label for="bWhen" style="font-size:.8rem;color:var(--muted)" data-i18n="book.fWhen">Preferowany okres</label>
+            <select class="inp" id="bWhen">
+              <option data-i18n="book.w1">Najbliższy wolny termin</option>
+              <option data-i18n="book.w2">W ciągu 2 tygodni</option>
+              <option data-i18n="book.w3">W tym miesiącu</option>
+              <option data-i18n="book.w4">Jestem elastyczny</option>
+            </select></div>
+          <div><label for="bDay" style="font-size:.8rem;color:var(--muted)" data-i18n="book.fDay">Pora dnia</label>
+            <select class="inp" id="bDay">
+              <option data-i18n="book.p1">Rano</option>
+              <option data-i18n="book.p2">Popołudnie</option>
+              <option data-i18n="book.p3">Wieczór</option>
+              <option data-i18n="book.p4">Bez znaczenia</option>
+            </select></div>
+        </div>
+        <div class="step-nav">
+          <button class="btn btn-ghost" type="button" data-prev="1"><i class="ph ph-arrow-left" aria-hidden="true"></i><span data-i18n="book.back">Wstecz</span></button>
+          <button class="btn btn-primary" type="button" data-next="3"><span data-i18n="book.next">Dalej</span><i class="ph ph-arrow-right" aria-hidden="true"></i></button>
+        </div>
+      </div>
+
+      <div class="step" data-step="3">
+        <h3 data-i18n="book.h3">Jak się odezwać</h3>
+        <p class="hint" data-i18n="book.hint3">Wystarczy imię i jeden kanał kontaktu.</p>
+        <div class="grid2">
+          <div>
+            <label for="bName" style="font-size:.8rem;color:var(--muted)" data-i18n="book.fName">Imię</label>
+            <input class="inp" id="bName" data-ph="book.phName" placeholder="Jak masz na imię">
+            <p class="err" id="errName" data-i18n="book.errName">Wpisz imię, żebyśmy wiedzieli, jak się zwracać.</p>
+          </div>
+          <div>
+            <label for="bContact" style="font-size:.8rem;color:var(--muted)" data-i18n="book.fContact">Instagram lub telefon</label>
+            <input class="inp" id="bContact" data-ph="book.phContact" placeholder="@nick albo numer">
+            <p class="err" id="errContact" data-i18n="book.errContact">Podaj nick na Instagramie albo numer telefonu.</p>
+          </div>
+        </div>
+        <div class="step-nav">
+          <button class="btn btn-ghost" type="button" data-prev="2"><i class="ph ph-arrow-left" aria-hidden="true"></i><span data-i18n="book.back">Wstecz</span></button>
+          <button class="btn btn-primary" type="button" data-next="4"><span data-i18n="book.next">Dalej</span><i class="ph ph-arrow-right" aria-hidden="true"></i></button>
+        </div>
+      </div>
+
+      <div class="step" data-step="4">
+        <h3 data-i18n="book.h4">Gotowa wiadomość</h3>
+        <p class="hint" data-i18n="book.hint4">Skopiuj i wklej na Instagramie albo zadzwoń. Odpisujemy po polsku, angielsku i ukraińsku.</p>
+        <div class="summary">
+          <dl id="sumList"></dl>
+        </div>
+        <div class="send-row">
+          <button class="btn btn-primary" type="button" id="copyMsg"><i class="ph ph-copy" aria-hidden="true"></i><span data-i18n="book.copy">Kopiuj wiadomość</span></button>
+          <a class="btn btn-ghost" href="https://www.instagram.com/brotobrotattoo/" target="_blank" rel="noopener"><i class="ph ph-instagram-logo" aria-hidden="true"></i>Instagram</a>
+          <a class="btn btn-ghost" href="tel:+48579128368"><i class="ph ph-phone" aria-hidden="true"></i>579 128 368</a>
+          <span class="copied" id="copiedMsg" data-i18n="book.copied">Skopiowane</span>
+        </div>
+        <div class="step-nav">
+          <button class="btn btn-ghost" type="button" data-prev="3"><i class="ph ph-arrow-left" aria-hidden="true"></i><span data-i18n="book.back">Wstecz</span></button>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= AFTERCARE ================= -->
+<section class="care" id="gojenie">
+  <div class="shell">
+    <div class="care-top">
+      <div class="rv" style="max-width:52ch">
+        <p class="eyebrow" data-i18n="care.eyebrow">Gojenie</p>
+        <h2 class="display" data-i18n="care.h">Trzydzieści dni<br>po sesji</h2>
+      </div>
+      <p class="lead rv" data-d="1" style="max-width:38ch" data-i18n="care.lead">Przesuń suwak i sprawdź, co dzieje się ze skórą danego dnia oraz czego wtedy unikać.</p>
+    </div>
+
+    <div class="timeline rv" data-d="1">
+      <input type="range" id="day" min="1" max="30" value="1" step="1" aria-label="Dzień gojenia" style="margin-bottom:22px">
+      <div class="tl-track"><div class="tl-fill" id="tlFill"></div></div>
+      <div class="tl-marks"><span>1</span><span>7</span><span>14</span><span>21</span><span>30</span></div>
+    </div>
+
+    <div class="care-panel rv" data-d="2">
+      <div>
+        <p class="care-stage" id="careStage">Dzień 1 z 30</p>
+        <h3 id="careTitle">Świeża rana</h3>
+        <p style="color:var(--muted);margin:10px 0 18px" id="careDesc">Tatuaż jest otwartą raną. Folia zostaje tyle, ile powie artysta.</p>
+        <ul id="careDo"></ul>
+      </div>
+      <div class="no">
+        <h3 data-i18n="care.avoid">Czego unikać</h3>
+        <ul id="careDont" style="margin-top:14px"></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ + CONTACT ================= -->
+<section class="close" id="kontakt">
+  <div class="shell close-grid">
+    <div class="rv">
+      <h2 class="display" style="margin-bottom:28px" data-i18n="faq.h">Pytania</h2>
+      <div class="acc">
+        <details><summary data-i18n="faq.q1">Ile kosztuje tatuaż</summary><p class="ans" data-i18n="faq.a1">Liczymy od godziny pracy, minimum to 400 zł. Konfigurator wyżej poda widełki, a artysta potwierdzi cenę po zobaczeniu projektu.</p></details>
+        <details><summary data-i18n="faq.q2">Czy konsultacja jest płatna</summary><p class="ans" data-i18n="faq.a2">Nie. Konsultacja i projekt są gratis. Płacisz dopiero za sesję.</p></details>
+        <details><summary data-i18n="faq.q3">Czy trzeba wpłacać zaliczkę</summary><p class="ans" data-i18n="faq.a3">Tak, zaliczka rezerwuje termin i odlicza się od ceny końcowej. Przy rezygnacji na mniej niż 48 godzin przed sesją przepada.</p></details>
+        <details><summary data-i18n="faq.q4">Robicie cover-upy i poprawki</summary><p class="ans" data-i18n="faq.a4">Robimy. Przy cover-upie przyślij zdjęcie starej pracy w dobrym świetle, wtedy powiemy, co da się zrobić. Mamy też usuwanie laserem.</p></details>
+        <details><summary data-i18n="faq.q5">Od ilu lat można się tatuować</summary><p class="ans" data-i18n="faq.a5">Od 18 lat, z dowodem. Osób niepełnoletnich nie tatuujemy nawet za zgodą rodziców.</p></details>
+        <details><summary data-i18n="faq.q6">W jakich językach się dogadamy</summary><p class="ans" data-i18n="faq.a6">Polski, angielski, ukraiński i białoruski.</p></details>
+      </div>
+    </div>
+
+    <aside class="contact-card rv" data-d="1">
+      <h3 style="font-size:1.25rem" data-i18n="contact.h">Gdzie nas znaleźć</h3>
+      <div class="contact-list">
+        <span><i class="ph ph-map-pin" aria-hidden="true"></i><span data-i18n="contact.addr">Grizzly Barber Shop, ul. Mickiewicza 36A, Szczecin<small>Studio działa wewnątrz barbershopu</small></span></span>
+        <a href="tel:+48579128368"><i class="ph ph-phone" aria-hidden="true"></i><span>579 128 368<small data-i18n="contact.callHint">Telefon i wiadomości</small></span></a>
+        <a href="https://www.instagram.com/brotobrotattoo/" target="_blank" rel="noopener"><i class="ph ph-instagram-logo" aria-hidden="true"></i><span>@brotobrotattoo<small data-i18n="contact.igHint">Najszybszy kontakt i wolne terminy</small></span></a>
+        <a href="https://www.tiktok.com/@brotobro.tattoo" target="_blank" rel="noopener"><i class="ph ph-tiktok-logo" aria-hidden="true"></i><span>@brotobro.tattoo<small data-i18n="contact.ttHint">Kulisy sesji</small></span></a>
+        <span><i class="ph ph-clock" aria-hidden="true"></i><span data-i18n="contact.hours">Codziennie 10:00 - 20:00<small>Sesje po wcześniejszym umówieniu</small></span></span>
+        <span><i class="ph ph-airplane-tilt" aria-hidden="true"></i><span data-i18n="contact.tour">Część terminów robimy na konwentach<small>Niemcy, Francja, Belgia, Szwajcaria, Austria</small></span></span>
+      </div>
+      <p style="font-size:.82rem;color:var(--muted)" data-i18n="contact.langs">Mówimy po polsku, angielsku, ukraińsku i białorusku.</p>
+      <a class="btn btn-primary" href="#zapisy" style="margin-top:20px"><span data-i18n="contact.cta">Umów konsultację</span></a>
+    </aside>
+  </div>
+</section>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Podgląd pracy">
+  <button class="lb-close" id="lbClose" aria-label="Zamknij"><i class="ph ph-x" aria-hidden="true"></i></button>
+  <button class="lb-nav lb-prev" id="lbPrev" aria-label="Poprzednia praca"><i class="ph ph-caret-left" aria-hidden="true"></i></button>
+  <figure class="lb-fig">
+    <img id="lbImg" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+    <figcaption id="lbCap"></figcaption>
+  </figure>
+  <button class="lb-nav lb-next" id="lbNext" aria-label="Następna praca"><i class="ph ph-caret-right" aria-hidden="true"></i></button>
+</div>
+
+</main>
+
+<footer>
+  <div class="shell">
+    <div class="foot-brand">
+      <img src="assets/logo-wordmark.png" alt="Bro to Bro Tattoo Art Studio" width="630" height="218" loading="lazy">
+      <p>Szczecin. <span data-i18n="foot.rights">Wszystkie prace należą do ich autorów.</span></p>
+    </div>
+    <div class="foot-social">
+      <a href="https://www.instagram.com/brotobrotattoo/" target="_blank" rel="noopener" aria-label="Instagram"><i class="ph ph-instagram-logo" aria-hidden="true"></i></a>
+      <a href="https://www.tiktok.com/@brotobro.tattoo" target="_blank" rel="noopener" aria-label="TikTok"><i class="ph ph-tiktok-logo" aria-hidden="true"></i></a>
+      <a href="tel:+48579128368" aria-label="Telefon"><i class="ph ph-phone" aria-hidden="true"></i></a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+'use strict';
+
+/* =========================================================
+   1. i18n
+   ========================================================= */
+const DICT = {
+pl:{
+ 'crew.works':'3 prace',
+ 'crew.empty':'Nie znaleźliśmy takiego mistrza.',
+ 'crew.search':'Szukaj mistrza',
+ 'gal.alt':'Tatuaż, autor {name}',
+ 'gal.more':'Pokaż więcej',
+ 'gal.reset':'Wszystkie prace',
+ 'gal.by':'Prace mistrza {name}',
+ 'gal.state':'Wszystkie prace: {n} od {m} mistrzów',
+ 'nav.style':'Style','nav.crew':'Ekipa','nav.calc':'Wycena','nav.book':'Zapisy','nav.care':'Gojenie','nav.contact':'Kontakt',
+ 'hero.h1':'Twoja skóra.<br><em>Nasz tusz.</em>',
+ 'hero.lead':'Kolektyw tatuatorów ze Szczecina. Realism, blackwork, dotwork i handpoke. Konsultacja i projekt zawsze gratis.',
+ 'hero.cta1':'Wyceń tatuaż','hero.cta2':'Zobacz prace','hero.badge':'z 72 opinii w Google',
+ 'stat.artists':'artystów w kolektywie','stat.awards':'nagrody z konwentów','stat.conv':'konwentów w roku','stat.countries':'krajów: PL, DE, FR, BE, CH, AT',
+ 'styles.eyebrow':'Portfolio','styles.h':'Prace naszej<br>ekipy',
+ 'f.all':'Wszystko','f.realism':'Realism','f.blackwork':'Blackwork','f.dotwork':'Dotwork','f.oldschool':'Old school','f.linework':'Linework','f.graphic':'Graphic','f.abstract':'Abstract','f.handpoke':'Handpoke',
+ 'crew.h':'Ekipa',
+ 'crew.lead':'Rezydenci w Szczecinie i artyści, których łapiecie na konwentach w Niemczech, Francji czy Szwajcarii. Kliknij mistrza, żeby zobaczyć jego prace.',
+ 'cfg.eyebrow':'Konfigurator','cfg.h':'Zaznacz miejsce,<br>poznaj widełki',
+ 'cfg.lead':'Kliknij część ciała na sylwetce, ustaw rozmiar i styl. Policzymy orientacyjny czas, cenę i poziom bólu.',
+ 'cfg.picked':'Wybrane miejsce','cfg.size':'Rozmiar, dłuższy bok','cfg.style':'Styl','cfg.color':'Kolorystyka','cfg.detail':'Poziom detalu',
+ 'cfg.bw':'Czerń i szarości','cfg.rgb':'Kolor','cfg.d1':'Prosty','cfg.d2':'Średni','cfg.d3':'Bardzo detaliczny',
+ 'cfg.price':'Widełki cenowe','cfg.time':'Czas pracy','cfg.sessions':'Sesje','cfg.pain':'Ból w tym miejscu',
+ 'cfg.note':'Wycena orientacyjna, liczona od stawki 350 zł za godzinę przy minimum 400 zł. Ostateczną cenę artysta podaje po konsultacji i zobaczeniu projektu.',
+ 'cfg.send':'Przenieś do zapisów','cfg.reset':'Wyczyść',
+ 'book.h':'Zapisy','book.lead':'Trzy kroki i masz gotową wiadomość. Wysyłasz ją na Instagram albo dzwonisz. Konsultacja nic nie kosztuje.',
+ 'book.s1':'1. Pomysł','book.s2':'2. Termin','book.s3':'3. Kontakt','book.s4':'4. Wyślij',
+ 'book.h1':'Co chcesz zrobić','book.hint1':'Jeśli korzystałeś z konfiguratora, pola są już wypełnione.',
+ 'book.fStyle':'Styl','book.fPlace':'Miejsce','book.fSize':'Rozmiar','book.fFirst':'Pierwszy tatuaż','book.yes':'Tak','book.no':'Nie',
+ 'book.fIdea':'Opis pomysłu','book.phIdea':'np. wilk w stylu graphic, czerń, na zewnętrznej stronie przedramienia',
+ 'book.h2':'Kiedy pasuje','book.hint2':'Ekipa często jeździ na konwenty w Europie, więc podaj widełki, a my dopasujemy termin.',
+ 'book.fWhen':'Preferowany okres','book.w1':'Najbliższy wolny termin','book.w2':'W ciągu 2 tygodni','book.w3':'W tym miesiącu','book.w4':'Jestem elastyczny',
+ 'book.fDay':'Pora dnia','book.p1':'Rano','book.p2':'Popołudnie','book.p3':'Wieczór','book.p4':'Bez znaczenia',
+ 'book.h3':'Jak się odezwać','book.hint3':'Wystarczy imię i jeden kanał kontaktu.',
+ 'book.fName':'Imię','book.phName':'Jak masz na imię','book.errName':'Wpisz imię, żebyśmy wiedzieli, jak się zwracać.',
+ 'book.fContact':'Instagram lub telefon','book.phContact':'@nick albo numer','book.errContact':'Podaj nick na Instagramie albo numer telefonu.',
+ 'book.h4':'Gotowa wiadomość','book.hint4':'Skopiuj i wklej na Instagramie albo zadzwoń. Odpisujemy po polsku, angielsku i ukraińsku.',
+ 'book.copy':'Kopiuj wiadomość','book.copied':'Skopiowane','book.next':'Dalej','book.back':'Wstecz',
+ 'sum.name':'Imię','sum.contact':'Kontakt','sum.style':'Styl','sum.place':'Miejsce','sum.size':'Rozmiar','sum.first':'Pierwszy tatuaż',
+ 'sum.idea':'Pomysł','sum.when':'Termin','sum.day':'Pora dnia','sum.est':'Szacunek','sum.empty':'nie podano',
+ 'msg.hi':'Cześć, piszę w sprawie tatuażu.',
+ 'care.eyebrow':'Gojenie','care.h':'Trzydzieści dni<br>po sesji',
+ 'care.lead':'Przesuń suwak i sprawdź, co dzieje się ze skórą danego dnia oraz czego wtedy unikać.',
+ 'care.avoid':'Czego unikać','care.day':'Dzień {d} z 30',
+ 'faq.h':'Pytania',
+ 'faq.q1':'Ile kosztuje tatuaż','faq.a1':'Liczymy od godziny pracy, minimum to 400 zł. Konfigurator wyżej poda widełki, a artysta potwierdzi cenę po zobaczeniu projektu.',
+ 'faq.q2':'Czy konsultacja jest płatna','faq.a2':'Nie. Konsultacja i projekt są gratis. Płacisz dopiero za sesję.',
+ 'faq.q3':'Czy trzeba wpłacać zaliczkę','faq.a3':'Tak, zaliczka rezerwuje termin i odlicza się od ceny końcowej. Przy rezygnacji na mniej niż 48 godzin przed sesją przepada.',
+ 'faq.q4':'Robicie cover-upy i poprawki','faq.a4':'Robimy. Przy cover-upie przyślij zdjęcie starej pracy w dobrym świetle, wtedy powiemy, co da się zrobić. Mamy też usuwanie laserem.',
+ 'faq.q5':'Od ilu lat można się tatuować','faq.a5':'Od 18 lat, z dowodem. Osób niepełnoletnich nie tatuujemy nawet za zgodą rodziców.',
+ 'faq.q6':'W jakich językach się dogadamy','faq.a6':'Polski, angielski, ukraiński i białoruski.',
+ 'contact.h':'Gdzie nas znaleźć',
+ 'contact.addr':'Grizzly Barber Shop, ul. Mickiewicza 36A, Szczecin<small>Studio działa wewnątrz barbershopu</small>',
+ 'contact.callHint':'Telefon i wiadomości','contact.igHint':'Najszybszy kontakt i wolne terminy','contact.ttHint':'Kulisy sesji',
+ 'contact.hours':'Codziennie 10:00 - 20:00<small>Sesje po wcześniejszym umówieniu</small>',
+ 'contact.tour':'Część terminów robimy na konwentach<small>Niemcy, Francja, Belgia, Szwajcaria, Austria</small>',
+ 'contact.langs':'Mówimy po polsku, angielsku, ukraińsku i białorusku.','contact.cta':'Umów konsultację',
+ 'foot.rights':'Wszystkie prace należą do ich autorów.'
+},
+en:{
+ 'crew.works':'3 pieces',
+ 'crew.empty':'No artist by that name.',
+ 'crew.search':'Search for an artist',
+ 'gal.alt':'Tattoo by {name}',
+ 'gal.more':'Show more',
+ 'gal.reset':'All work',
+ 'gal.by':'Work by {name}',
+ 'gal.state':'All work: {n} pieces from {m} artists',
+ 'nav.style':'Styles','nav.crew':'Crew','nav.calc':'Quote','nav.book':'Booking','nav.care':'Healing','nav.contact':'Contact',
+ 'hero.h1':'Your skin.<br><em>Our ink.</em>',
+ 'hero.lead':'A tattoo collective from Szczecin. Realism, blackwork, dotwork and handpoke. Consultation and design always free.',
+ 'hero.cta1':'Get a quote','hero.cta2':'See the work','hero.badge':'from 72 Google reviews',
+ 'stat.artists':'artists in the collective','stat.awards':'convention awards','stat.conv':'conventions a year','stat.countries':'countries: PL, DE, FR, BE, CH, AT',
+ 'styles.eyebrow':'Portfolio','styles.h':'Work from<br>the crew',
+ 'f.all':'Everything','f.realism':'Realism','f.blackwork':'Blackwork','f.dotwork':'Dotwork','f.oldschool':'Old school','f.linework':'Linework','f.graphic':'Graphic','f.abstract':'Abstract','f.handpoke':'Handpoke',
+ 'crew.h':'The crew',
+ 'crew.lead':'Residents in Szczecin plus artists you catch at conventions in Germany, France and Switzerland. Tap an artist to see their work.',
+ 'cfg.eyebrow':'Configurator','cfg.h':'Pick the spot,<br>see the range',
+ 'cfg.lead':'Tap a body part, set the size and style. We estimate the time, the price range and how much it stings.',
+ 'cfg.picked':'Selected spot','cfg.size':'Size, longest side','cfg.style':'Style','cfg.color':'Colour','cfg.detail':'Detail level',
+ 'cfg.bw':'Black and grey','cfg.rgb':'Colour','cfg.d1':'Simple','cfg.d2':'Medium','cfg.d3':'Very detailed',
+ 'cfg.price':'Price range','cfg.time':'Working time','cfg.sessions':'Sessions','cfg.pain':'Pain in this spot',
+ 'cfg.note':'This is an estimate based on a 350 PLN hourly rate with a 400 PLN minimum. The artist confirms the final price after seeing the design.',
+ 'cfg.send':'Take it to booking','cfg.reset':'Reset',
+ 'book.h':'Booking','book.lead':'Three steps and your message is ready. Send it on Instagram or call. The consultation is free.',
+ 'book.s1':'1. Idea','book.s2':'2. Timing','book.s3':'3. Contact','book.s4':'4. Send',
+ 'book.h1':'What you want done','book.hint1':'If you used the configurator, these fields are already filled in.',
+ 'book.fStyle':'Style','book.fPlace':'Spot','book.fSize':'Size','book.fFirst':'First tattoo','book.yes':'Yes','book.no':'No',
+ 'book.fIdea':'Describe the idea','book.phIdea':'e.g. a wolf, graphic style, black, outer forearm',
+ 'book.h2':'When it suits you','book.hint2':'The crew travels to conventions across Europe, so give us a window and we will match a date.',
+ 'book.fWhen':'Preferred window','book.w1':'Next free slot','book.w2':'Within 2 weeks','book.w3':'This month','book.w4':'I am flexible',
+ 'book.fDay':'Time of day','book.p1':'Morning','book.p2':'Afternoon','book.p3':'Evening','book.p4':'Any',
+ 'book.h3':'How to reach you','book.hint3':'Your name and one contact channel is enough.',
+ 'book.fName':'Name','book.phName':'What should we call you','book.errName':'Add your name so we know who we are talking to.',
+ 'book.fContact':'Instagram or phone','book.phContact':'@handle or number','book.errContact':'Add an Instagram handle or a phone number.',
+ 'book.h4':'Your message','book.hint4':'Copy it into Instagram or give us a call. We answer in Polish, English and Ukrainian.',
+ 'book.copy':'Copy message','book.copied':'Copied','book.next':'Next','book.back':'Back',
+ 'sum.name':'Name','sum.contact':'Contact','sum.style':'Style','sum.place':'Spot','sum.size':'Size','sum.first':'First tattoo',
+ 'sum.idea':'Idea','sum.when':'Window','sum.day':'Time of day','sum.est':'Estimate','sum.empty':'not given',
+ 'msg.hi':'Hi, I am writing about a tattoo.',
+ 'care.eyebrow':'Healing','care.h':'Thirty days<br>after the session',
+ 'care.lead':'Drag the slider to see what the skin is doing on a given day and what to stay away from.',
+ 'care.avoid':'What to avoid','care.day':'Day {d} of 30',
+ 'faq.h':'Questions',
+ 'faq.q1':'How much does a tattoo cost','faq.a1':'We charge by the hour with a 400 PLN minimum. The configurator above gives a range and the artist confirms the price after seeing the design.',
+ 'faq.q2':'Is the consultation paid','faq.a2':'No. Consultation and design are free. You pay for the session only.',
+ 'faq.q3':'Do I need a deposit','faq.a3':'Yes, the deposit holds your slot and comes off the final price. Cancel less than 48 hours before and it is gone.',
+ 'faq.q4':'Do you do cover ups and fixes','faq.a4':'We do. For a cover up send a photo of the old piece in good light and we will tell you what is possible. We also remove tattoos with a laser.',
+ 'faq.q5':'What is the minimum age','faq.a5':'18 with an ID. We do not tattoo minors, not even with parental consent.',
+ 'faq.q6':'What languages do you speak','faq.a6':'Polish, English, Ukrainian and Belarusian.',
+ 'contact.h':'Where to find us',
+ 'contact.addr':'Grizzly Barber Shop, Mickiewicza 36A, Szczecin<small>The studio works inside the barbershop</small>',
+ 'contact.callHint':'Calls and messages','contact.igHint':'Fastest reply and free slots','contact.ttHint':'Behind the scenes',
+ 'contact.hours':'Every day 10:00 - 20:00<small>Sessions by appointment</small>',
+ 'contact.tour':'Some dates happen at conventions<small>Germany, France, Belgium, Switzerland, Austria</small>',
+ 'contact.langs':'We speak Polish, English, Ukrainian and Belarusian.','contact.cta':'Book a consultation',
+ 'foot.rights':'All artwork belongs to its artists.'
+},
+ua:{
+ 'crew.works':'3 роботи',
+ 'crew.empty':'Такого майстра не знайшли.',
+ 'crew.search':'Пошук майстра',
+ 'gal.alt':'Татуювання, автор {name}',
+ 'gal.more':'Показати ще',
+ 'gal.reset':'Усі роботи',
+ 'gal.by':'Роботи майстра {name}',
+ 'gal.state':'Усі роботи: {n} від {m} майстрів',
+ 'nav.style':'Стилі','nav.crew':'Команда','nav.calc':'Оцінка','nav.book':'Запис','nav.care':'Загоєння','nav.contact':'Контакти',
+ 'hero.h1':'Твоя шкіра.<br><em>Наше чорнило.</em>',
+ 'hero.lead':'Колектив татуювальників зі Щецина. Realism, blackwork, dotwork і handpoke. Консультація та ескіз завжди безкоштовні.',
+ 'hero.cta1':'Порахувати ціну','hero.cta2':'Дивитись роботи','hero.badge':'із 72 відгуків у Google',
+ 'stat.artists':'майстрів у колективі','stat.awards':'нагороди з конвентів','stat.conv':'конвентів на рік','stat.countries':'країн: PL, DE, FR, BE, CH, AT',
+ 'styles.eyebrow':'Портфоліо','styles.h':'Роботи нашої<br>команди',
+ 'f.all':'Усе','f.realism':'Realism','f.blackwork':'Blackwork','f.dotwork':'Dotwork','f.oldschool':'Old school','f.linework':'Linework','f.graphic':'Graphic','f.abstract':'Abstract','f.handpoke':'Handpoke',
+ 'crew.h':'Команда',
+ 'crew.lead':'Резиденти у Щецині та майстри, яких ловите на конвентах у Німеччині, Франції чи Швейцарії. Натисни майстра, щоб побачити його роботи.',
+ 'cfg.eyebrow':'Конфігуратор','cfg.h':'Обери місце,<br>дізнайся вилку',
+ 'cfg.lead':'Натисни частину тіла на силуеті, постав розмір і стиль. Порахуємо орієнтовний час, ціну та рівень болю.',
+ 'cfg.picked':'Обране місце','cfg.size':'Розмір, довша сторона','cfg.style':'Стиль','cfg.color':'Колір','cfg.detail':'Рівень деталізації',
+ 'cfg.bw':'Чорно сіре','cfg.rgb':'Колір','cfg.d1':'Просте','cfg.d2':'Середнє','cfg.d3':'Дуже деталізоване',
+ 'cfg.price':'Вилка цін','cfg.time':'Час роботи','cfg.sessions':'Сесії','cfg.pain':'Біль у цьому місці',
+ 'cfg.note':'Оцінка орієнтовна, рахуємо від 350 zł за годину за мінімуму 400 zł. Остаточну ціну майстер називає після консультації та ескізу.',
+ 'cfg.send':'Перенести в запис','cfg.reset':'Скинути',
+ 'book.h':'Запис','book.lead':'Три кроки і повідомлення готове. Надсилаєш в Instagram або дзвониш. Консультація безкоштовна.',
+ 'book.s1':'1. Ідея','book.s2':'2. Дати','book.s3':'3. Контакт','book.s4':'4. Надіслати',
+ 'book.h1':'Що хочеш зробити','book.hint1':'Якщо користувався конфігуратором, поля вже заповнені.',
+ 'book.fStyle':'Стиль','book.fPlace':'Місце','book.fSize':'Розмір','book.fFirst':'Перше тату','book.yes':'Так','book.no':'Ні',
+ 'book.fIdea':'Опис ідеї','book.phIdea':'напр. вовк у стилі graphic, чорне, зовнішня сторона передпліччя',
+ 'book.h2':'Коли зручно','book.hint2':'Команда часто їздить на конвенти Європою, тож дай проміжок, а ми підберемо дату.',
+ 'book.fWhen':'Бажаний період','book.w1':'Найближче вільне вікно','book.w2':'Протягом 2 тижнів','book.w3':'Цього місяця','book.w4':'Я гнучкий',
+ 'book.fDay':'Час доби','book.p1':'Ранок','book.p2':'День','book.p3':'Вечір','book.p4':'Байдуже',
+ 'book.h3':'Як з тобою звʼязатися','book.hint3':'Достатньо імені та одного каналу звʼязку.',
+ 'book.fName':'Імʼя','book.phName':'Як до тебе звертатися','book.errName':'Впиши імʼя, щоб ми знали, як звертатися.',
+ 'book.fContact':'Instagram або телефон','book.phContact':'@нік або номер','book.errContact':'Додай нік в Instagram або номер телефону.',
+ 'book.h4':'Готове повідомлення','book.hint4':'Скопіюй і встав в Instagram або подзвони. Відповідаємо польською, англійською та українською.',
+ 'book.copy':'Копіювати','book.copied':'Скопійовано','book.next':'Далі','book.back':'Назад',
+ 'sum.name':'Імʼя','sum.contact':'Контакт','sum.style':'Стиль','sum.place':'Місце','sum.size':'Розмір','sum.first':'Перше тату',
+ 'sum.idea':'Ідея','sum.when':'Період','sum.day':'Час доби','sum.est':'Оцінка','sum.empty':'не вказано',
+ 'msg.hi':'Привіт, пишу щодо татуювання.',
+ 'care.eyebrow':'Загоєння','care.h':'Тридцять днів<br>після сесії',
+ 'care.lead':'Посунь повзунок і подивись, що відбувається зі шкірою в цей день і чого тоді уникати.',
+ 'care.avoid':'Чого уникати','care.day':'День {d} з 30',
+ 'faq.h':'Питання',
+ 'faq.q1':'Скільки коштує тату','faq.a1':'Рахуємо погодинно, мінімум 400 zł. Конфігуратор вище дасть вилку, а майстер підтвердить ціну після ескізу.',
+ 'faq.q2':'Чи платна консультація','faq.a2':'Ні. Консультація та ескіз безкоштовні. Платиш лише за сесію.',
+ 'faq.q3':'Чи потрібна передоплата','faq.a3':'Так, передоплата тримає дату і віднімається від фінальної ціни. При скасуванні менш ніж за 48 годин вона згорає.',
+ 'faq.q4':'Робите перекриття і правки','faq.a4':'Робимо. Для перекриття надішли фото старої роботи при доброму світлі, тоді скажемо, що можливо. Також знімаємо тату лазером.',
+ 'faq.q5':'З якого віку','faq.a5':'З 18 років, з документом. Неповнолітніх не татуюємо навіть зі згодою батьків.',
+ 'faq.q6':'Якими мовами спілкуємось','faq.a6':'Польська, англійська, українська та білоруська.',
+ 'contact.h':'Де нас знайти',
+ 'contact.addr':'Grizzly Barber Shop, Mickiewicza 36A, Щецин<small>Студія працює всередині барбершопу</small>',
+ 'contact.callHint':'Дзвінки та повідомлення','contact.igHint':'Найшвидша відповідь і вільні дати','contact.ttHint':'Закулісся сесій',
+ 'contact.hours':'Щодня 10:00 - 20:00<small>Сесії за попереднім записом</small>',
+ 'contact.tour':'Частину дат робимо на конвентах<small>Німеччина, Франція, Бельгія, Швейцарія, Австрія</small>',
+ 'contact.langs':'Говоримо польською, англійською, українською та білоруською.','contact.cta':'Записатись на консультацію',
+ 'foot.rights':'Усі роботи належать їхнім авторам.'
+}};
+
+const ZONE_NAMES = {
+ pl:{glowa:'głowa',szyja:'szyja',bark:'bark',klatka:'klatka piersiowa',zebra:'żebra',brzuch:'brzuch',biodra:'biodra',ramie:'ramię',przedramie:'przedramię',dlon:'dłoń',udo:'udo',kolano:'kolano',lydka:'łydka',stopa:'stopa'},
+ en:{glowa:'head',szyja:'neck',bark:'shoulder',klatka:'chest',zebra:'ribs',brzuch:'stomach',biodra:'hips',ramie:'upper arm',przedramie:'forearm',dlon:'hand',udo:'thigh',kolano:'knee',lydka:'calf',stopa:'foot'},
+ ua:{glowa:'голова',szyja:'шия',bark:'плече',klatka:'груди',zebra:'ребра',brzuch:'живіт',biodra:'стегна',ramie:'верх руки',przedramie:'передпліччя',dlon:'кисть',udo:'стегно',kolano:'коліно',lydka:'литка',stopa:'ступня'}
+};
+
+const CARE = {
+ pl:[
+  {t:'Świeża rana',d:'Tatuaż jest otwartą raną. Folia zostaje tyle, ile powie artysta.',
+   do:['Zdejmij folię wtedy, kiedy ustaliliście','Umyj letnią wodą i szarym mydłem','Osusz jednorazowym ręcznikiem','Śpij na czystej pościeli'],
+   no:['Basen, jezioro, sauna','Alkohol i rozrzedzanie krwi','Dotykanie brudnymi rękami','Ciasne ubranie na świeżej pracy']},
+  {t:'Sączenie',d:'Skóra oddaje osocze i nadmiar tuszu. To normalne przez kilka dni.',
+   do:['Myj dwa razy dziennie','Cienka warstwa maści, nie grubo','Zmieniaj pościel','Pij dużo wody'],
+   no:['Zdrapywanie zaschniętych warstw','Długa gorąca kąpiel','Trening kontaktowy','Słońce bez ubrania']},
+  {t:'Łuszczenie i swędzenie',d:'Zaczynają schodzić płatki naskórka. Swędzi, ale to dobry znak.',
+   do:['Klep zamiast drapać','Nawilżaj cienko i często','Luźne, przewiewne ubranie','Obserwuj, czy nie ma zaczerwienienia'],
+   no:['Drapanie i zrywanie skórek','Solarium','Golenie tego miejsca','Kremy z zapachem']},
+  {t:'Matowa faza',d:'Tatuaż wygląda mętnie i blado. Pod spodem buduje się nowy naskórek.',
+   do:['Zwykły balsam wystarczy','Krem z filtrem, gdy wychodzisz na słońce','Wróć do normalnego treningu','Zrób zdjęcie do porównania'],
+   no:['Panika, że kolor zniknął','Poprawki przed 30 dniem','Peelingi na tym miejscu','Długie moczenie']},
+  {t:'Pełne wybarwienie',d:'Kolor wraca, skóra jest gładka. Można oceniać efekt i planować poprawkę.',
+   do:['Filtr SPF 50 na zawsze','Odezwij się, jeśli coś wypadło','Planuj kolejną sesję','Nawilżaj dalej, bez fanatyzmu'],
+   no:['Solarium bez ochrony','Zabiegi laserowe obok świeżej pracy','Zapominanie o filtrze latem','Porównywanie do świeżego zdjęcia']}
+ ],
+ en:[
+  {t:'Fresh wound',d:'The tattoo is an open wound. The wrap stays on as long as the artist said.',
+   do:['Remove the wrap at the agreed time','Wash with lukewarm water and mild soap','Pat dry with a paper towel','Sleep on clean sheets'],
+   no:['Pools, lakes, sauna','Alcohol and blood thinners','Touching it with dirty hands','Tight clothes over fresh work']},
+  {t:'Weeping',d:'The skin pushes out plasma and excess ink. Normal for a few days.',
+   do:['Wash twice a day','A thin layer of ointment, not a thick one','Change the bedding','Drink plenty of water'],
+   no:['Picking dried layers','Long hot baths','Contact training','Sun on bare skin']},
+  {t:'Peeling and itching',d:'Flakes start coming off. It itches, which is a good sign.',
+   do:['Tap instead of scratching','Moisturise thin and often','Loose, breathable clothes','Watch for spreading redness'],
+   no:['Scratching and pulling flakes','Tanning beds','Shaving the area','Scented creams']},
+  {t:'Cloudy phase',d:'The tattoo looks dull and faded. New skin is forming underneath.',
+   do:['A normal lotion is enough','Sunscreen when you go outside','Back to your usual training','Take a photo for comparison'],
+   no:['Panicking that the colour is gone','Touch ups before day 30','Scrubs on the area','Long soaking']},
+  {t:'Full colour',d:'The colour is back and the skin is smooth. Time to judge the result and plan a touch up.',
+   do:['SPF 50 from now on','Message us if something dropped out','Plan the next session','Keep moisturising, without obsessing'],
+   no:['Unprotected tanning beds','Laser work next to fresh ink','Forgetting sunscreen in summer','Comparing it to the day one photo']}
+ ],
+ ua:[
+  {t:'Свіжа рана',d:'Тату це відкрита рана. Плівка тримається стільки, скільки сказав майстер.',
+   do:['Зніми плівку в домовлений час','Мий теплою водою і мʼяким милом','Просуши одноразовим рушником','Спи на чистій білизні'],
+   no:['Басейн, озеро, сауна','Алкоголь і розріджувачі крові','Торкатися брудними руками','Тісний одяг на свіжій роботі']},
+  {t:'Сукровиця',d:'Шкіра віддає плазму і надлишок чорнила. Кілька днів це нормально.',
+   do:['Мий двічі на день','Тонкий шар мазі, не густо','Міняй білизну','Пий багато води'],
+   no:['Здирати підсохлі шари','Довга гаряча ванна','Контактні тренування','Сонце на голу шкіру']},
+  {t:'Лущення і свербіж',d:'Починають сходити лусочки. Свербить, і це добрий знак.',
+   do:['Поплескуй замість чухати','Зволожуй тонко і часто','Вільний одяг, що дихає','Стеж, чи не поширюється почервоніння'],
+   no:['Чухати і зривати шкірки','Солярій','Голити це місце','Креми з ароматизаторами']},
+  {t:'Каламутна фаза',d:'Тату виглядає тьмяним і блідим. Під низом формується новий епідерміс.',
+   do:['Звичайний бальзам підійде','Крем із фільтром на вулицю','Повертайся до звичних тренувань','Зроби фото для порівняння'],
+   no:['Панікувати, що колір зник','Правки до 30 дня','Пілінги на цьому місці','Довге замочування']},
+  {t:'Повний колір',d:'Колір повертається, шкіра гладка. Можна оцінювати результат і планувати правку.',
+   do:['SPF 50 назавжди','Напиши, якщо щось випало','Плануй наступну сесію','Зволожуй далі, без фанатизму'],
+   no:['Солярій без захисту','Лазер поруч зі свіжою роботою','Забувати про фільтр влітку','Порівнювати зі свіжим фото']}
+ ]
+};
+
+let LANG = 'pl';
+
+function t(k){ return (DICT[LANG] && DICT[LANG][k]) || DICT.pl[k] || k; }
+
+function applyLang(lang){
+  LANG = DICT[lang] ? lang : 'pl';
+  document.documentElement.lang = LANG === 'ua' ? 'uk' : LANG;
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    const s = t(el.getAttribute('data-i18n'));
+    if(el.tagName === 'OPTION') el.textContent = s.replace(/<[^>]+>/g,'');
+    else el.innerHTML = s;
+  });
+  document.querySelectorAll('[data-ph]').forEach(function(el){ el.placeholder = t(el.getAttribute('data-ph')); });
+  document.querySelectorAll('.lang button').forEach(function(b){
+    b.setAttribute('aria-pressed', String(b.dataset.lang === LANG));
+  });
+  try{ localStorage.setItem('b2b-lang', LANG); }catch(e){}
+  updateCfg();
+  updateCare();
+  if(current === 4) buildSummary();
+  if(typeof renderCrew === 'function'){ renderCrew(document.getElementById('crewSearch').value); renderGal(); }
+}
+
+document.querySelectorAll('.lang button').forEach(function(b){
+  b.addEventListener('click', function(){ applyLang(b.dataset.lang); });
+});
+
+/* =========================================================
+   2. nav + reveal + counters (IntersectionObserver only)
+   ========================================================= */
+const topbar = document.getElementById('topbar');
+new IntersectionObserver(function(e){
+  topbar.classList.toggle('stuck', !e[0].isIntersecting);
+}, {rootMargin:'0px'}).observe(document.getElementById('top-sentinel'));
+
+const burger = document.getElementById('burger');
+const navlinks = document.getElementById('navlinks');
+burger.addEventListener('click', function(){
+  const open = navlinks.classList.toggle('open');
+  burger.setAttribute('aria-expanded', String(open));
+  burger.innerHTML = open ? '<i class="ph ph-x"></i>' : '<i class="ph ph-list"></i>';
+});
+navlinks.addEventListener('click', function(ev){
+  if(ev.target.tagName === 'A'){
+    navlinks.classList.remove('open');
+    burger.setAttribute('aria-expanded','false');
+    burger.innerHTML = '<i class="ph ph-list"></i>';
+  }
+});
+
+const revealIO = new IntersectionObserver(function(entries, obs){
+  entries.forEach(function(en){
+    if(en.isIntersecting){ en.target.classList.add('in'); obs.unobserve(en.target); }
+  });
+}, {threshold:.15, rootMargin:'0px 0px -40px'});
+document.querySelectorAll('.rv').forEach(function(el){ revealIO.observe(el); });
+
+const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const countIO = new IntersectionObserver(function(entries, obs){
+  entries.forEach(function(en){
+    if(!en.isIntersecting) return;
+    obs.unobserve(en.target);
+    const el = en.target, target = parseInt(el.dataset.count,10);
+    if(reduce){ el.textContent = target; return; }
+    const dur = 1100, t0 = performance.now();
+    (function tick(now){
+      const p = Math.min(1,(now-t0)/dur);
+      el.textContent = Math.round(target * (1 - Math.pow(1-p,3)));
+      if(p<1) requestAnimationFrame(tick);
+    })(t0);
+  });
+}, {threshold:.6});
+document.querySelectorAll('[data-count]').forEach(function(el){ countIO.observe(el); });
+
+/* =========================================================
+   3. crew + works + lightbox
+   ========================================================= */
+const ARTISTS=[
+  {n:"Aleksandr Gusev",s:"aleksandr-gusev"},
+  {n:"Alexey Kushner KodeInk",s:"alexey-kushner-kodeink"},
+  {n:"Aliaksandr Yazykou Xander",s:"aliaksandr-yazykou-xander"},
+  {n:"Aliaksei Vasileuski (lutytatts)",s:"aliaksei-vasileuski-lutytatts"},
+  {n:"Anastasiya Barashko",s:"anastasiya-barashko"},
+  {n:"Anna Onishchuk",s:"anna-onishchuk"},
+  {n:"Anton Shmundiak Chinaski",s:"anton-shmundiak-chinaski"},
+  {n:"Daniil Korniienko",s:"daniil-korniienko"},
+  {n:"Dzmitry Darashenka",s:"dzmitry-darashenka"},
+  {n:"Egor Klimchuk Shadow13",s:"egor-klimchuk-shadow13"},
+  {n:"Krystsina Butskevich",s:"krystsina-butskevich"},
+  {n:"Kseniia Zhigulskaia",s:"kseniia-zhigulskaia"},
+  {n:"MAKSIM BANADYSEU MaxMarker",s:"maksim-banadyseu-maxmarker"},
+  {n:"Maksym Sysoniuk (MKVS)",s:"maksym-sysoniuk-mkvs"},
+  {n:"Maksym Verbov Happy Max",s:"maksym-verbov-happy-max"},
+  {n:"Marzhona Khamraieva",s:"marzhona-khamraieva"},
+  {n:"Mikita Karabka",s:"mikita-karabka"},
+  {n:"Nazar DENYSYOUK Nazlo",s:"nazar-denysyouk-nazlo"},
+  {n:"Nikita Miasnykov",s:"nikita-miasnykov"},
+  {n:"Nikolay Harus",s:"nikolay-harus"},
+  {n:"Nikolay Mokhir",s:"nikolay-mokhir"},
+  {n:"Oleksandr Voznyi",s:"oleksandr-voznyi"},
+  {n:"Oleksii Shvetsov Levsha",s:"oleksii-shvetsov-levsha"},
+  {n:"Ramy Hanna",s:"ramy-hanna"},
+  {n:"Sabina Nikitina",s:"sabina-nikitina"},
+  {n:"Savva Kozakov St19",s:"savva-kozakov-st19"},
+  {n:"Stanislav Miasnykov",s:"stanislav-miasnykov"},
+  {n:"Sławomir Sacharczuk Sławek",s:"slawomir-sacharczuk-slawek"},
+  {n:"Uladzislau Famiankou Straight line",s:"uladzislau-famiankou-straight-line"},
+  {n:"Valentin Kryshtul",s:"valentin-kryshtul"},
+  {n:"Varvara Shvetsova Varyabey.tattoo",s:"varvara-shvetsova-varyabeytattoo"},
+  {n:"Viktoriya Fedosova",s:"viktoriya-fedosova"},
+  {n:"Vlad Ostrohliad Teren",s:"vlad-ostrohliad-teren"},
+  {n:"Vladyslav Trofimov",s:"vladyslav-trofimov"},
+  {n:"Vladyslava Nazarenko",s:"vladyslava-nazarenko"}
+];
+
+/* one entry per photo; interleaved so the grid never shows 3 works of the
+   same artist side by side */
+const WORKS = [];
+[1,2,3].forEach(function(i){ ARTISTS.forEach(function(a){ WORKS.push({a:a, i:i}); }); });
+
+const PAGE = 24;
+let galShown  = PAGE;
+let galList   = WORKS;
+
+const galEl    = document.getElementById('gal');
+const galState = document.getElementById('galState');
+const galMore  = document.getElementById('galMore');
+const crewGrid = document.getElementById('crewGrid');
+const crewEmpty= document.getElementById('crewEmpty');
+
+function workSrc(w){ return 'assets/artists/' + w.a.s + '/work' + w.i + '.jpg'; }
+
+function renderGal(){
+  galList = WORKS;
+  const slice = galList.slice(0, galShown);
+  galEl.innerHTML = '';
+  slice.forEach(function(w, idx){
+    const fig = document.createElement('figure');
+    fig.className = 'tile';
+    fig.setAttribute('role','button');
+    fig.tabIndex = 0;
+    fig.dataset.idx = idx;
+    const img = document.createElement('img');
+    img.loading = 'lazy'; img.decoding = 'async';
+    img.src = workSrc(w);
+    img.alt = t('gal.alt').replace('{name}', w.a.n);
+    const cap = document.createElement('figcaption');
+    cap.textContent = w.a.n;
+    fig.appendChild(img); fig.appendChild(cap);
+    galEl.appendChild(fig);
+  });
+  galState.innerHTML = t('gal.state')
+    .replace('{n}', '<b>' + WORKS.length + '</b>')
+    .replace('{m}', '<b>' + ARTISTS.length + '</b>');
+  galMore.parentNode.hidden = galShown >= galList.length;
+}
+
+galMore.addEventListener('click', function(){ galShown += PAGE; renderGal(); });
+
+function renderCrew(q){
+  const needle = (q||'').trim().toLowerCase();
+  const list = needle ? ARTISTS.filter(function(a){ return a.n.toLowerCase().indexOf(needle) > -1; }) : ARTISTS;
+  crewGrid.innerHTML = '';
+  list.forEach(function(a){
+    const card = document.createElement('a');
+    card.className = 'card-artist'; card.dataset.slug = a.s;
+    card.href = 'artysta-' + a.s + '.html';
+    const face = document.createElement('div'); face.className = 'ph-face';
+    const img = document.createElement('img');
+    img.loading = 'lazy'; img.decoding = 'async';
+    img.src = 'assets/artists/' + a.s + '/profile.jpg'; img.alt = a.n;
+    face.appendChild(img);
+    const body = document.createElement('div'); body.className = 'body';
+    const h = document.createElement('h3'); h.textContent = a.n;
+    const note = document.createElement('p'); note.className = 'note'; note.textContent = t('crew.works');
+    body.appendChild(h); body.appendChild(note);
+    card.appendChild(face); card.appendChild(body);
+    crewGrid.appendChild(card);
+  });
+  crewEmpty.hidden = list.length > 0;
+}
+
+document.getElementById('crewSearch').addEventListener('input', function(e){ renderCrew(e.target.value); });
+
+/* ---- lightbox ---- */
+const lb = document.getElementById('lb'), lbImg = document.getElementById('lbImg'),
+      lbCap = document.getElementById('lbCap');
+let lbIdx = 0, lbOpener = null;
+
+function lbShow(i){
+  const n = galList.length;
+  lbIdx = (i + n) % n;
+  const w = galList[lbIdx];
+  lbImg.src = workSrc(w);
+  lbImg.alt = t('gal.alt').replace('{name}', w.a.n);
+  lbCap.innerHTML = '<a class="lb-link" href="artysta-' + w.a.s + '.html"><b>' + w.a.n +
+                    '</b></a> &nbsp; ' + (lbIdx+1) + ' / ' + n;
+}
+function lbOpen(i, opener){
+  lbOpener = opener || null;
+  lb.hidden = false;
+  document.body.style.overflow = 'hidden';
+  lbShow(i);
+  document.getElementById('lbClose').focus();
+}
+function lbClose(){
+  lb.hidden = true;
+  document.body.style.overflow = '';
+  if(lbOpener) lbOpener.focus();
+}
+galEl.addEventListener('click', function(ev){
+  const fig = ev.target.closest('.tile'); if(fig) lbOpen(+fig.dataset.idx, fig);
+});
+galEl.addEventListener('keydown', function(ev){
+  const fig = ev.target.closest('.tile'); if(!fig) return;
+  if(ev.key === 'Enter' || ev.key === ' '){ ev.preventDefault(); lbOpen(+fig.dataset.idx, fig); }
+});
+document.getElementById('lbClose').addEventListener('click', lbClose);
+document.getElementById('lbPrev').addEventListener('click', function(){ lbShow(lbIdx-1); });
+document.getElementById('lbNext').addEventListener('click', function(){ lbShow(lbIdx+1); });
+lb.addEventListener('click', function(ev){ if(ev.target === lb) lbClose(); });
+document.addEventListener('keydown', function(ev){
+  if(lb.hidden) return;
+  if(ev.key === 'Escape') lbClose();
+  else if(ev.key === 'ArrowLeft') lbShow(lbIdx-1);
+  else if(ev.key === 'ArrowRight') lbShow(lbIdx+1);
+});
+
+/* =========================================================
+   4. configurator
+   ========================================================= */
+const ZONES = {
+  glowa:{pain:7,mult:1.15}, szyja:{pain:8,mult:1.20}, bark:{pain:3,mult:1.00},
+  klatka:{pain:7,mult:1.10}, zebra:{pain:9,mult:1.25}, brzuch:{pain:7,mult:1.10},
+  biodra:{pain:8,mult:1.15}, ramie:{pain:4,mult:1.00}, przedramie:{pain:4,mult:1.00},
+  dlon:{pain:9,mult:1.30}, udo:{pain:4,mult:0.95}, kolano:{pain:7,mult:1.15},
+  lydka:{pain:5,mult:1.00}, stopa:{pain:8,mult:1.25}
+};
+const STYLE_F  = {realism:1.35, blackwork:1.10, dotwork:1.25, oldschool:0.95, linework:0.80, graphic:1.05, abstract:1.00, handpoke:1.50};
+const DETAIL_F = {'1':0.85, '2':1.00, '3':1.25};
+const COLOR_F  = {bw:1.00, color:1.25};
+const RATE = 350, MINIMUM = 400;
+
+const state = {zone:'przedramie', size:15, style:'linework', color:'bw', detail:'2'};
+
+const painMeter = document.getElementById('painMeter');
+for(let i=0;i<10;i++) painMeter.appendChild(document.createElement('i'));
+
+function money(n){ return n.toLocaleString('pl-PL').replace(/ /g,' ') + ' zł'; }
+function round50(n){ return Math.round(n/50)*50; }
+
+function fmtHours(h){
+  if(h < 1) return Math.round(h*60) + ' min';
+  const r = Math.round(h*2)/2;
+  return String(r).replace('.', LANG === 'en' ? '.' : ',') + ' h';
+}
+
+function compute(){
+  const z = ZONES[state.zone];
+  let h = Math.pow(state.size, 1.5) / 22;
+  h *= STYLE_F[state.style] * DETAIL_F[state.detail] * COLOR_F[state.color] * z.mult;
+  h = Math.max(0.5, h);
+  const mid = Math.max(MINIMUM, h * RATE);
+  return {
+    hours: h,
+    low: round50(mid * 0.85),
+    high: round50(mid * 1.20),
+    sessions: Math.max(1, Math.ceil(h / 5)),
+    pain: z.pain
+  };
+}
+
+function updateCfg(){
+  const r = compute();
+  document.getElementById('zoneName').textContent = ZONE_NAMES[LANG][state.zone];
+  document.getElementById('sizeVal').textContent = state.size;
+  document.getElementById('outPrice').textContent = money(r.low) + ' - ' + money(r.high);
+  document.getElementById('outTime').textContent = fmtHours(r.hours);
+  document.getElementById('outSessions').textContent = r.sessions;
+  document.getElementById('outPain').textContent = r.pain + ' / 10';
+  Array.prototype.forEach.call(painMeter.children, function(bar, i){
+    bar.classList.toggle('on', i < r.pain);
+  });
+  document.querySelectorAll('.zone').forEach(function(z){
+    z.classList.toggle('sel', z.dataset.z === state.zone);
+  });
+}
+
+document.querySelectorAll('.zone').forEach(function(z){
+  function pick(){ state.zone = z.dataset.z; updateCfg(); }
+  z.addEventListener('click', pick);
+  z.addEventListener('keydown', function(e){
+    if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); pick(); }
+  });
+});
+
+document.getElementById('size').addEventListener('input', function(e){
+  state.size = parseInt(e.target.value,10); updateCfg();
+});
+
+function bindSeg(id, key){
+  const seg = document.getElementById(id);
+  seg.addEventListener('click', function(ev){
+    const b = ev.target.closest('button'); if(!b) return;
+    seg.querySelectorAll('button').forEach(function(x){ x.setAttribute('aria-pressed', String(x === b)); });
+    state[key] = b.dataset.v; updateCfg();
+  });
+}
+bindSeg('segStyle','style');
+bindSeg('segColor','color');
+bindSeg('segDetail','detail');
+
+document.getElementById('resetCfg').addEventListener('click', function(){
+  state.zone='przedramie'; state.size=15; state.style='linework'; state.color='bw'; state.detail='2';
+  document.getElementById('size').value = 15;
+  [['segStyle','linework'],['segColor','bw'],['segDetail','2']].forEach(function(p){
+    document.querySelectorAll('#'+p[0]+' button').forEach(function(b){
+      b.setAttribute('aria-pressed', String(b.dataset.v === p[1]));
+    });
+  });
+  updateCfg();
+});
+
+/* configurator feeds the booking form */
+document.getElementById('toBooking').addEventListener('click', function(){
+  const styleBtn = document.querySelector('#segStyle button[aria-pressed="true"]');
+  document.getElementById('bStyle').value = styleBtn ? styleBtn.textContent.trim() : state.style;
+  document.getElementById('bPlace').value = ZONE_NAMES[LANG][state.zone];
+  document.getElementById('bSize').value  = state.size + ' cm';
+  goStep(1);
+});
+
+/* =========================================================
+   5. booking stepper
+   ========================================================= */
+const steps = document.querySelectorAll('.step');
+const bars  = document.querySelectorAll('#stepsBar div');
+let current = 1;
+
+function goStep(n){
+  current = n;
+  steps.forEach(function(s){ s.classList.toggle('on', +s.dataset.step === n); });
+  bars.forEach(function(b, i){
+    b.classList.toggle('active', i+1 === n);
+    b.classList.toggle('done', i+1 < n);
+  });
+  if(n === 4) buildSummary();
+}
+
+function validateStep3(){
+  const name = document.getElementById('bName');
+  const contact = document.getElementById('bContact');
+  let ok = true;
+  [[name,'errName'],[contact,'errContact']].forEach(function(p){
+    const bad = p[0].value.trim().length < 2;
+    p[0].setAttribute('aria-invalid', String(bad));
+    document.getElementById(p[1]).classList.toggle('show', bad);
+    if(bad) ok = false;
+  });
+  return ok;
+}
+
+document.querySelectorAll('[data-next]').forEach(function(b){
+  b.addEventListener('click', function(){
+    const n = +b.dataset.next;
+    if(n === 4 && !validateStep3()) return;
+    goStep(n);
+    document.getElementById('zapisy').scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block:'start'});
+  });
+});
+document.querySelectorAll('[data-prev]').forEach(function(b){
+  b.addEventListener('click', function(){ goStep(+b.dataset.prev); });
+});
+['bName','bContact'].forEach(function(id){
+  document.getElementById(id).addEventListener('input', function(e){
+    if(e.target.value.trim().length >= 2){
+      e.target.setAttribute('aria-invalid','false');
+      document.getElementById(id === 'bName' ? 'errName' : 'errContact').classList.remove('show');
+    }
+  });
+});
+
+function val(id){ const v = document.getElementById(id); return (v.value || '').trim(); }
+function selText(id){ const s = document.getElementById(id); return s.options[s.selectedIndex].text; }
+
+function collect(){
+  const r = compute();
+  return [
+    ['sum.name',    val('bName')    || t('sum.empty')],
+    ['sum.contact', val('bContact') || t('sum.empty')],
+    ['sum.style',   val('bStyle')   || t('sum.empty')],
+    ['sum.place',   val('bPlace')   || t('sum.empty')],
+    ['sum.size',    val('bSize')    || t('sum.empty')],
+    ['sum.first',   selText('bFirst')],
+    ['sum.idea',    val('bIdea')    || t('sum.empty')],
+    ['sum.when',    selText('bWhen')],
+    ['sum.day',     selText('bDay')],
+    ['sum.est',     money(r.low) + ' - ' + money(r.high) + ', ' + fmtHours(r.hours)]
+  ];
+}
+
+function buildSummary(){
+  const dl = document.getElementById('sumList');
+  dl.innerHTML = '';
+  collect().forEach(function(row){
+    const dt = document.createElement('dt'); dt.textContent = t(row[0]);
+    const dd = document.createElement('dd'); dd.textContent = row[1];
+    dl.appendChild(dt); dl.appendChild(dd);
+  });
+}
+
+function messageText(){
+  return t('msg.hi') + '\n' + collect().map(function(r){ return t(r[0]) + ': ' + r[1]; }).join('\n');
+}
+
+document.getElementById('copyMsg').addEventListener('click', function(){
+  const text = messageText();
+  const done = function(){
+    const tip = document.getElementById('copiedMsg');
+    tip.classList.add('show');
+    setTimeout(function(){ tip.classList.remove('show'); }, 2200);
+  };
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(done, fallback);
+  } else fallback();
+  function fallback(){
+    const ta = document.createElement('textarea');
+    ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); done(); }catch(e){}
+    document.body.removeChild(ta);
+  }
+});
+
+/* =========================================================
+   6. aftercare timeline
+   ========================================================= */
+const daySlider = document.getElementById('day');
+function stageIndex(d){
+  if(d <= 2) return 0;
+  if(d <= 5) return 1;
+  if(d <= 10) return 2;
+  if(d <= 18) return 3;
+  return 4;
+}
+function updateCare(){
+  const d = parseInt(daySlider.value,10);
+  const s = CARE[LANG][stageIndex(d)];
+  document.getElementById('tlFill').style.transform = 'scaleX(' + ((d-1)/29) + ')';
+  document.getElementById('careStage').textContent = t('care.day').replace('{d}', d);
+  document.getElementById('careTitle').textContent = s.t;
+  document.getElementById('careDesc').textContent = s.d;
+  fillList('careDo', s.do, 'ph-check');
+  fillList('careDont', s.no, 'ph-x');
+}
+function fillList(id, arr, icon){
+  const ul = document.getElementById(id);
+  ul.innerHTML = '';
+  arr.forEach(function(item){
+    const li = document.createElement('li');
+    const i = document.createElement('i'); i.className = 'ph ' + icon; i.setAttribute('aria-hidden','true');
+    const sp = document.createElement('span'); sp.textContent = item;
+    li.appendChild(i); li.appendChild(sp); ul.appendChild(li);
+  });
+}
+daySlider.addEventListener('input', updateCare);
+
+/* =========================================================
+   7. boot
+   ========================================================= */
+let saved = 'pl';
+try{ saved = localStorage.getItem('b2b-lang') || 'pl'; }catch(e){}
+applyLang(saved);
+
+/* ?q= drives the crew search, so the site works as a Chrome search engine */
+const q = new URLSearchParams(location.search).get('q') || '';
+renderCrew(q);
+renderGal();
+if(q){
+  const box = document.getElementById('crewSearch');
+  box.value = q;
+  const hit = crewGrid.querySelector('.card-artist');
+  if(hit && crewGrid.querySelectorAll('.card-artist').length === 1) location.replace(hit.href);
+  else document.getElementById('artysci').scrollIntoView({block:'start'});
+}
+})();
+</script>
+</body>
+</html>

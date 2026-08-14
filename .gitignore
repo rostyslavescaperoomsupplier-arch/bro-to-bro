@@ -1,0 +1,6 @@
+# Dane osobowe artystów z ankiety - nigdy nie trafiają do publicznego repo
+_data/
+_incoming/
+
+.DS_Store
+.impeccable/

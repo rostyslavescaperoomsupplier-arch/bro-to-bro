@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vladyslava Nazarenko | BRO TO BRO Tattoo Art Studio Szczecin</title>
+<meta name="description" content="Vladyslava Nazarenko - artysta w studiu BRO TO BRO w Szczecinie. Prace, style i zapisy.">
+<meta name="theme-color" content="#0b0b0c">
+<meta property="og:title" content="Vladyslava Nazarenko | BRO TO BRO Tattoo">
+<meta property="og:image" content="assets/artists/vladyslava-nazarenko/profile.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="icon" href="assets/logo-mark.png">
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="topbar stuck">
+  <div class="shell">
+    <a class="brand" href="index.html" aria-label="BRO TO BRO Tattoo Art Studio">
+      <img src="assets/logo-mark.png" alt="" width="606" height="616">
+      <span>Bro to Bro<small>TATTOO ART STUDIO</small></span>
+    </a>
+    <nav class="navlinks prof-links">
+      <a href="index.html#artysci" data-i18n="crew">Cała ekipa</a>
+      <a href="index.html#kalkulator">Wycena</a>
+      <a href="index.html#zapisy" data-i18n="book">Umów się</a>
+    </nav>
+    <div class="navtools">
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-lang="pl" aria-pressed="true">PL</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+        <button type="button" data-lang="ua" aria-pressed="false">UA</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="prof">
+  <div class="shell prof-grid">
+    <figure class="prof-photo">
+      <img src="assets/artists/vladyslava-nazarenko/profile.jpg" alt="Vladyslava Nazarenko" width="720" height="720" fetchpriority="high">
+    </figure>
+    <div class="prof-info">
+      <p class="eyebrow" data-i18n="eyebrow">Artysta</p>
+      <h1 class="display">Vladyslava Nazarenko</h1>
+    <dl class="facts">
+      <dt data-i18n="styles">Style</dt>
+      <dd>Old school / traditional, New school / neo trad, Japanese traditional, Minimalist, Fine line</dd>
+      <dt data-i18n="since">Tatuuje od</dt>
+      <dd><span class="mono">2020</span> <small><span class="mono">6</span> <span data-i18n="years">lat w zawodzie</span></small></dd>
+      <dt data-i18n="city">Baza</dt>
+      <dd>Konstanz, Germany</dd>
+    </dl>
+      <div class="prof-cta">
+        <a class="btn btn-primary" href="index.html#zapisy"><i class="ph ph-paper-plane-tilt" aria-hidden="true"></i><span data-i18n="book">Umów się</span></a>
+        <a class="btn btn-ghost" href="https://www.instagram.com/n_tattoo.time_v/" target="_blank" rel="noopener"><i class="ph ph-instagram-logo" aria-hidden="true"></i>@n_tattoo.time_v</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="prof-works">
+  <div class="shell">
+    <h2 class="display" data-i18n="works">Prace</h2>
+    <div class="gal prof-gal" id="gal">
+        <figure class="tile" role="button" tabindex="0" data-idx="0"><img loading="lazy" decoding="async" src="assets/artists/vladyslava-nazarenko/work1.jpg" alt="Tatuaż, autor Vladyslava Nazarenko"></figure>
+        <figure class="tile" role="button" tabindex="0" data-idx="1"><img loading="lazy" decoding="async" src="assets/artists/vladyslava-nazarenko/work2.jpg" alt="Tatuaż, autor Vladyslava Nazarenko"></figure>
+        <figure class="tile" role="button" tabindex="0" data-idx="2"><img loading="lazy" decoding="async" src="assets/artists/vladyslava-nazarenko/work3.jpg" alt="Tatuaż, autor Vladyslava Nazarenko"></figure>
+    </div>
+
+    <nav class="prof-nav">
+      <a class="btn btn-ghost btn-sm" href="artysta-vladyslav-trofimov.html"><i class="ph ph-arrow-left" aria-hidden="true"></i>Vladyslav Trofimov</a>
+      <a class="btn btn-ghost btn-sm" href="index.html#artysci" data-i18n="crew">Cała ekipa</a>
+      <a class="btn btn-ghost btn-sm" href="artysta-aleksandr-gusev.html">Aleksandr Gusev<i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+    </nav>
+  </div>
+</section>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Podgląd pracy">
+  <button class="lb-close" id="lbClose" aria-label="Zamknij"><i class="ph ph-x" aria-hidden="true"></i></button>
+  <button class="lb-nav lb-prev" id="lbPrev" aria-label="Poprzednia"><i class="ph ph-caret-left" aria-hidden="true"></i></button>
+  <figure class="lb-fig">
+    <img id="lbImg" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+    <figcaption id="lbCap"></figcaption>
+  </figure>
+  <button class="lb-nav lb-next" id="lbNext" aria-label="Następna"><i class="ph ph-caret-right" aria-hidden="true"></i></button>
+</div>
+</main>
+
+<footer>
+  <div class="shell">
+    <div class="foot-brand">
+      <img src="assets/logo-wordmark.png" alt="Bro to Bro Tattoo Art Studio" width="630" height="218" loading="lazy">
+      <p><a href="index.html" data-i18n="back">Wróć na stronę główną</a></p>
+    </div>
+    <div class="foot-social">
+      <a href="https://www.instagram.com/brotobrotattoo/" target="_blank" rel="noopener" aria-label="Instagram"><i class="ph ph-instagram-logo" aria-hidden="true"></i></a>
+      <a href="tel:+48579128368" aria-label="Telefon"><i class="ph ph-phone" aria-hidden="true"></i></a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+'use strict';
+const L = {"pl": {"eyebrow": "Artysta", "works": "Prace", "styles": "Style", "since": "Tatuuje od", "city": "Baza", "langs": "Języki", "ig": "Instagram", "book": "Umów się", "crew": "Cała ekipa", "prev": "Poprzedni", "next": "Następny", "soon": "Opis tego artysty przygotowujemy. Prace poniżej mówią za siebie, a termin ustalimy przez Instagram albo telefon.", "back": "Wróć na stronę główną", "years": "lat w zawodzie"}, "en": {"eyebrow": "Artist", "works": "Work", "styles": "Styles", "since": "Tattooing since", "city": "Based in", "langs": "Languages", "ig": "Instagram", "book": "Book a session", "crew": "The whole crew", "prev": "Previous", "next": "Next", "soon": "We are still writing this profile. The work below speaks for itself, and we can set a date over Instagram or by phone.", "back": "Back to the main page", "years": "years in the trade"}, "ua": {"eyebrow": "Майстер", "works": "Роботи", "styles": "Стилі", "since": "Татуює з", "city": "База", "langs": "Мови", "ig": "Instagram", "book": "Записатись", "crew": "Уся команда", "prev": "Попередній", "next": "Наступний", "soon": "Опис цього майстра ще готуємо. Роботи нижче говорять самі за себе, а дату узгодимо в Instagram або телефоном.", "back": "На головну", "years": "років у професії"}};
+const NAME = "Vladyslava Nazarenko";
+const SRC = [1,2,3].map(function(i){ return 'assets/artists/vladyslava-nazarenko/work'+i+'.jpg'; });
+
+function applyLang(lang){
+  if(!L[lang]) lang='pl';
+  document.documentElement.lang = lang === 'ua' ? 'uk' : lang;
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    const v = L[lang][el.getAttribute('data-i18n')];
+    if(v) el.textContent = v;
+  });
+  document.querySelectorAll('.lang button').forEach(function(b){
+    b.setAttribute('aria-pressed', String(b.dataset.lang === lang));
+  });
+  try{ localStorage.setItem('b2b-lang', lang); }catch(e){}
+}
+document.querySelectorAll('.lang button').forEach(function(b){
+  b.addEventListener('click', function(){ applyLang(b.dataset.lang); });
+});
+let saved='pl';
+try{ saved = localStorage.getItem('b2b-lang') || 'pl'; }catch(e){}
+applyLang(saved);
+
+/* lightbox */
+const lb=document.getElementById('lb'), img=document.getElementById('lbImg'), cap=document.getElementById('lbCap');
+let idx=0, opener=null;
+function show(i){
+  idx=(i+SRC.length)%SRC.length;
+  img.src=SRC[idx]; img.alt=NAME;
+  cap.innerHTML='<b>'+NAME+'</b> &nbsp; '+(idx+1)+' / '+SRC.length;
+}
+function open(i,el){ opener=el; lb.hidden=false; document.body.style.overflow='hidden'; show(i); document.getElementById('lbClose').focus(); }
+function close(){ lb.hidden=true; document.body.style.overflow=''; if(opener) opener.focus(); }
+document.getElementById('gal').addEventListener('click', function(e){
+  const f=e.target.closest('.tile'); if(f) open(+f.dataset.idx, f);
+});
+document.getElementById('gal').addEventListener('keydown', function(e){
+  const f=e.target.closest('.tile'); if(!f) return;
+  if(e.key==='Enter'||e.key===' '){ e.preventDefault(); open(+f.dataset.idx, f); }
+});
+document.getElementById('lbClose').addEventListener('click', close);
+document.getElementById('lbPrev').addEventListener('click', function(){ show(idx-1); });
+document.getElementById('lbNext').addEventListener('click', function(){ show(idx+1); });
+lb.addEventListener('click', function(e){ if(e.target===lb) close(); });
+document.addEventListener('keydown', function(e){
+  if(lb.hidden) return;
+  if(e.key==='Escape') close();
+  else if(e.key==='ArrowLeft') show(idx-1);
+  else if(e.key==='ArrowRight') show(idx+1);
+});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,271 @@
+#!/usr/bin/env python3
+"""Generuje stronę profilową dla każdego artysty z _data/artists.json.
+
+    python3 build.py
+
+Dane biograficzne pochodzą wyłącznie z ankiety artysty. Artyści bez ankiety
+dostają stronę z nazwiskiem i pracami, bez wymyślonego opisu.
+"""
+import html
+import json
+import os
+
+DATA = json.load(open('_data/artists.json', encoding='utf-8'))
+DATA.sort(key=lambda a: a['name'].lower())
+
+LANGS = ('pl', 'en', 'ua')
+
+L = {
+    'pl': {
+        'eyebrow': 'Artysta', 'works': 'Prace', 'styles': 'Style', 'since': 'Tatuuje od',
+        'city': 'Baza', 'langs': 'Języki', 'ig': 'Instagram', 'book': 'Umów się',
+        'crew': 'Cała ekipa', 'prev': 'Poprzedni', 'next': 'Następny',
+        'soon': 'Opis tego artysty przygotowujemy. Prace poniżej mówią za siebie, a termin ustalimy przez Instagram albo telefon.',
+        'back': 'Wróć na stronę główną', 'years': 'lat w zawodzie',
+    },
+    'en': {
+        'eyebrow': 'Artist', 'works': 'Work', 'styles': 'Styles', 'since': 'Tattooing since',
+        'city': 'Based in', 'langs': 'Languages', 'ig': 'Instagram', 'book': 'Book a session',
+        'crew': 'The whole crew', 'prev': 'Previous', 'next': 'Next',
+        'soon': 'We are still writing this profile. The work below speaks for itself, and we can set a date over Instagram or by phone.',
+        'back': 'Back to the main page', 'years': 'years in the trade',
+    },
+    'ua': {
+        'eyebrow': 'Майстер', 'works': 'Роботи', 'styles': 'Стилі', 'since': 'Татуює з',
+        'city': 'База', 'langs': 'Мови', 'ig': 'Instagram', 'book': 'Записатись',
+        'crew': 'Уся команда', 'prev': 'Попередній', 'next': 'Наступний',
+        'soon': 'Опис цього майстра ще готуємо. Роботи нижче говорять самі за себе, а дату узгодимо в Instagram або телефоном.',
+        'back': 'На головну', 'years': 'років у професії',
+    },
+}
+
+CURRENT_YEAR = 2026
+
+
+def esc(v):
+    return html.escape(str(v), quote=True)
+
+
+def facts_rows(a):
+    """Only rows backed by the questionnaire. No invented content."""
+    rows = []
+    if a.get('styles'):
+        rows.append(('styles', ', '.join(a['styles'])))
+    if a.get('since'):
+        years = CURRENT_YEAR - int(a['since'])
+        rows.append(('since', f"{a['since']}|{years}"))
+    where = ', '.join(x for x in (a.get('city'), a.get('country')) if x)
+    if where:
+        rows.append(('city', where))
+    if a.get('langs'):
+        rows.append(('langs', ' / '.join(a['langs'])))
+    return rows
+
+
+def page(a, prev, nxt):
+    slug = a['slug']
+    name = esc(a['name'])
+    rows = facts_rows(a)
+
+    dl = []
+    for key, val in rows:
+        if key == 'since':
+            year, years = val.split('|')
+            value_html = (f'<span class="mono">{year}</span> '
+                          f'<small><span class="mono">{years}</span> '
+                          f'<span data-i18n="years">{esc(L["pl"]["years"])}</span></small>')
+        else:
+            value_html = esc(val)
+        dl.append(f'      <dt data-i18n="{key}">{esc(L["pl"][key])}</dt>\n'
+                  f'      <dd>{value_html}</dd>')
+    facts = ('    <dl class="facts">\n' + '\n'.join(dl) + '\n    </dl>')  if dl else \
+            f'    <p class="lead prof-soon" data-i18n="soon">{esc(L["pl"]["soon"])}</p>'
+
+    ig = ''
+    if a.get('ig'):
+        h = esc(a['ig'])
+        ig = (f'\n        <a class="btn btn-ghost" href="https://www.instagram.com/{h}/" '
+              f'target="_blank" rel="noopener">'
+              f'<i class="ph ph-instagram-logo" aria-hidden="true"></i>@{h}</a>')
+
+    nick = f'\n      <p class="prof-nick mono">{esc(a["nick"])}</p>' if a.get('nick') else ''
+
+    tiles = '\n'.join(
+        f'        <figure class="tile" role="button" tabindex="0" data-idx="{i-1}">'
+        f'<img loading="lazy" decoding="async" src="assets/artists/{slug}/work{i}.jpg" '
+        f'alt="Tatuaż, autor {name}"></figure>'
+        for i in (1, 2, 3))
+
+    labels = json.dumps({k: L[k] for k in LANGS}, ensure_ascii=False)
+
+    return f'''<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{name} | BRO TO BRO Tattoo Art Studio Szczecin</title>
+<meta name="description" content="{name} - artysta w studiu BRO TO BRO w Szczecinie. Prace, style i zapisy.">
+<meta name="theme-color" content="#0b0b0c">
+<meta property="og:title" content="{name} | BRO TO BRO Tattoo">
+<meta property="og:image" content="assets/artists/{slug}/profile.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="icon" href="assets/logo-mark.png">
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="topbar stuck">
+  <div class="shell">
+    <a class="brand" href="index.html" aria-label="BRO TO BRO Tattoo Art Studio">
+      <img src="assets/logo-mark.png" alt="" width="606" height="616">
+      <span>Bro to Bro<small>TATTOO ART STUDIO</small></span>
+    </a>
+    <nav class="navlinks prof-links">
+      <a href="index.html#artysci" data-i18n="crew">{esc(L['pl']['crew'])}</a>
+      <a href="index.html#kalkulator">Wycena</a>
+      <a href="index.html#zapisy" data-i18n="book">{esc(L['pl']['book'])}</a>
+    </nav>
+    <div class="navtools">
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-lang="pl" aria-pressed="true">PL</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+        <button type="button" data-lang="ua" aria-pressed="false">UA</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="prof">
+  <div class="shell prof-grid">
+    <figure class="prof-photo">
+      <img src="assets/artists/{slug}/profile.jpg" alt="{name}" width="720" height="720" fetchpriority="high">
+    </figure>
+    <div class="prof-info">
+      <p class="eyebrow" data-i18n="eyebrow">{esc(L['pl']['eyebrow'])}</p>
+      <h1 class="display">{name}</h1>{nick}
+{facts}
+      <div class="prof-cta">
+        <a class="btn btn-primary" href="index.html#zapisy"><i class="ph ph-paper-plane-tilt" aria-hidden="true"></i><span data-i18n="book">{esc(L['pl']['book'])}</span></a>{ig}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="prof-works">
+  <div class="shell">
+    <h2 class="display" data-i18n="works">{esc(L['pl']['works'])}</h2>
+    <div class="gal prof-gal" id="gal">
+{tiles}
+    </div>
+
+    <nav class="prof-nav">
+      <a class="btn btn-ghost btn-sm" href="artysta-{prev['slug']}.html"><i class="ph ph-arrow-left" aria-hidden="true"></i>{esc(prev['name'])}</a>
+      <a class="btn btn-ghost btn-sm" href="index.html#artysci" data-i18n="crew">{esc(L['pl']['crew'])}</a>
+      <a class="btn btn-ghost btn-sm" href="artysta-{nxt['slug']}.html">{esc(nxt['name'])}<i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+    </nav>
+  </div>
+</section>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Podgląd pracy">
+  <button class="lb-close" id="lbClose" aria-label="Zamknij"><i class="ph ph-x" aria-hidden="true"></i></button>
+  <button class="lb-nav lb-prev" id="lbPrev" aria-label="Poprzednia"><i class="ph ph-caret-left" aria-hidden="true"></i></button>
+  <figure class="lb-fig">
+    <img id="lbImg" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+    <figcaption id="lbCap"></figcaption>
+  </figure>
+  <button class="lb-nav lb-next" id="lbNext" aria-label="Następna"><i class="ph ph-caret-right" aria-hidden="true"></i></button>
+</div>
+</main>
+
+<footer>
+  <div class="shell">
+    <div class="foot-brand">
+      <img src="assets/logo-wordmark.png" alt="Bro to Bro Tattoo Art Studio" width="630" height="218" loading="lazy">
+      <p><a href="index.html" data-i18n="back">{esc(L['pl']['back'])}</a></p>
+    </div>
+    <div class="foot-social">
+      <a href="https://www.instagram.com/brotobrotattoo/" target="_blank" rel="noopener" aria-label="Instagram"><i class="ph ph-instagram-logo" aria-hidden="true"></i></a>
+      <a href="tel:+48579128368" aria-label="Telefon"><i class="ph ph-phone" aria-hidden="true"></i></a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){{
+'use strict';
+const L = {labels};
+const NAME = {json.dumps(a['name'], ensure_ascii=False)};
+const SRC = [1,2,3].map(function(i){{ return 'assets/artists/{slug}/work'+i+'.jpg'; }});
+
+function applyLang(lang){{
+  if(!L[lang]) lang='pl';
+  document.documentElement.lang = lang === 'ua' ? 'uk' : lang;
+  document.querySelectorAll('[data-i18n]').forEach(function(el){{
+    const v = L[lang][el.getAttribute('data-i18n')];
+    if(v) el.textContent = v;
+  }});
+  document.querySelectorAll('.lang button').forEach(function(b){{
+    b.setAttribute('aria-pressed', String(b.dataset.lang === lang));
+  }});
+  try{{ localStorage.setItem('b2b-lang', lang); }}catch(e){{}}
+}}
+document.querySelectorAll('.lang button').forEach(function(b){{
+  b.addEventListener('click', function(){{ applyLang(b.dataset.lang); }});
+}});
+let saved='pl';
+try{{ saved = localStorage.getItem('b2b-lang') || 'pl'; }}catch(e){{}}
+applyLang(saved);
+
+/* lightbox */
+const lb=document.getElementById('lb'), img=document.getElementById('lbImg'), cap=document.getElementById('lbCap');
+let idx=0, opener=null;
+function show(i){{
+  idx=(i+SRC.length)%SRC.length;
+  img.src=SRC[idx]; img.alt=NAME;
+  cap.innerHTML='<b>'+NAME+'</b> &nbsp; '+(idx+1)+' / '+SRC.length;
+}}
+function open(i,el){{ opener=el; lb.hidden=false; document.body.style.overflow='hidden'; show(i); document.getElementById('lbClose').focus(); }}
+function close(){{ lb.hidden=true; document.body.style.overflow=''; if(opener) opener.focus(); }}
+document.getElementById('gal').addEventListener('click', function(e){{
+  const f=e.target.closest('.tile'); if(f) open(+f.dataset.idx, f);
+}});
+document.getElementById('gal').addEventListener('keydown', function(e){{
+  const f=e.target.closest('.tile'); if(!f) return;
+  if(e.key==='Enter'||e.key===' '){{ e.preventDefault(); open(+f.dataset.idx, f); }}
+}});
+document.getElementById('lbClose').addEventListener('click', close);
+document.getElementById('lbPrev').addEventListener('click', function(){{ show(idx-1); }});
+document.getElementById('lbNext').addEventListener('click', function(){{ show(idx+1); }});
+lb.addEventListener('click', function(e){{ if(e.target===lb) close(); }});
+document.addEventListener('keydown', function(e){{
+  if(lb.hidden) return;
+  if(e.key==='Escape') close();
+  else if(e.key==='ArrowLeft') show(idx-1);
+  else if(e.key==='ArrowRight') show(idx+1);
+}});
+}})();
+</script>
+</body>
+</html>
+'''
+
+
+def main():
+    n = len(DATA)
+    for i, a in enumerate(DATA):
+        prev = DATA[(i - 1) % n]
+        nxt = DATA[(i + 1) % n]
+        out = f"artysta-{a['slug']}.html"
+        with open(out, 'w', encoding='utf-8') as f:
+            f.write(page(a, prev, nxt))
+    withbio = sum(1 for a in DATA if a.get('confidence') == 'high')
+    print(f'{n} stron profilowych, w tym {withbio} z danymi z ankiety')
+
+
+if __name__ == '__main__':
+    main()
