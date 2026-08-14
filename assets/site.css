@@ -89,7 +89,7 @@ p{margin:0;max-width:62ch}
 .navtools{display:flex;align-items:center;gap:12px}
 .lang{display:flex;border:1px solid var(--line);border-radius:var(--r-pill);overflow:hidden}
 .lang button{
-  background:none;border:0;padding:5px 10px;font-size:11px;font-family:'JetBrains Mono',monospace;
+  background:none;border:0;padding:5px 8px;font-size:11px;font-family:'JetBrains Mono',monospace;
   letter-spacing:.08em;color:var(--muted-2);cursor:pointer;transition:background .25s,color .25s
 }
 .lang button[aria-pressed="true"]{background:var(--text);color:var(--bg)}
