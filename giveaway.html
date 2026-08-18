@@ -20,7 +20,7 @@
   .gwbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;
     gap:16px;padding:14px 20px;background:rgba(11,11,12,.82);backdrop-filter:blur(14px);
     border-bottom:1px solid var(--line-soft)}
-  .gwbar img{width:118px}
+  .gwbar img{width:auto;height:34px}
   .gwlangs{display:flex;gap:4px}
   .gwlangs button{background:none;border:0;padding:6px 9px;border-radius:var(--r-pill);
     font-size:.72rem;font-weight:700;letter-spacing:.1em;color:var(--muted-2);cursor:pointer;transition:color .2s,background .2s}
@@ -103,7 +103,7 @@
 <div class="grain" aria-hidden="true"></div>
 
 <header class="gwbar">
-  <a href="index.html" aria-label="BRO TO BRO"><img src="assets/logo-wordmark.png" alt="Bro to Bro Tattoo Art Studio" width="630" height="218"></a>
+  <a href="index.html" aria-label="BRO TO BRO"><img src="assets/logo-wordmark.png" alt="Bro to Bro Tattoo Art Studio" width="630" height="218" style="height:34px;width:auto"></a>
   <div class="gwlangs" id="gwLangs">
     <button type="button" data-lang="pl" aria-pressed="true">PL</button>
     <button type="button" data-lang="en" aria-pressed="false">EN</button>
@@ -286,18 +286,11 @@ function renderPrizes(list){
 }
 
 /* Дни, мастера и призы приходят из панели — вёрстку при новом конвенте трогать не нужно. */
-Promise.all([
-  fetch(API, { cache: 'no-store' }).then(function(r){ return r.json(); }),
-  fetch('https://inkroute-q2pp.onrender.com/api/giveaway/public', { cache: 'no-store' })
-    .then(function(r){ return r.json(); }).catch(function(){ return null; })
-]).then(function(res){
-  var data = res[0], pub = res[1];
+fetch(API, { cache: 'no-store' }).then(function(r){ return r.json(); }).then(function(data){
   state.artists = data.artists || [];
   state.days = data.days || [];
-  if (pub){
-    state.drawTime = pub.drawTimeLabel || '';
-    if (pub.prizes && pub.prizes.length) renderPrizes(pub.prizes);
-  }
+  state.drawTime = data.drawTime || '';
+  renderPrizes(data.prizes || []);
   if (!state.days.length){
     form.style.display = 'none';
     err(t('gw.closed'));
