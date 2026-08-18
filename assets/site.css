@@ -432,3 +432,17 @@ footer p{font-size:.82rem;color:var(--muted-2)}
 }
 .lb-link{border-bottom:1px solid var(--line)}
 .lb-link:hover{color:var(--accent);border-color:var(--accent)}
+
+/* ---------- wejście do losowania (giveaway.html) ---------- */
+.navlinks .nav-gw{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:5px 12px;border:1px solid rgba(243,25,24,.5);border-radius:var(--r-pill);
+  color:var(--text);
+}
+.navlinks .nav-gw::before{
+  content:"";width:6px;height:6px;border-radius:50%;background:var(--accent);
+  animation:gw-pulse 2.4s var(--ease) infinite;
+}
+.navlinks .nav-gw:hover{border-color:var(--accent);background:var(--accent-soft)}
+@keyframes gw-pulse{0%,100%{opacity:1}50%{opacity:.35}}
+@media (prefers-reduced-motion:reduce){.navlinks .nav-gw::before{animation:none}}
