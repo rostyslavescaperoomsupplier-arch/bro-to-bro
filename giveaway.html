@@ -71,6 +71,8 @@
   .fld input::placeholder{color:#4d4a46}
   .fld input:focus,.fld select:focus{outline:none;border-color:var(--accent);background:#191b1d}
 
+  .hint{margin-top:8px;font-size:.8rem;color:var(--muted);line-height:1.5}
+  .hint b{color:var(--text)}
   .consent{display:flex;gap:12px;align-items:flex-start;margin-top:20px;padding:15px;
     border:1px solid var(--line);border-radius:12px;background:var(--surface-2);cursor:pointer}
   .consent input{margin:2px 0 0;width:18px;height:18px;accent-color:var(--accent);flex:none;cursor:pointer}
@@ -153,6 +155,11 @@
             <input id="gwEmail" type="email" autocomplete="email" placeholder="name@mail.com">
           </div>
         </div>
+        <div class="fld">
+          <label for="gwAmount"><span data-i18n="gw.price">Cena tatuażu</span> <span id="gwCur">EUR</span></label>
+          <input id="gwAmount" inputmode="decimal" required placeholder="180">
+          <div class="hint" id="gwTickets"></div>
+        </div>
       </div>
 
       <label class="consent">
@@ -189,18 +196,18 @@
 var API = 'https://inkroute-q2pp.onrender.com/api/giveaway/register';
 
 var DICT = {
- pl:{'gw.eyebrow':'Losowanie na konwencie','gw.h1b':'Giveaway','gw.tagline':'Zrób tatuaż. Odzyskaj pieniądze.','gw.prizes':'Nagrody','gw.form':'Zgłoszenie','gw.day':'Dzień losowania','gw.name':'Imię','gw.phone':'Telefon','gw.email':'E-mail','gw.artist':'Mistrz','gw.none':'—','gw.consent':'Akceptuję zasady losowania','gw.consentLink':'regulamin','gw.submit':'Zgłaszam się','gw.sending':'Wysyłam…','gw.okTitle':'Jesteś zgłoszony','gw.ok':'Podejdź do stanowiska — pracownik potwierdzi zgłoszenie i wpisze cenę tatuażu.','gw.dup':'Twoje zgłoszenie już mamy. Nie trzeba wysyłać drugi raz.','gw.errName':'Wpisz imię.','gw.errContact':'Podaj telefon albo e-mail.','gw.errConsent':'Zaznacz zgodę na zasady losowania.','gw.errClosed':'Zgłoszenia na ten dzień są zamknięte.','gw.errNet':'Nie udało się wysłać. Sprawdź internet i spróbuj jeszcze raz.','gw.closed':'Teraz nie ma otwartego losowania. Wróć w dniach konwentu.','gw.draw':'Losowanie','gw.at':'o','gw.back':'Strona główna','gw.fullRules':'Regulamin'},
- en:{'gw.eyebrow':'Convention giveaway','gw.h1b':'Giveaway','gw.tagline':'Get tattooed. Win your money back.','gw.prizes':'Prizes','gw.form':'Entry','gw.day':'Draw day','gw.name':'Name','gw.phone':'Phone','gw.email':'Email','gw.artist':'Artist','gw.none':'—','gw.consent':'I accept the giveaway rules','gw.consentLink':'full rules','gw.submit':'Enter the draw','gw.sending':'Sending…','gw.okTitle':"You're in",'gw.ok':'Come to the booth — staff will confirm your entry and fill in the tattoo price.','gw.dup':'We already have your entry. No need to send it twice.','gw.errName':'Please enter your name.','gw.errContact':'Leave a phone number or an email.','gw.errConsent':'Please accept the giveaway rules.','gw.errClosed':'Entries for this day are closed.','gw.errNet':'Could not send. Check your connection and try again.','gw.closed':'No draw is open right now. Come back on convention days.','gw.draw':'Draw','gw.at':'at','gw.back':'Main page','gw.fullRules':'Full rules'},
- ua:{'gw.eyebrow':'Розіграш на конвенції','gw.h1b':'Giveaway','gw.tagline':'Зроби тату. Поверни свої гроші.','gw.prizes':'Призи','gw.form':'Заявка','gw.day':'День розіграшу','gw.name':'Імʼя','gw.phone':'Телефон','gw.email':'E-mail','gw.artist':'Майстер','gw.none':'—','gw.consent':'Приймаю правила розіграшу','gw.consentLink':'регламент','gw.submit':'Беру участь','gw.sending':'Надсилаю…','gw.okTitle':'Ти в грі','gw.ok':'Підійди до стенду — працівник підтвердить заявку і внесе ціну тату.','gw.dup':'Твоя заявка вже є. Надсилати вдруге не треба.','gw.errName':'Введи імʼя.','gw.errContact':'Залиш телефон або e-mail.','gw.errConsent':'Познач згоду з правилами розіграшу.','gw.errClosed':'Заявки на цей день закриті.','gw.errNet':'Не вдалося надіслати. Перевір інтернет і спробуй ще раз.','gw.closed':'Зараз відкритого розіграшу немає. Повертайся в дні конвенції.','gw.draw':'Розіграш','gw.at':'о','gw.back':'На головну','gw.fullRules':'Регламент'},
- de:{'gw.eyebrow':'Verlosung auf der Convention','gw.h1b':'Giveaway','gw.tagline':'Lass dich tätowieren. Hol dir dein Geld zurück.','gw.prizes':'Preise','gw.form':'Teilnahme','gw.day':'Tag der Ziehung','gw.name':'Name','gw.phone':'Telefon','gw.email':'E-Mail','gw.artist':'Künstler','gw.none':'—','gw.consent':'Ich akzeptiere die Teilnahmebedingungen','gw.consentLink':'Regeln','gw.submit':'Teilnehmen','gw.sending':'Senden…','gw.okTitle':'Du bist dabei','gw.ok':'Komm zum Stand — ein Mitarbeiter bestätigt die Teilnahme und trägt den Preis ein.','gw.dup':'Deine Teilnahme haben wir schon. Kein zweites Mal nötig.','gw.errName':'Bitte Namen eingeben.','gw.errContact':'Bitte Telefon oder E-Mail angeben.','gw.errConsent':'Bitte die Teilnahmebedingungen akzeptieren.','gw.errClosed':'Für diesen Tag ist die Anmeldung geschlossen.','gw.errNet':'Senden fehlgeschlagen. Verbindung prüfen und erneut versuchen.','gw.closed':'Aktuell läuft keine Ziehung. Komm an den Conventiontagen wieder.','gw.draw':'Ziehung','gw.at':'um','gw.back':'Startseite','gw.fullRules':'Regeln'},
- fr:{'gw.eyebrow':'Tirage à la convention','gw.h1b':'Giveaway','gw.tagline':'Fais-toi tatouer. Récupère ton argent.','gw.prizes':'Prix','gw.form':'Participation','gw.day':'Jour du tirage','gw.name':'Prénom','gw.phone':'Téléphone','gw.email':'E-mail','gw.artist':'Artiste','gw.none':'—','gw.consent':'J’accepte les règles du tirage','gw.consentLink':'règlement','gw.submit':'Je participe','gw.sending':'Envoi…','gw.okTitle':'C’est validé','gw.ok':"Passe au stand — l'équipe confirme ta participation et saisit le prix du tatouage.",'gw.dup':'Ta participation est déjà enregistrée.','gw.errName':'Indique ton prénom.','gw.errContact':'Laisse un téléphone ou un e-mail.','gw.errConsent':'Merci d’accepter les règles du tirage.','gw.errClosed':'Les inscriptions pour ce jour sont closes.','gw.errNet':'Envoi impossible. Vérifie ta connexion et réessaie.','gw.closed':'Aucun tirage ouvert pour le moment. Reviens pendant la convention.','gw.draw':'Tirage','gw.at':'à','gw.back':'Accueil','gw.fullRules':'Règlement'}
+ pl:{'gw.eyebrow':'Losowanie na konwencie','gw.h1b':'Giveaway','gw.tagline':'Zrób tatuaż. Odzyskaj pieniądze.','gw.prizes':'Nagrody','gw.form':'Zgłoszenie','gw.day':'Dzień losowania','gw.name':'Imię','gw.phone':'Telefon','gw.email':'E-mail','gw.artist':'Mistrz','gw.none':'—','gw.price':'Cena tatuażu','gw.tickets':'Twoje losy: <b>{n}</b>','gw.priceNote':'Zwrot za 1. miejsce liczymy od tej kwoty.','gw.errAmount':'Wpisz cenę tatuażu.','gw.consent':'Akceptuję zasady losowania','gw.consentLink':'regulamin','gw.submit':'Zgłaszam się','gw.sending':'Wysyłam…','gw.okTitle':'Jesteś zgłoszony','gw.ok':'Podejdź do stanowiska — pracownik potwierdzi zgłoszenie i wpisze cenę tatuażu.','gw.dup':'Twoje zgłoszenie już mamy. Nie trzeba wysyłać drugi raz.','gw.errName':'Wpisz imię.','gw.errContact':'Podaj telefon albo e-mail.','gw.errConsent':'Zaznacz zgodę na zasady losowania.','gw.errClosed':'Zgłoszenia na ten dzień są zamknięte.','gw.errNet':'Nie udało się wysłać. Sprawdź internet i spróbuj jeszcze raz.','gw.closed':'Teraz nie ma otwartego losowania. Wróć w dniach konwentu.','gw.draw':'Losowanie','gw.at':'o','gw.back':'Strona główna','gw.fullRules':'Regulamin'},
+ en:{'gw.eyebrow':'Convention giveaway','gw.h1b':'Giveaway','gw.tagline':'Get tattooed. Win your money back.','gw.prizes':'Prizes','gw.form':'Entry','gw.day':'Draw day','gw.name':'Name','gw.phone':'Phone','gw.email':'Email','gw.artist':'Artist','gw.none':'—','gw.price':'Tattoo price','gw.tickets':'Your tickets: <b>{n}</b>','gw.priceNote':'The 1st place refund is calculated from this amount.','gw.errAmount':'Please enter the tattoo price.','gw.consent':'I accept the giveaway rules','gw.consentLink':'full rules','gw.submit':'Enter the draw','gw.sending':'Sending…','gw.okTitle':"You're in",'gw.ok':'Come to the booth — staff will confirm your entry and fill in the tattoo price.','gw.dup':'We already have your entry. No need to send it twice.','gw.errName':'Please enter your name.','gw.errContact':'Leave a phone number or an email.','gw.errConsent':'Please accept the giveaway rules.','gw.errClosed':'Entries for this day are closed.','gw.errNet':'Could not send. Check your connection and try again.','gw.closed':'No draw is open right now. Come back on convention days.','gw.draw':'Draw','gw.at':'at','gw.back':'Main page','gw.fullRules':'Full rules'},
+ ua:{'gw.eyebrow':'Розіграш на конвенції','gw.h1b':'Giveaway','gw.tagline':'Зроби тату. Поверни свої гроші.','gw.prizes':'Призи','gw.form':'Заявка','gw.day':'День розіграшу','gw.name':'Імʼя','gw.phone':'Телефон','gw.email':'E-mail','gw.artist':'Майстер','gw.none':'—','gw.price':'Ціна тату','gw.tickets':'Твої білети: <b>{n}</b>','gw.priceNote':'Повернення за 1-ше місце рахуємо від цієї суми.','gw.errAmount':'Вкажи ціну тату.','gw.consent':'Приймаю правила розіграшу','gw.consentLink':'регламент','gw.submit':'Беру участь','gw.sending':'Надсилаю…','gw.okTitle':'Ти в грі','gw.ok':'Підійди до стенду — працівник підтвердить заявку і внесе ціну тату.','gw.dup':'Твоя заявка вже є. Надсилати вдруге не треба.','gw.errName':'Введи імʼя.','gw.errContact':'Залиш телефон або e-mail.','gw.errConsent':'Познач згоду з правилами розіграшу.','gw.errClosed':'Заявки на цей день закриті.','gw.errNet':'Не вдалося надіслати. Перевір інтернет і спробуй ще раз.','gw.closed':'Зараз відкритого розіграшу немає. Повертайся в дні конвенції.','gw.draw':'Розіграш','gw.at':'о','gw.back':'На головну','gw.fullRules':'Регламент'},
+ de:{'gw.eyebrow':'Verlosung auf der Convention','gw.h1b':'Giveaway','gw.tagline':'Lass dich tätowieren. Hol dir dein Geld zurück.','gw.prizes':'Preise','gw.form':'Teilnahme','gw.day':'Tag der Ziehung','gw.name':'Name','gw.phone':'Telefon','gw.email':'E-Mail','gw.artist':'Künstler','gw.none':'—','gw.price':'Preis des Tattoos','gw.tickets':'Deine Lose: <b>{n}</b>','gw.priceNote':'Die Erstattung für Platz 1 richtet sich nach diesem Betrag.','gw.errAmount':'Bitte den Preis des Tattoos eingeben.','gw.consent':'Ich akzeptiere die Teilnahmebedingungen','gw.consentLink':'Regeln','gw.submit':'Teilnehmen','gw.sending':'Senden…','gw.okTitle':'Du bist dabei','gw.ok':'Komm zum Stand — ein Mitarbeiter bestätigt die Teilnahme und trägt den Preis ein.','gw.dup':'Deine Teilnahme haben wir schon. Kein zweites Mal nötig.','gw.errName':'Bitte Namen eingeben.','gw.errContact':'Bitte Telefon oder E-Mail angeben.','gw.errConsent':'Bitte die Teilnahmebedingungen akzeptieren.','gw.errClosed':'Für diesen Tag ist die Anmeldung geschlossen.','gw.errNet':'Senden fehlgeschlagen. Verbindung prüfen und erneut versuchen.','gw.closed':'Aktuell läuft keine Ziehung. Komm an den Conventiontagen wieder.','gw.draw':'Ziehung','gw.at':'um','gw.back':'Startseite','gw.fullRules':'Regeln'},
+ fr:{'gw.eyebrow':'Tirage à la convention','gw.h1b':'Giveaway','gw.tagline':'Fais-toi tatouer. Récupère ton argent.','gw.prizes':'Prix','gw.form':'Participation','gw.day':'Jour du tirage','gw.name':'Prénom','gw.phone':'Téléphone','gw.email':'E-mail','gw.artist':'Artiste','gw.none':'—','gw.price':'Prix du tatouage','gw.tickets':'Tes tickets : <b>{n}</b>','gw.priceNote':'Le remboursement de la 1re place est calculé sur ce montant.','gw.errAmount':'Indique le prix du tatouage.','gw.consent':'J’accepte les règles du tirage','gw.consentLink':'règlement','gw.submit':'Je participe','gw.sending':'Envoi…','gw.okTitle':'C’est validé','gw.ok':"Passe au stand — l'équipe confirme ta participation et saisit le prix du tatouage.",'gw.dup':'Ta participation est déjà enregistrée.','gw.errName':'Indique ton prénom.','gw.errContact':'Laisse un téléphone ou un e-mail.','gw.errConsent':'Merci d’accepter les règles du tirage.','gw.errClosed':'Les inscriptions pour ce jour sont closes.','gw.errNet':'Envoi impossible. Vérifie ta connexion et réessaie.','gw.closed':'Aucun tirage ouvert pour le moment. Reviens pendant la convention.','gw.draw':'Tirage','gw.at':'à','gw.back':'Accueil','gw.fullRules':'Règlement'}
 };
 
 var lang = (localStorage.getItem('b2b-lang') || (navigator.language || 'pl').slice(0,2)).toLowerCase();
 if (!DICT[lang]) lang = 'pl';
 function t(k){ return (DICT[lang] && DICT[lang][k]) || DICT.pl[k] || k; }
 
-var state = { days: [], artists: [], drawTime: '' };
+var state = { days: [], artists: [], drawTime: '', tiers: [], currency: 'EUR' };
 
 function applyLang(){
   document.documentElement.lang = lang;
@@ -212,6 +219,7 @@ function applyLang(){
   }
   renderMeta();
   renderArtists();
+  renderTickets();
 }
 
 document.getElementById('gwLangs').addEventListener('click', function(e){
@@ -262,6 +270,27 @@ function renderArtists(){
   artistSel.value = chosen;
 }
 
+var amountInput = document.getElementById('gwAmount');
+var ticketsHint = document.getElementById('gwTickets');
+
+function ticketsFor(amountMajor){
+  var minor = Math.round(amountMajor * 100);
+  for (var i = 0; i < state.tiers.length; i++){
+    var tier = state.tiers[i];
+    if (tier.maxAmountBase === null || minor <= tier.maxAmountBase) return tier.tickets;
+  }
+  return 1;
+}
+
+function renderTickets(){
+  var raw = parseFloat((amountInput.value || '').replace(',', '.'));
+  if (!raw || raw <= 0 || !state.tiers.length){
+    ticketsHint.innerHTML = t('gw.priceNote');
+    return;
+  }
+  ticketsHint.innerHTML = t('gw.tickets').replace('{n}', ticketsFor(raw)) + ' · ' + t('gw.priceNote');
+}
+
 function renderPrizes(list){
   prizes.innerHTML = '';
   list.forEach(function(prize){
@@ -290,6 +319,10 @@ fetch(API, { cache: 'no-store' }).then(function(r){ return r.json(); }).then(fun
   state.artists = data.artists || [];
   state.days = data.days || [];
   state.drawTime = data.drawTime || '';
+  state.tiers = data.tiers || [];
+  state.currency = data.currency || 'EUR';
+  document.getElementById('gwCur').textContent = state.currency;
+  renderTickets();
   renderPrizes(data.prizes || []);
   if (!state.days.length){
     form.style.display = 'none';
@@ -315,9 +348,11 @@ form.addEventListener('submit', function(e){
   var phone = document.getElementById('gwPhone').value.trim();
   var email = document.getElementById('gwEmail').value.trim();
   var consent = document.getElementById('gwConsent').checked;
+  var amount = parseFloat((amountInput.value || '').replace(',', '.'));
 
   if (name.length < 2) return err(t('gw.errName'));
   if (!phone && !email) return err(t('gw.errContact'));
+  if (!amount || amount <= 0) return err(t('gw.errAmount'));
   if (!consent) return err(t('gw.errConsent'));
 
   submit.disabled = true;
@@ -330,7 +365,7 @@ form.addEventListener('submit', function(e){
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify({
       name: name, phone: phone, email: email,
-      date: daySel.value, artistId: artistSel.value, consent: true
+      date: daySel.value, artistId: artistSel.value, amount: amount, consent: true
     })
   })
     .then(function(r){ return r.json().then(function(body){ return { ok: r.ok, body: body }; }); })
@@ -338,6 +373,7 @@ form.addEventListener('submit', function(e){
       if (!res.ok){
         var code = res.body && res.body.error;
         err(code === 'closed' ? t('gw.errClosed')
+          : code === 'amount' ? t('gw.errAmount')
           : code === 'name' ? t('gw.errName')
           : code === 'contact' ? t('gw.errContact')
           : code === 'consent' ? t('gw.errConsent')
@@ -354,6 +390,8 @@ form.addEventListener('submit', function(e){
       label.textContent = original;
     });
 });
+
+amountInput.addEventListener('input', renderTickets);
 
 applyLang();
 })();
