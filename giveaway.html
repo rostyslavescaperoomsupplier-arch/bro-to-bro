@@ -196,7 +196,7 @@ var DICT = {
  fr:{'gw.eyebrow':'Tirage à la convention','gw.h1b':'Giveaway','gw.tagline':'Fais-toi tatouer. Récupère ton argent.','gw.prizes':'Prix','gw.form':'Participation','gw.day':'Jour du tirage','gw.name':'Prénom','gw.phone':'Téléphone','gw.email':'E-mail','gw.artist':'Artiste','gw.none':'—','gw.consent':'J’accepte les règles du tirage','gw.consentLink':'règlement','gw.submit':'Je participe','gw.sending':'Envoi…','gw.okTitle':'C’est validé','gw.ok':"Passe au stand — l'équipe confirme ta participation et saisit le prix du tatouage.",'gw.dup':'Ta participation est déjà enregistrée.','gw.errName':'Indique ton prénom.','gw.errContact':'Laisse un téléphone ou un e-mail.','gw.errConsent':'Merci d’accepter les règles du tirage.','gw.errClosed':'Les inscriptions pour ce jour sont closes.','gw.errNet':'Envoi impossible. Vérifie ta connexion et réessaie.','gw.closed':'Aucun tirage ouvert pour le moment. Reviens pendant la convention.','gw.draw':'Tirage','gw.at':'à','gw.back':'Accueil','gw.fullRules':'Règlement'}
 };
 
-var lang = (localStorage.getItem('b2b_lang') || (navigator.language || 'pl').slice(0,2)).toLowerCase();
+var lang = (localStorage.getItem('b2b-lang') || (navigator.language || 'pl').slice(0,2)).toLowerCase();
 if (!DICT[lang]) lang = 'pl';
 function t(k){ return (DICT[lang] && DICT[lang][k]) || DICT.pl[k] || k; }
 
@@ -218,7 +218,7 @@ document.getElementById('gwLangs').addEventListener('click', function(e){
   var btn = e.target.closest ? e.target.closest('button[data-lang]') : null;
   if (!btn) return;
   lang = btn.getAttribute('data-lang');
-  localStorage.setItem('b2b_lang', lang);
+  localStorage.setItem('b2b-lang', lang);
   applyLang();
 });
 
