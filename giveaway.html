@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Giveaway — BRO TO BRO Tattoo Art Studio</title>
+<meta name="description" content="Zgłoszenie do losowania Bro2Bro na konwencie. Zrób tatuaż, zgłoś się i odbierz szansę na zwrot kosztów.">
+<meta name="theme-color" content="#0b0b0c">
+<meta name="robots" content="noindex">
+<meta property="og:title" content="BRO2BRO TATTOO GIVEAWAY">
+<meta property="og:description" content="Get tattooed. Win your money back.">
+<meta property="og:image" content="assets/logo-wide.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<link rel="icon" href="assets/logo-mark.png">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+  .gw{max-width:640px;margin:0 auto;padding:clamp(28px,6vw,64px) 20px 80px}
+  .gw-logo{width:180px;margin:0 auto 28px}
+  .gw h1{font-size:clamp(30px,7vw,46px);line-height:1.02;letter-spacing:-.02em;margin:0;text-transform:uppercase}
+  .gw .tag{color:var(--muted);text-transform:uppercase;letter-spacing:.18em;font-size:12px;margin:10px 0 0}
+  .gw-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-card);padding:clamp(18px,4vw,28px);margin-top:26px}
+  .gw-field{margin-bottom:16px}
+  .gw-field label{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:6px}
+  .gw-field .inp,.gw-field select{width:100%;background:var(--surface-2);border:1px solid var(--line);border-radius:var(--r-input);padding:12px 14px;color:var(--text)}
+  .gw-field .inp:focus,.gw-field select:focus{outline:none;border-color:var(--accent)}
+  .gw-prizes{list-style:none;padding:0;margin:0}
+  .gw-prizes li{display:flex;gap:12px;align-items:baseline;padding:9px 0;border-bottom:1px solid var(--line-soft);font-size:14px}
+  .gw-prizes li:last-child{border-bottom:0}
+  .gw-prizes b{font-size:13px;text-transform:uppercase;letter-spacing:.04em}
+  .gw-prizes span.pl{width:26px;color:var(--muted-2);font-family:'JetBrains Mono',monospace}
+  .gw-note{color:var(--muted);font-size:13px;line-height:1.6}
+  .gw-msg{border-radius:var(--r-input);padding:14px 16px;margin-top:16px;font-size:14px;display:none}
+  .gw-msg.ok{display:block;background:rgba(52,168,110,.12);border:1px solid rgba(52,168,110,.4)}
+  .gw-msg.err{display:block;background:var(--accent-soft);border:1px solid var(--accent)}
+  .gw-langs{display:flex;gap:6px;justify-content:center;margin-bottom:24px}
+  .gw-langs button{background:none;border:1px solid var(--line);border-radius:var(--r-pill);padding:5px 12px;font-size:12px;color:var(--muted-2);cursor:pointer}
+  .gw-langs button[aria-pressed="true"]{border-color:var(--accent);color:var(--text)}
+  .gw-back{display:inline-block;margin-top:26px;color:var(--muted);font-size:13px;border-bottom:1px solid var(--line)}
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<main class="gw">
+  <div class="gw-langs" id="gwLangs">
+    <button type="button" data-lang="pl" aria-pressed="true">PL</button>
+    <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    <button type="button" data-lang="ua" aria-pressed="false">UA</button>
+    <button type="button" data-lang="de" aria-pressed="false">DE</button>
+    <button type="button" data-lang="fr" aria-pressed="false">FR</button>
+  </div>
+
+  <img class="gw-logo" src="assets/logo-wordmark.png" alt="Bro to Bro Tattoo Art Studio" width="630" height="218">
+
+  <h1 data-i18n="gw.title">Bro2Bro Tattoo Giveaway</h1>
+  <p class="tag" data-i18n="gw.tagline">Get tattooed. Win your money back.</p>
+
+  <div class="gw-card">
+    <h2 style="margin:0 0 14px;font-size:15px;text-transform:uppercase;letter-spacing:.12em" data-i18n="gw.prizes">Nagrody</h2>
+    <ul class="gw-prizes" id="gwPrizes">
+      <li><span class="pl">1</span><b>100% Tattoo refund</b></li>
+      <li><span class="pl">2</span><b>Convention ticket refund</b></li>
+      <li><span class="pl">3</span><b>Free temporary tattoo</b></li>
+      <li><span class="pl">4</span><b>10% off next tattoo</b></li>
+      <li><span class="pl">5</span><b>10% off next tattoo</b></li>
+      <li><span class="pl">6</span><b>10% off next tattoo</b></li>
+    </ul>
+  </div>
+
+  <div class="gw-card">
+    <h2 style="margin:0 0 16px;font-size:15px;text-transform:uppercase;letter-spacing:.12em" data-i18n="gw.form">Zgłoszenie</h2>
+
+    <form id="gwForm" novalidate>
+      <div class="gw-field">
+        <label for="gwDay" data-i18n="gw.day">Dzień losowania</label>
+        <select id="gwDay"></select>
+      </div>
+      <div class="gw-field">
+        <label for="gwName" data-i18n="gw.name">Imię</label>
+        <input class="inp" id="gwName" autocomplete="name" required>
+      </div>
+      <div class="gw-field">
+        <label for="gwPhone" data-i18n="gw.phone">Telefon</label>
+        <input class="inp" id="gwPhone" type="tel" autocomplete="tel" inputmode="tel">
+      </div>
+      <div class="gw-field">
+        <label for="gwEmail" data-i18n="gw.email">E-mail</label>
+        <input class="inp" id="gwEmail" type="email" autocomplete="email">
+      </div>
+      <div class="gw-field">
+        <label for="gwArtist" data-i18n="gw.artist">Mistrz</label>
+        <select id="gwArtist"></select>
+      </div>
+
+      <button class="btn btn-primary" type="submit" id="gwSubmit" style="width:100%;justify-content:center">
+        <span data-i18n="gw.submit">Zgłaszam się</span>
+      </button>
+
+      <div class="gw-msg" id="gwMsg"></div>
+    </form>
+
+    <p class="gw-note" style="margin-top:18px" data-i18n="gw.note">
+      Ceny tatuażu nie podajesz — wpisze ją pracownik, gdy potwierdzi zgłoszenie przy stanowisku.
+      Do losowania trafiasz po potwierdzeniu.
+    </p>
+  </div>
+
+  <div class="gw-card">
+    <h2 style="margin:0 0 12px;font-size:15px;text-transform:uppercase;letter-spacing:.12em" data-i18n="gw.rules">Zasady</h2>
+    <p class="gw-note" data-i18n="gw.rulesBody">
+      Liczba losów zależy od ceny tatuażu: prace do 100 € dostają 100 losów, droższe — 1 los.
+      Oznacza to, że tańsze prace mają znacznie większą szansę na wygraną. Losowanie odbywa się
+      o 20:00 ostatniego dnia zgłoszeń, jeden uczestnik może zająć tylko jedno miejsce.
+    </p>
+    <p style="margin-top:12px"><a class="gw-back" href="https://inkroute-q2pp.onrender.com/rules" target="_blank" rel="noopener" data-i18n="gw.fullRules">Pełny regulamin</a></p>
+  </div>
+
+  <a class="gw-back" href="index.html" data-i18n="gw.back">Wróć na stronę główną</a>
+</main>
+
+<script>
+(function(){
+'use strict';
+
+var API = 'https://inkroute-q2pp.onrender.com/api/giveaway/register';
+
+var DICT = {
+ pl:{'gw.title':'Bro2Bro Tattoo Giveaway','gw.tagline':'Zrób tatuaż. Odzyskaj pieniądze.','gw.prizes':'Nagrody','gw.form':'Zgłoszenie','gw.day':'Dzień losowania','gw.name':'Imię','gw.phone':'Telefon','gw.email':'E-mail','gw.artist':'Mistrz','gw.submit':'Zgłaszam się','gw.sending':'Wysyłam…','gw.note':'Ceny tatuażu nie podajesz — wpisze ją pracownik, gdy potwierdzi zgłoszenie przy stanowisku. Do losowania trafiasz po potwierdzeniu.','gw.rules':'Zasady','gw.rulesBody':'Liczba losów zależy od ceny tatuażu: prace do 100 € dostają 100 losów, droższe — 1 los. Oznacza to, że tańsze prace mają znacznie większą szansę na wygraną. Losowanie odbywa się o 20:00, jeden uczestnik może zająć tylko jedno miejsce.','gw.fullRules':'Pełny regulamin','gw.back':'Wróć na stronę główną','gw.ok':'Gotowe. Podejdź do stanowiska — pracownik potwierdzi zgłoszenie i podasz mu cenę tatuażu.','gw.dup':'Twoje zgłoszenie już mamy. Nie trzeba wysyłać drugi raz.','gw.errName':'Wpisz imię.','gw.errContact':'Podaj telefon albo e-mail.','gw.errClosed':'Zgłoszenia na dziś są zamknięte. Spróbuj następnego dnia konwentu.','gw.errNet':'Nie udało się wysłać. Sprawdź internet i spróbuj jeszcze raz.','gw.closed':'Teraz nie ma otwartego losowania. Wróć w dniach konwentu.','gw.none':'—'},
+ en:{'gw.title':'Bro2Bro Tattoo Giveaway','gw.tagline':'Get tattooed. Win your money back.','gw.prizes':'Prizes','gw.form':'Entry','gw.day':'Draw day','gw.name':'Name','gw.phone':'Phone','gw.email':'Email','gw.artist':'Artist','gw.submit':'Enter the draw','gw.sending':'Sending…','gw.note':'You do not enter the tattoo price — a member of staff fills it in when they confirm your entry at the booth. You join the draw once confirmed.','gw.rules':'Rules','gw.rulesBody':'The number of tickets depends on the tattoo price: work up to €100 gets 100 tickets, anything above gets 1 ticket. Cheaper work therefore has a much higher chance of winning. The draw runs at 8:00 PM and one person can take only one place.','gw.fullRules':'Full rules','gw.back':'Back to the main page','gw.ok':'Done. Come to the booth — staff will confirm your entry and take the tattoo price.','gw.dup':'We already have your entry. No need to send it twice.','gw.errName':'Please enter your name.','gw.errContact':'Please leave a phone number or an email.','gw.errClosed':'Entries are closed for today. Try on the next convention day.','gw.errNet':'Could not send. Check your connection and try again.','gw.closed':'No draw is open right now. Come back on convention days.','gw.none':'—'},
+ ua:{'gw.title':'Bro2Bro Tattoo Giveaway','gw.tagline':'Зроби тату. Поверни свої гроші.','gw.prizes':'Призи','gw.form':'Заявка','gw.day':'День розіграшу','gw.name':'Імʼя','gw.phone':'Телефон','gw.email':'E-mail','gw.artist':'Майстер','gw.submit':'Беру участь','gw.sending':'Надсилаю…','gw.note':'Ціну тату ти не вказуєш — її внесе працівник, коли підтвердить заявку на стенді. У розіграш потрапляєш після підтвердження.','gw.rules':'Правила','gw.rulesBody':'Кількість білетів залежить від ціни тату: роботи до 100 € отримують 100 білетів, дорожчі — 1. Тобто дешевші роботи мають значно більший шанс. Розіграш о 20:00, один учасник може зайняти лише одне місце.','gw.fullRules':'Повний регламент','gw.back':'На головну','gw.ok':'Готово. Підійди до стенду — працівник підтвердить заявку і внесе ціну тату.','gw.dup':'Твоя заявка вже є. Надсилати вдруге не треба.','gw.errName':'Введи імʼя.','gw.errContact':'Залиш телефон або e-mail.','gw.errClosed':'Заявки на сьогодні закриті. Спробуй наступного дня конвенції.','gw.errNet':'Не вдалося надіслати. Перевір інтернет і спробуй ще раз.','gw.closed':'Зараз відкритого розіграшу немає. Повертайся в дні конвенції.','gw.none':'—'},
+ de:{'gw.title':'Bro2Bro Tattoo Giveaway','gw.tagline':'Lass dich tätowieren. Hol dir dein Geld zurück.','gw.prizes':'Preise','gw.form':'Teilnahme','gw.day':'Tag der Ziehung','gw.name':'Name','gw.phone':'Telefon','gw.email':'E-Mail','gw.artist':'Künstler','gw.submit':'Teilnehmen','gw.sending':'Senden…','gw.note':'Den Preis des Tattoos trägst du nicht ein — das macht ein Mitarbeiter bei der Bestätigung am Stand. In die Ziehung kommst du nach der Bestätigung.','gw.rules':'Regeln','gw.rulesBody':'Die Zahl der Lose hängt vom Preis ab: Arbeiten bis 100 € bekommen 100 Lose, teurere 1 Los. Günstigere Arbeiten haben also eine deutlich höhere Gewinnchance. Ziehung um 20:00 Uhr, eine Person kann nur einen Platz belegen.','gw.fullRules':'Vollständige Regeln','gw.back':'Zurück zur Startseite','gw.ok':'Fertig. Komm zum Stand — ein Mitarbeiter bestätigt die Teilnahme und trägt den Preis ein.','gw.dup':'Deine Teilnahme haben wir schon. Kein zweites Mal nötig.','gw.errName':'Bitte Namen eingeben.','gw.errContact':'Bitte Telefon oder E-Mail angeben.','gw.errClosed':'Für heute ist die Anmeldung geschlossen. Versuch es am nächsten Konventtag.','gw.errNet':'Senden fehlgeschlagen. Verbindung prüfen und erneut versuchen.','gw.closed':'Aktuell läuft keine Ziehung. Komm an den Konventtagen wieder.','gw.none':'—'},
+ fr:{'gw.title':'Bro2Bro Tattoo Giveaway','gw.tagline':'Fais-toi tatouer. Récupère ton argent.','gw.prizes':'Prix','gw.form':'Participation','gw.day':'Jour du tirage','gw.name':'Prénom','gw.phone':'Téléphone','gw.email':'E-mail','gw.artist':'Artiste','gw.submit':'Je participe','gw.sending':'Envoi…','gw.note':"Tu n'indiques pas le prix du tatouage — un membre de l'équipe le saisit en validant ta participation au stand. Tu entres dans le tirage une fois validé.",'gw.rules':'Règles','gw.rulesBody':'Le nombre de tickets dépend du prix : jusqu’à 100 € — 100 tickets, au-dessus — 1 ticket. Les petites pièces ont donc bien plus de chances. Tirage à 20h00, une personne ne peut occuper qu’une seule place.','gw.fullRules':'Règlement complet','gw.back':"Retour à l'accueil",'gw.ok':"C'est fait. Passe au stand — l'équipe valide ta participation et saisit le prix.",'gw.dup':'Ta participation est déjà enregistrée. Pas besoin de renvoyer.','gw.errName':'Indique ton prénom.','gw.errContact':'Laisse un téléphone ou un e-mail.','gw.errClosed':'Les inscriptions sont closes pour aujourd’hui. Reviens le jour suivant.','gw.errNet':'Envoi impossible. Vérifie ta connexion et réessaie.','gw.closed':'Aucun tirage ouvert pour le moment. Reviens pendant la convention.','gw.none':'—'}
+};
+
+var lang = (localStorage.getItem('b2b_lang') || (navigator.language || 'pl').slice(0,2)).toLowerCase();
+if (!DICT[lang]) lang = 'pl';
+
+function t(key){ return (DICT[lang] && DICT[lang][key]) || DICT.pl[key] || key; }
+
+function applyLang(){
+  document.documentElement.lang = lang;
+  var nodes = document.querySelectorAll('[data-i18n]');
+  for (var i = 0; i < nodes.length; i++){
+    nodes[i].textContent = t(nodes[i].getAttribute('data-i18n'));
+  }
+  var buttons = document.querySelectorAll('#gwLangs button');
+  for (var j = 0; j < buttons.length; j++){
+    buttons[j].setAttribute('aria-pressed', buttons[j].getAttribute('data-lang') === lang ? 'true' : 'false');
+  }
+}
+
+document.getElementById('gwLangs').addEventListener('click', function(e){
+  var btn = e.target.closest('button[data-lang]');
+  if (!btn) return;
+  lang = btn.getAttribute('data-lang');
+  localStorage.setItem('b2b_lang', lang);
+  applyLang();
+});
+
+var daySel = document.getElementById('gwDay');
+var artistSel = document.getElementById('gwArtist');
+var form = document.getElementById('gwForm');
+var submit = document.getElementById('gwSubmit');
+var msg = document.getElementById('gwMsg');
+
+function show(kind, text){
+  msg.className = 'gw-msg ' + kind;
+  msg.textContent = text;
+}
+
+/* Дни и мастера приходят из панели: список конвенций живёт там, а не в вёрстке. */
+fetch(API, { cache: 'no-store' })
+  .then(function(r){ return r.json(); })
+  .then(function(data){
+    daySel.innerHTML = '';
+    if (!data.days || !data.days.length){
+      form.style.display = 'none';
+      show('err', t('gw.closed'));
+      return;
+    }
+    data.days.forEach(function(day){
+      var opt = document.createElement('option');
+      opt.value = day.date;
+      opt.textContent = day.date + ' · ' + day.title + (day.city ? ' · ' + day.city : '');
+      daySel.appendChild(opt);
+    });
+    var none = document.createElement('option');
+    none.value = '';
+    none.textContent = t('gw.none');
+    artistSel.appendChild(none);
+    (data.artists || []).forEach(function(artist){
+      var opt = document.createElement('option');
+      opt.value = artist.id;
+      opt.textContent = artist.name;
+      artistSel.appendChild(opt);
+    });
+  })
+  .catch(function(){ show('err', t('gw.errNet')); });
+
+form.addEventListener('submit', function(e){
+  e.preventDefault();
+  var name = document.getElementById('gwName').value.trim();
+  var phone = document.getElementById('gwPhone').value.trim();
+  var email = document.getElementById('gwEmail').value.trim();
+
+  if (name.length < 2) return show('err', t('gw.errName'));
+  if (!phone && !email) return show('err', t('gw.errContact'));
+
+  submit.disabled = true;
+  var label = submit.querySelector('span');
+  var original = label.textContent;
+  label.textContent = t('gw.sending');
+
+  fetch(API, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({
+      name: name,
+      phone: phone,
+      email: email,
+      date: daySel.value,
+      artistId: artistSel.value
+    })
+  })
+    .then(function(r){ return r.json().then(function(body){ return { ok: r.ok, body: body }; }); })
+    .then(function(res){
+      if (!res.ok){
+        var code = res.body && res.body.error;
+        show('err', code === 'closed' ? t('gw.errClosed') : code === 'name' ? t('gw.errName') : code === 'contact' ? t('gw.errContact') : t('gw.errNet'));
+        return;
+      }
+      show('ok', res.body.duplicate ? t('gw.dup') : t('gw.ok'));
+      form.reset();
+    })
+    .catch(function(){ show('err', t('gw.errNet')); })
+    .finally(function(){
+      submit.disabled = false;
+      label.textContent = original;
+    });
+});
+
+applyLang();
+})();
+</script>
+</body>
+</html>
