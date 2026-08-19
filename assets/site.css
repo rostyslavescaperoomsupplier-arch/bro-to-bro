@@ -472,6 +472,10 @@ footer p{font-size:.82rem;color:var(--muted-2)}
 a.conv-tag:hover{border-color:var(--accent);color:var(--text)}
 .conv-tag.live{border-color:transparent;background:var(--accent);color:var(--on-accent);font-weight:700}
 .conv-tag.gw{border-color:rgba(243,25,24,.45);color:var(--text)}
+.conv-tag.watch{border-color:transparent;background:var(--surface-2);color:var(--text)}
+.conv-tag.watch::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent);
+  margin-right:7px;animation:gw-pulse 2.2s var(--ease) infinite}
+@media (prefers-reduced-motion:reduce){.conv-tag.watch::before{animation:none}}
 @media (max-width:600px){.conv-card{padding:18px}}
 
 /* ============================================================
@@ -493,6 +497,10 @@ section[id]{scroll-margin-top:84px}
 .hero-live.on{display:inline-flex}
 /* Pasek stoi nad obiema kolumnami hero — to status, nie część tekstu */
 .hero .shell > .hero-live{grid-column:1/-1;justify-self:start;margin-bottom:26px}
+/* Na wąskich ekranach zdjęcie idzie na górę (order:-1), więc pasek musi wyprzedzić i je */
+@media(max-width:900px){
+  .hero .shell > .hero-live{order:-2;margin-bottom:18px}
+}
 .hero-live b{color:var(--text);font-weight:700}
 .hero-live .dot{
   width:7px;height:7px;border-radius:50%;background:var(--accent);flex:none;

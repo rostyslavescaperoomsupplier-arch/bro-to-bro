@@ -447,7 +447,7 @@ pl:{
  'gal.by':'Prace mistrza {name}',
  'gal.state':'Wszystkie prace: {n} od {m} mistrzów',
  'nav.style':'Style','nav.crew':'Ekipa','nav.calc':'Wycena','nav.book':'Zapisy','nav.care':'Gojenie','nav.contact':'Kontakt','nav.giveaway':'Giveaway','nav.conv':'Konwenty',
- 'conv.eyebrow':'Konwenty','conv.next':'Najbliżej:','conv.liveNow':'Jesteśmy teraz na:','conv.h':'Gdzie nas<br>spotkacie','conv.lead':'Najbliższe konwenty, na które jedzie ekipa. Terminy aktualizujemy na bieżąco.','conv.live':'Jesteśmy tam teraz','conv.gw':'Losowanie na miejscu','conv.site':'Strona konwentu',
+ 'conv.eyebrow':'Konwenty','conv.next':'Najbliżej:','conv.liveNow':'Jesteśmy teraz na:','conv.h':'Gdzie nas<br>spotkacie','conv.lead':'Najbliższe konwenty, na które jedzie ekipa. Terminy aktualizujemy na bieżąco.','conv.live':'Jesteśmy tam teraz','conv.gw':'Losowanie na miejscu','conv.watch':'Oglądaj losowanie','conv.site':'Strona konwentu',
  'hero.h1':'Twoja skóra.<br><em>Nasz tusz.</em>',
  'hero.lead':'Kolektyw tatuatorów ze Szczecina. Realism, blackwork, dotwork i handpoke. Konsultacja i projekt zawsze gratis.',
  'hero.cta1':'Wyceń tatuaż','hero.cta2':'Zobacz prace','hero.badge':'z 72 opinii w Google',
@@ -507,7 +507,7 @@ en:{
  'gal.by':'Work by {name}',
  'gal.state':'All work: {n} pieces from {m} artists',
  'nav.style':'Styles','nav.crew':'Crew','nav.calc':'Quote','nav.book':'Booking','nav.care':'Healing','nav.contact':'Contact','nav.giveaway':'Giveaway','nav.conv':'Conventions',
- 'conv.eyebrow':'Conventions','conv.next':'Next up:','conv.liveNow':'We are right now at:','conv.h':'Where to<br>find us','conv.lead':'The conventions the crew is heading to next. Dates are kept up to date.','conv.live':'We are there right now','conv.gw':'Giveaway on site','conv.site':'Convention website',
+ 'conv.eyebrow':'Conventions','conv.next':'Next up:','conv.liveNow':'We are right now at:','conv.h':'Where to<br>find us','conv.lead':'The conventions the crew is heading to next. Dates are kept up to date.','conv.live':'We are there right now','conv.gw':'Giveaway on site','conv.watch':'Watch the draw','conv.site':'Convention website',
  'hero.h1':'Your skin.<br><em>Our ink.</em>',
  'hero.lead':'A tattoo collective from Szczecin. Realism, blackwork, dotwork and handpoke. Consultation and design always free.',
  'hero.cta1':'Get a quote','hero.cta2':'See the work','hero.badge':'from 72 Google reviews',
@@ -567,7 +567,7 @@ ua:{
  'gal.by':'Роботи майстра {name}',
  'gal.state':'Усі роботи: {n} від {m} майстрів',
  'nav.style':'Стилі','nav.crew':'Команда','nav.calc':'Оцінка','nav.book':'Запис','nav.care':'Загоєння','nav.contact':'Контакти','nav.giveaway':'Giveaway','nav.conv':'Конвенції',
- 'conv.eyebrow':'Конвенції','conv.next':'Найближче:','conv.liveNow':'Ми зараз на:','conv.h':'Де нас<br>зустріти','conv.lead':'Найближчі конвенції, на які їде команда. Дати оновлюємо постійно.','conv.live':'Ми там просто зараз','conv.gw':'Розіграш на місці','conv.site':'Сайт конвенції',
+ 'conv.eyebrow':'Конвенції','conv.next':'Найближче:','conv.liveNow':'Ми зараз на:','conv.h':'Де нас<br>зустріти','conv.lead':'Найближчі конвенції, на які їде команда. Дати оновлюємо постійно.','conv.live':'Ми там просто зараз','conv.gw':'Розіграш на місці','conv.watch':'Дивитись розіграш','conv.site':'Сайт конвенції',
  'hero.h1':'Твоя шкіра.<br><em>Наше чорнило.</em>',
  'hero.lead':'Колектив татуювальників зі Щецина. Realism, blackwork, dotwork і handpoke. Консультація та ескіз завжди безкоштовні.',
  'hero.cta1':'Порахувати ціну','hero.cta2':'Дивитись роботи','hero.badge':'із 72 відгуків у Google',
@@ -628,6 +628,7 @@ de:{
  'conv.lead':'Die nächsten Conventions, auf die das Team fährt. Termine halten wir aktuell.',
  'conv.live':'Wir sind gerade dort',
  'conv.gw':'Verlosung vor Ort',
+ 'conv.watch':'Ziehung ansehen',
  'conv.site':'Website der Convention',
  'nav.crew':'Team',
  'nav.calc':'Preis',
@@ -778,6 +779,7 @@ fr:{
  'conv.lead':'Les prochaines conventions où part l’équipe. Les dates sont tenues à jour.',
  'conv.live':'Nous y sommes en ce moment',
  'conv.gw':'Tirage sur place',
+ 'conv.watch':'Suivre le tirage',
  'conv.site':'Site de la convention',
  'nav.crew':'Équipe',
  'nav.calc':'Devis',
@@ -1548,6 +1550,16 @@ function renderConventions(){
       gw.href = 'giveaway.html';
       gw.textContent = t('conv.gw');
       tags.appendChild(gw);
+    }
+    /* Ekran losowania ma sens tylko wtedy, gdy konwent trwa — wtedy coś na nim widać */
+    if(item.giveaway && item.live){
+      const watch = document.createElement('a');
+      watch.className = 'conv-tag watch';
+      watch.href = 'https://inkroute-q2pp.onrender.com/screen?edition=' + encodeURIComponent(item.id);
+      watch.target = '_blank';
+      watch.rel = 'noopener';
+      watch.textContent = t('conv.watch');
+      tags.appendChild(watch);
     }
     if(item.website){
       const site = document.createElement('a');
