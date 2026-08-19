@@ -63,6 +63,7 @@
 <section class="hero">
   <div class="shell">
     <div class="hero-copy">
+      <a class="hero-live rv" id="heroLive" href="#konwenty"><span class="dot" aria-hidden="true"></span><span></span></a>
       <h1 class="display rv" data-i18n="hero.h1">Twoja skóra.<br><em>Nasz tusz.</em></h1>
       <p class="lead rv" data-d="1" data-i18n="hero.lead">Kolektyw tatuatorów ze Szczecina. Realism, blackwork, dotwork i handpoke. Konsultacja i projekt zawsze gratis.</p>
       <div class="hero-cta rv" data-d="2">
@@ -446,7 +447,7 @@ pl:{
  'gal.by':'Prace mistrza {name}',
  'gal.state':'Wszystkie prace: {n} od {m} mistrzów',
  'nav.style':'Style','nav.crew':'Ekipa','nav.calc':'Wycena','nav.book':'Zapisy','nav.care':'Gojenie','nav.contact':'Kontakt','nav.giveaway':'Giveaway','nav.conv':'Konwenty',
- 'conv.eyebrow':'Konwenty','conv.h':'Gdzie nas<br>spotkacie','conv.lead':'Najbliższe konwenty, na które jedzie ekipa. Terminy aktualizujemy na bieżąco.','conv.live':'Jesteśmy tam teraz','conv.gw':'Losowanie na miejscu','conv.site':'Strona konwentu',
+ 'conv.eyebrow':'Konwenty','conv.next':'Najbliżej:','conv.liveNow':'Jesteśmy teraz na:','conv.h':'Gdzie nas<br>spotkacie','conv.lead':'Najbliższe konwenty, na które jedzie ekipa. Terminy aktualizujemy na bieżąco.','conv.live':'Jesteśmy tam teraz','conv.gw':'Losowanie na miejscu','conv.site':'Strona konwentu',
  'hero.h1':'Twoja skóra.<br><em>Nasz tusz.</em>',
  'hero.lead':'Kolektyw tatuatorów ze Szczecina. Realism, blackwork, dotwork i handpoke. Konsultacja i projekt zawsze gratis.',
  'hero.cta1':'Wyceń tatuaż','hero.cta2':'Zobacz prace','hero.badge':'z 72 opinii w Google',
@@ -506,7 +507,7 @@ en:{
  'gal.by':'Work by {name}',
  'gal.state':'All work: {n} pieces from {m} artists',
  'nav.style':'Styles','nav.crew':'Crew','nav.calc':'Quote','nav.book':'Booking','nav.care':'Healing','nav.contact':'Contact','nav.giveaway':'Giveaway','nav.conv':'Conventions',
- 'conv.eyebrow':'Conventions','conv.h':'Where to<br>find us','conv.lead':'The conventions the crew is heading to next. Dates are kept up to date.','conv.live':'We are there right now','conv.gw':'Giveaway on site','conv.site':'Convention website',
+ 'conv.eyebrow':'Conventions','conv.next':'Next up:','conv.liveNow':'We are right now at:','conv.h':'Where to<br>find us','conv.lead':'The conventions the crew is heading to next. Dates are kept up to date.','conv.live':'We are there right now','conv.gw':'Giveaway on site','conv.site':'Convention website',
  'hero.h1':'Your skin.<br><em>Our ink.</em>',
  'hero.lead':'A tattoo collective from Szczecin. Realism, blackwork, dotwork and handpoke. Consultation and design always free.',
  'hero.cta1':'Get a quote','hero.cta2':'See the work','hero.badge':'from 72 Google reviews',
@@ -566,7 +567,7 @@ ua:{
  'gal.by':'Роботи майстра {name}',
  'gal.state':'Усі роботи: {n} від {m} майстрів',
  'nav.style':'Стилі','nav.crew':'Команда','nav.calc':'Оцінка','nav.book':'Запис','nav.care':'Загоєння','nav.contact':'Контакти','nav.giveaway':'Giveaway','nav.conv':'Конвенції',
- 'conv.eyebrow':'Конвенції','conv.h':'Де нас<br>зустріти','conv.lead':'Найближчі конвенції, на які їде команда. Дати оновлюємо постійно.','conv.live':'Ми там просто зараз','conv.gw':'Розіграш на місці','conv.site':'Сайт конвенції',
+ 'conv.eyebrow':'Конвенції','conv.next':'Найближче:','conv.liveNow':'Ми зараз на:','conv.h':'Де нас<br>зустріти','conv.lead':'Найближчі конвенції, на які їде команда. Дати оновлюємо постійно.','conv.live':'Ми там просто зараз','conv.gw':'Розіграш на місці','conv.site':'Сайт конвенції',
  'hero.h1':'Твоя шкіра.<br><em>Наше чорнило.</em>',
  'hero.lead':'Колектив татуювальників зі Щецина. Realism, blackwork, dotwork і handpoke. Консультація та ескіз завжди безкоштовні.',
  'hero.cta1':'Порахувати ціну','hero.cta2':'Дивитись роботи','hero.badge':'із 72 відгуків у Google',
@@ -621,6 +622,8 @@ de:{
  'nav.giveaway':'Giveaway',
  'nav.conv':'Conventions',
  'conv.eyebrow':'Conventions',
+ 'conv.next':'Als Nächstes:',
+ 'conv.liveNow':'Wir sind gerade auf:',
  'conv.h':'Wo ihr uns<br>trefft',
  'conv.lead':'Die nächsten Conventions, auf die das Team fährt. Termine halten wir aktuell.',
  'conv.live':'Wir sind gerade dort',
@@ -769,6 +772,8 @@ fr:{
  'nav.giveaway':'Giveaway',
  'nav.conv':'Conventions',
  'conv.eyebrow':'Conventions',
+ 'conv.next':'Prochainement :',
+ 'conv.liveNow':'Nous sommes en ce moment à :',
  'conv.h':'Où nous<br>croiser',
  'conv.lead':'Les prochaines conventions où part l’équipe. Les dates sont tenues à jour.',
  'conv.live':'Nous y sommes en ce moment',
@@ -1495,7 +1500,18 @@ function convDates(item){
   return left + ' – ' + right;
 }
 
+function renderHeroLive(){
+  const box = document.getElementById('heroLive');
+  if(!box || !convItems.length){ if(box) box.className = 'hero-live rv in'; return; }
+  const now = convItems.find(function(c){ return c.live; }) || convItems[0];
+  const label = document.createElement('span');
+  label.innerHTML = (now.live ? t('conv.liveNow') : t('conv.next')) + ' <b>' + now.name + ' ' + now.year + '</b> · ' + convDates(now);
+  box.querySelector('span:last-child').replaceWith(label);
+  box.className = 'hero-live rv in on' + (now.live ? ' now' : '');
+}
+
 function renderConventions(){
+  renderHeroLive();
   if(!convItems.length){ convSection.hidden = true; return; }
   convSection.hidden = false;
   convGrid.innerHTML = '';
