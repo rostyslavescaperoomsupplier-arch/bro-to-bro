@@ -37,6 +37,7 @@
       <a href="#artysci" data-i18n="nav.crew">Ekipa</a>
       <a href="#kalkulator" data-i18n="nav.calc">Wycena</a>
       <a href="#zapisy" data-i18n="nav.book">Zapisy</a>
+      <a href="#konwenty" data-i18n="nav.conv">Konwenty</a>
       <a href="#gojenie" data-i18n="nav.care">Gojenie</a>
       <a href="#kontakt" data-i18n="nav.contact">Kontakt</a>
       <a href="giveaway.html" class="nav-gw" data-i18n="nav.giveaway">Giveaway</a>
@@ -119,6 +120,19 @@
     </div>
     <div class="crew-grid rv" data-d="1" id="crewGrid"></div>
     <p class="crew-empty" id="crewEmpty" hidden data-i18n="crew.empty">Nie znaleźliśmy takiego mistrza.</p>
+  </div>
+</section>
+
+<!-- ================= KONWENTY ================= -->
+<!-- Lista pobierana z panelu InkRoute, nie z kodu: zmiana w panelu widać tu od razu. -->
+<section class="conv" id="konwenty" hidden>
+  <div class="shell">
+    <div class="conv-head rv">
+      <p class="eyebrow" data-i18n="conv.eyebrow">Konwenty</p>
+      <h2 class="display" data-i18n="conv.h">Gdzie nas<br>spotkacie</h2>
+      <p class="lead" style="margin-top:18px" data-i18n="conv.lead">Najbliższe konwenty, na które jedzie ekipa. Terminy aktualizujemy na bieżąco.</p>
+    </div>
+    <div class="conv-grid rv" data-d="1" id="convGrid"></div>
   </div>
 </section>
 
@@ -431,7 +445,8 @@ pl:{
  'gal.reset':'Wszystkie prace',
  'gal.by':'Prace mistrza {name}',
  'gal.state':'Wszystkie prace: {n} od {m} mistrzów',
- 'nav.style':'Style','nav.crew':'Ekipa','nav.calc':'Wycena','nav.book':'Zapisy','nav.care':'Gojenie','nav.contact':'Kontakt','nav.giveaway':'Giveaway',
+ 'nav.style':'Style','nav.crew':'Ekipa','nav.calc':'Wycena','nav.book':'Zapisy','nav.care':'Gojenie','nav.contact':'Kontakt','nav.giveaway':'Giveaway','nav.conv':'Konwenty',
+ 'conv.eyebrow':'Konwenty','conv.h':'Gdzie nas<br>spotkacie','conv.lead':'Najbliższe konwenty, na które jedzie ekipa. Terminy aktualizujemy na bieżąco.','conv.live':'Jesteśmy tam teraz','conv.gw':'Losowanie na miejscu','conv.site':'Strona konwentu',
  'hero.h1':'Twoja skóra.<br><em>Nasz tusz.</em>',
  'hero.lead':'Kolektyw tatuatorów ze Szczecina. Realism, blackwork, dotwork i handpoke. Konsultacja i projekt zawsze gratis.',
  'hero.cta1':'Wyceń tatuaż','hero.cta2':'Zobacz prace','hero.badge':'z 72 opinii w Google',
@@ -490,7 +505,8 @@ en:{
  'gal.reset':'All work',
  'gal.by':'Work by {name}',
  'gal.state':'All work: {n} pieces from {m} artists',
- 'nav.style':'Styles','nav.crew':'Crew','nav.calc':'Quote','nav.book':'Booking','nav.care':'Healing','nav.contact':'Contact','nav.giveaway':'Giveaway',
+ 'nav.style':'Styles','nav.crew':'Crew','nav.calc':'Quote','nav.book':'Booking','nav.care':'Healing','nav.contact':'Contact','nav.giveaway':'Giveaway','nav.conv':'Conventions',
+ 'conv.eyebrow':'Conventions','conv.h':'Where to<br>find us','conv.lead':'The conventions the crew is heading to next. Dates are kept up to date.','conv.live':'We are there right now','conv.gw':'Giveaway on site','conv.site':'Convention website',
  'hero.h1':'Your skin.<br><em>Our ink.</em>',
  'hero.lead':'A tattoo collective from Szczecin. Realism, blackwork, dotwork and handpoke. Consultation and design always free.',
  'hero.cta1':'Get a quote','hero.cta2':'See the work','hero.badge':'from 72 Google reviews',
@@ -549,7 +565,8 @@ ua:{
  'gal.reset':'Усі роботи',
  'gal.by':'Роботи майстра {name}',
  'gal.state':'Усі роботи: {n} від {m} майстрів',
- 'nav.style':'Стилі','nav.crew':'Команда','nav.calc':'Оцінка','nav.book':'Запис','nav.care':'Загоєння','nav.contact':'Контакти','nav.giveaway':'Giveaway',
+ 'nav.style':'Стилі','nav.crew':'Команда','nav.calc':'Оцінка','nav.book':'Запис','nav.care':'Загоєння','nav.contact':'Контакти','nav.giveaway':'Giveaway','nav.conv':'Конвенції',
+ 'conv.eyebrow':'Конвенції','conv.h':'Де нас<br>зустріти','conv.lead':'Найближчі конвенції, на які їде команда. Дати оновлюємо постійно.','conv.live':'Ми там просто зараз','conv.gw':'Розіграш на місці','conv.site':'Сайт конвенції',
  'hero.h1':'Твоя шкіра.<br><em>Наше чорнило.</em>',
  'hero.lead':'Колектив татуювальників зі Щецина. Realism, blackwork, dotwork і handpoke. Консультація та ескіз завжди безкоштовні.',
  'hero.cta1':'Порахувати ціну','hero.cta2':'Дивитись роботи','hero.badge':'із 72 відгуків у Google',
@@ -602,6 +619,13 @@ ua:{
 de:{
  'nav.style':'Stile',
  'nav.giveaway':'Giveaway',
+ 'nav.conv':'Conventions',
+ 'conv.eyebrow':'Conventions',
+ 'conv.h':'Wo ihr uns<br>trefft',
+ 'conv.lead':'Die nächsten Conventions, auf die das Team fährt. Termine halten wir aktuell.',
+ 'conv.live':'Wir sind gerade dort',
+ 'conv.gw':'Verlosung vor Ort',
+ 'conv.site':'Website der Convention',
  'nav.crew':'Team',
  'nav.calc':'Preis',
  'nav.book':'Termine',
@@ -743,6 +767,13 @@ de:{
 fr:{
  'nav.style':'Styles',
  'nav.giveaway':'Giveaway',
+ 'nav.conv':'Conventions',
+ 'conv.eyebrow':'Conventions',
+ 'conv.h':'Où nous<br>croiser',
+ 'conv.lead':'Les prochaines conventions où part l’équipe. Les dates sont tenues à jour.',
+ 'conv.live':'Nous y sommes en ce moment',
+ 'conv.gw':'Tirage sur place',
+ 'conv.site':'Site de la convention',
  'nav.crew':'Équipe',
  'nav.calc':'Devis',
  'nav.book':'Rendez-vous',
@@ -999,6 +1030,7 @@ function applyLang(lang){
   updateCare();
   if(current === 4) buildSummary();
   if(typeof renderCrew === 'function'){ renderCrew(document.getElementById('crewSearch').value); renderGal(); }
+  if(typeof renderConventions === 'function') renderConventions();
 }
 
 document.querySelectorAll('.lang button').forEach(function(b){
@@ -1444,6 +1476,86 @@ function fillList(id, arr, icon){
   });
 }
 daySlider.addEventListener('input', updateCare);
+
+/* =========================================================
+   6b. konwenty (lista z panelu InkRoute)
+   ========================================================= */
+const CONV_API = 'https://inkroute-q2pp.onrender.com/api/public/conventions';
+const convSection = document.getElementById('konwenty');
+const convGrid = document.getElementById('convGrid');
+let convItems = [];
+
+function convDates(item){
+  const locale = LANG === 'ua' ? 'uk-UA' : LANG === 'pl' ? 'pl-PL' : LANG === 'de' ? 'de-DE' : LANG === 'fr' ? 'fr-FR' : 'en-GB';
+  const a = new Date(item.start + 'T12:00:00');
+  const b = new Date(item.end + 'T12:00:00');
+  const sameMonth = a.getMonth() === b.getMonth() && a.getFullYear() === b.getFullYear();
+  const left = a.toLocaleDateString(locale, sameMonth ? {day:'numeric'} : {day:'numeric', month:'short'});
+  const right = b.toLocaleDateString(locale, {day:'numeric', month:'short', year:'numeric'});
+  return left + ' – ' + right;
+}
+
+function renderConventions(){
+  if(!convItems.length){ convSection.hidden = true; return; }
+  convSection.hidden = false;
+  convGrid.innerHTML = '';
+
+  convItems.forEach(function(item){
+    const card = document.createElement('article');
+    card.className = 'conv-card' + (item.live ? ' live' : '');
+
+    const head = document.createElement('div');
+    head.className = 'conv-when';
+    head.textContent = convDates(item);
+    card.appendChild(head);
+
+    const title = document.createElement('h3');
+    title.textContent = item.name + ' ' + item.year;
+    card.appendChild(title);
+
+    const place = document.createElement('p');
+    place.className = 'conv-where';
+    place.textContent = item.city + ', ' + item.country;
+    card.appendChild(place);
+
+    const tags = document.createElement('div');
+    tags.className = 'conv-tags';
+    if(item.live){
+      const live = document.createElement('span');
+      live.className = 'conv-tag live';
+      live.textContent = t('conv.live');
+      tags.appendChild(live);
+    }
+    if(item.giveaway){
+      const gw = document.createElement('a');
+      gw.className = 'conv-tag gw';
+      gw.href = 'giveaway.html';
+      gw.textContent = t('conv.gw');
+      tags.appendChild(gw);
+    }
+    if(item.website){
+      const site = document.createElement('a');
+      site.className = 'conv-tag';
+      site.href = item.website;
+      site.target = '_blank';
+      site.rel = 'noopener';
+      site.textContent = t('conv.site');
+      tags.appendChild(site);
+    }
+    card.appendChild(tags);
+    convGrid.appendChild(card);
+  });
+}
+
+fetch(CONV_API, {cache:'no-store'})
+  .then(function(r){ return r.json(); })
+  .then(function(data){
+    convItems = (data && data.items) || [];
+    renderConventions();
+    /* sekcja startuje ukryta, więc kafelki zgłaszamy animacji dopiero teraz */
+    revealIO.observe(convGrid);
+  })
+  .catch(function(){ convSection.hidden = true; });
 
 /* =========================================================
    7. boot
