@@ -41,6 +41,7 @@
       <a href="#gojenie" data-i18n="nav.care">Gojenie</a>
       <a href="#kontakt" data-i18n="nav.contact">Kontakt</a>
       <a href="giveaway.html" class="nav-gw" data-i18n="nav.giveaway">Giveaway</a>
+      <a href="https://inkroute-q2pp.onrender.com/screen" id="navScreen" class="nav-screen" target="_blank" rel="noopener" data-i18n="nav.screen">Ekran losowania</a>
     </nav>
     <div class="navtools">
       <div class="lang" role="group" aria-label="Language">
@@ -446,7 +447,7 @@ pl:{
  'gal.reset':'Wszystkie prace',
  'gal.by':'Prace mistrza {name}',
  'gal.state':'Wszystkie prace: {n} od {m} mistrzów',
- 'nav.style':'Style','nav.crew':'Ekipa','nav.calc':'Wycena','nav.book':'Zapisy','nav.care':'Gojenie','nav.contact':'Kontakt','nav.giveaway':'Giveaway','nav.conv':'Konwenty',
+ 'nav.style':'Style','nav.crew':'Ekipa','nav.calc':'Wycena','nav.book':'Zapisy','nav.care':'Gojenie','nav.contact':'Kontakt','nav.giveaway':'Giveaway','nav.conv':'Konwenty','nav.screen':'Ekran losowania',
  'conv.eyebrow':'Konwenty','conv.next':'Najbliżej:','conv.liveNow':'Jesteśmy teraz na:','conv.h':'Gdzie nas<br>spotkacie','conv.lead':'Najbliższe konwenty, na które jedzie ekipa. Terminy aktualizujemy na bieżąco.','conv.live':'Jesteśmy tam teraz','conv.gw':'Losowanie na miejscu','conv.watch':'Oglądaj losowanie','conv.site':'Strona konwentu',
  'hero.h1':'Twoja skóra.<br><em>Nasz tusz.</em>',
  'hero.lead':'Kolektyw tatuatorów ze Szczecina. Realism, blackwork, dotwork i handpoke. Konsultacja i projekt zawsze gratis.',
@@ -506,7 +507,7 @@ en:{
  'gal.reset':'All work',
  'gal.by':'Work by {name}',
  'gal.state':'All work: {n} pieces from {m} artists',
- 'nav.style':'Styles','nav.crew':'Crew','nav.calc':'Quote','nav.book':'Booking','nav.care':'Healing','nav.contact':'Contact','nav.giveaway':'Giveaway','nav.conv':'Conventions',
+ 'nav.style':'Styles','nav.crew':'Crew','nav.calc':'Quote','nav.book':'Booking','nav.care':'Healing','nav.contact':'Contact','nav.giveaway':'Giveaway','nav.conv':'Conventions','nav.screen':'Draw screen',
  'conv.eyebrow':'Conventions','conv.next':'Next up:','conv.liveNow':'We are right now at:','conv.h':'Where to<br>find us','conv.lead':'The conventions the crew is heading to next. Dates are kept up to date.','conv.live':'We are there right now','conv.gw':'Giveaway on site','conv.watch':'Watch the draw','conv.site':'Convention website',
  'hero.h1':'Your skin.<br><em>Our ink.</em>',
  'hero.lead':'A tattoo collective from Szczecin. Realism, blackwork, dotwork and handpoke. Consultation and design always free.',
@@ -566,7 +567,7 @@ ua:{
  'gal.reset':'Усі роботи',
  'gal.by':'Роботи майстра {name}',
  'gal.state':'Усі роботи: {n} від {m} майстрів',
- 'nav.style':'Стилі','nav.crew':'Команда','nav.calc':'Оцінка','nav.book':'Запис','nav.care':'Загоєння','nav.contact':'Контакти','nav.giveaway':'Giveaway','nav.conv':'Конвенції',
+ 'nav.style':'Стилі','nav.crew':'Команда','nav.calc':'Оцінка','nav.book':'Запис','nav.care':'Загоєння','nav.contact':'Контакти','nav.giveaway':'Giveaway','nav.conv':'Конвенції','nav.screen':'Екран розіграшу',
  'conv.eyebrow':'Конвенції','conv.next':'Найближче:','conv.liveNow':'Ми зараз на:','conv.h':'Де нас<br>зустріти','conv.lead':'Найближчі конвенції, на які їде команда. Дати оновлюємо постійно.','conv.live':'Ми там просто зараз','conv.gw':'Розіграш на місці','conv.watch':'Дивитись розіграш','conv.site':'Сайт конвенції',
  'hero.h1':'Твоя шкіра.<br><em>Наше чорнило.</em>',
  'hero.lead':'Колектив татуювальників зі Щецина. Realism, blackwork, dotwork і handpoke. Консультація та ескіз завжди безкоштовні.',
@@ -621,6 +622,7 @@ de:{
  'nav.style':'Stile',
  'nav.giveaway':'Giveaway',
  'nav.conv':'Conventions',
+ 'nav.screen':'Ziehungs-Screen',
  'conv.eyebrow':'Conventions',
  'conv.next':'Als Nächstes:',
  'conv.liveNow':'Wir sind gerade auf:',
@@ -772,6 +774,7 @@ fr:{
  'nav.style':'Styles',
  'nav.giveaway':'Giveaway',
  'nav.conv':'Conventions',
+ 'nav.screen':'Écran du tirage',
  'conv.eyebrow':'Conventions',
  'conv.next':'Prochainement :',
  'conv.liveNow':'Nous sommes en ce moment à :',
@@ -1502,6 +1505,13 @@ function convDates(item){
   return left + ' – ' + right;
 }
 
+function updateScreenLink(){
+  const link = document.getElementById('navScreen');
+  if(!link) return;
+  const live = convItems.filter(function(c){ return c.live; })[0];
+  link.href = 'https://inkroute-q2pp.onrender.com/screen' + (live ? '?edition=' + encodeURIComponent(live.id) : '');
+}
+
 function renderHeroLive(){
   const box = document.getElementById('heroLive');
   if(!box || !convItems.length){ if(box) box.className = 'hero-live rv in'; return; }
@@ -1514,6 +1524,7 @@ function renderHeroLive(){
 
 function renderConventions(){
   renderHeroLive();
+  updateScreenLink();
   if(!convItems.length){ convSection.hidden = true; return; }
   convSection.hidden = false;
   convGrid.innerHTML = '';

@@ -559,3 +559,12 @@ section[id]{scroll-margin-top:84px}
   .card-artist:active{border-color:var(--accent)}
   .btn:active{transform:scale(.98)}
 }
+
+/* Ekran losowania trzymamy tylko w menu pod burgerem — na pasku desktopu
+   pozycji jest już osiem, a to link roboczy, nie część oferty. */
+.navlinks .nav-screen{display:none}
+@media(max-width:1080px){
+  .navlinks .nav-screen{display:flex;align-items:center;gap:8px;color:var(--muted)}
+  .navlinks .nav-screen::before{content:"";width:7px;height:7px;border-radius:50%;
+    background:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
+}
