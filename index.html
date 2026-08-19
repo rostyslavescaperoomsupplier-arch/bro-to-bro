@@ -41,7 +41,7 @@
       <a href="#gojenie" data-i18n="nav.care">Gojenie</a>
       <a href="#kontakt" data-i18n="nav.contact">Kontakt</a>
       <a href="giveaway.html" class="nav-gw" data-i18n="nav.giveaway">Giveaway</a>
-      <a href="https://inkroute-q2pp.onrender.com/screen" id="navScreen" class="nav-screen" target="_blank" rel="noopener" data-i18n="nav.screen">Ekran losowania</a>
+      <a href="screen.html" id="navScreen" class="nav-screen" target="_blank" rel="noopener" data-i18n="nav.screen">Ekran losowania</a>
     </nav>
     <div class="navtools">
       <div class="lang" role="group" aria-label="Language">
@@ -1509,7 +1509,7 @@ function updateScreenLink(){
   const link = document.getElementById('navScreen');
   if(!link) return;
   const live = convItems.filter(function(c){ return c.live; })[0];
-  link.href = 'https://inkroute-q2pp.onrender.com/screen' + (live ? '?edition=' + encodeURIComponent(live.id) : '');
+  link.href = 'screen.html' + (live ? '?edition=' + encodeURIComponent(live.id) : '');
 }
 
 function renderHeroLive(){
@@ -1566,7 +1566,7 @@ function renderConventions(){
     if(item.giveaway && item.live){
       const watch = document.createElement('a');
       watch.className = 'conv-tag watch';
-      watch.href = 'https://inkroute-q2pp.onrender.com/screen?edition=' + encodeURIComponent(item.id);
+      watch.href = 'screen.html?edition=' + encodeURIComponent(item.id);
       watch.target = '_blank';
       watch.rel = 'noopener';
       watch.textContent = t('conv.watch');

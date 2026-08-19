@@ -164,7 +164,7 @@
 
       <label class="consent">
         <input type="checkbox" id="gwConsent">
-        <span><span data-i18n="gw.consent">Akceptuję zasady losowania</span> — <a href="https://inkroute-q2pp.onrender.com/rules" target="_blank" rel="noopener" data-i18n="gw.consentLink">regulamin</a>.</span>
+        <span><span data-i18n="gw.consent">Akceptuję zasady losowania</span> — <a href="regulamin.html" target="_blank" rel="noopener" data-i18n="gw.consentLink">regulamin</a>.</span>
       </label>
 
       <button class="btn btn-primary" type="submit" id="gwSubmit">
@@ -186,7 +186,7 @@
 
   <div class="gwfoot">
     <a href="index.html" data-i18n="gw.back">Strona główna</a>
-    <a href="https://inkroute-q2pp.onrender.com/rules" target="_blank" rel="noopener" data-i18n="gw.fullRules">Regulamin</a>
+    <a href="regulamin.html" target="_blank" rel="noopener" data-i18n="gw.fullRules">Regulamin</a>
     <a href="https://www.instagram.com/brotobrotattoo/" target="_blank" rel="noopener">Instagram</a>
     <a href="tel:+48579128368">579 128 368</a>
   </div>
@@ -391,7 +391,7 @@ form.addEventListener('submit', function(e){
       var day = state.days.filter(function(d){ return d.date === daySel.value; })[0];
       if (day){
         var watch = document.getElementById('gwWatch');
-        watch.href = 'https://inkroute-q2pp.onrender.com/screen?edition=' + encodeURIComponent(day.editionId);
+        watch.href = 'screen.html?edition=' + encodeURIComponent(day.editionId);
         watch.style.display = 'inline-flex';
       }
     })
