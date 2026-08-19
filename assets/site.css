@@ -491,6 +491,8 @@ section[id]{scroll-margin-top:84px}
   background:var(--surface);width:fit-content;max-width:100%;
 }
 .hero-live.on{display:inline-flex}
+/* Pasek stoi nad obiema kolumnami hero — to status, nie część tekstu */
+.hero .shell > .hero-live{grid-column:1/-1;justify-self:start;margin-bottom:26px}
 .hero-live b{color:var(--text);font-weight:700}
 .hero-live .dot{
   width:7px;height:7px;border-radius:50%;background:var(--accent);flex:none;
