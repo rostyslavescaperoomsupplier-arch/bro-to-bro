@@ -560,11 +560,13 @@ section[id]{scroll-margin-top:84px}
   .btn:active{transform:scale(.98)}
 }
 
-/* Ekran losowania trzymamy tylko w menu pod burgerem — na pasku desktopu
-   pozycji jest już osiem, a to link roboczy, nie część oferty. */
-.navlinks .nav-screen{display:none}
+/* Ekran losowania — widoczny wszędzie: na pasku i w menu pod burgerem */
+.navlinks .nav-screen{display:inline-flex;align-items:center;gap:7px;color:var(--muted)}
+.navlinks .nav-screen::before{
+  content:"";width:7px;height:7px;border-radius:50%;flex:none;
+  background:var(--accent);box-shadow:0 0 0 4px var(--accent-soft);
+}
+.navlinks .nav-screen:hover{color:var(--text)}
 @media(max-width:1080px){
-  .navlinks .nav-screen{display:flex;align-items:center;gap:8px;color:var(--muted)}
-  .navlinks .nav-screen::before{content:"";width:7px;height:7px;border-radius:50%;
-    background:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
+  .navlinks .nav-screen{display:flex}
 }
