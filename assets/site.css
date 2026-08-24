@@ -193,6 +193,14 @@ p{margin:0;max-width:62ch}
 .crew-search i{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--muted-2);font-size:1.05rem}
 .crew-search .inp{padding-left:42px}
 .crew-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+/* Заголовок страны внутри сетки мастеров — на всю ширину строки. */
+.crew-grid .crew-country{
+  grid-column:1/-1;margin:10px 0 -2px;
+  font:600 .78rem/1 'Archivo',system-ui,sans-serif;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--muted)
+}
+.crew-grid .crew-country:first-child{margin-top:0}
+.crew-countries{margin:0 0 16px}
 .card-artist{
   background:var(--bg);border:1px solid var(--line-soft);border-radius:var(--r-card);overflow:hidden;
   display:flex;flex-direction:column;cursor:pointer;text-align:left;padding:0;

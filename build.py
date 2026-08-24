@@ -1,19 +1,38 @@
 #!/usr/bin/env python3
 """Generuje stronę profilową dla każdego artysty z _data/artists.json.
 
-    python3 build.py
+    python3 build.py           # same strony profilowe + lista ekipy w index.html
+    python3 build.py --sync    # najpierw pobiera dane artystów z panelu InkRoute
 
 Dane biograficzne pochodzą wyłącznie z ankiety artysty. Artyści bez ankiety
 dostają stronę z nazwiskiem i pracami, bez wymyślonego opisu.
+
+--sync ciągnie z panelu wyłącznie pola publiczne (kraj, miasto, style, języki,
+Instagram, staż). Telefony, e-maile, daty urodzenia i notatki menedżera zostają
+w panelu — na stronę nie trafiają. Do repozytorium dopisuje tylko tych artystów,
+których już znamy: nowy człowiek bez zdjęć dałby połamane kafelki.
 """
+import argparse
 import html
 import json
 import os
+import re
+import sys
+import unicodedata
+import urllib.error
+import urllib.request
 
-DATA = json.load(open('_data/artists.json', encoding='utf-8'))
+DATA_PATH = '_data/artists.json'
+INDEX_PATH = 'index.html'
+
+# Adres panelu. Nadpisywalny zmienną środowiskową, żeby dało się celować w localhost.
+PANEL_URL = os.environ.get('INKROUTE_URL', 'https://inkroute-q2pp.onrender.com')
+
+DATA = json.load(open(DATA_PATH, encoding='utf-8'))
 DATA.sort(key=lambda a: a['name'].lower())
 
-LANGS = ('pl', 'en', 'ua', 'de', 'fr')
+# Kolejność jest kolejnością przycisków na stronie: EN, DE, FR, PL, RU, UA.
+LANGS = ('en', 'de', 'fr', 'pl', 'ru', 'ua')
 
 L = {
     'pl': {
@@ -50,6 +69,13 @@ L = {
         'crew': 'Toute l’équipe', 'prev': 'Précédent', 'next': 'Suivant',
         'soon': 'Nous écrivons encore ce profil. Les travaux ci-dessous parlent d’eux-mêmes, et on fixera une date sur Instagram ou par téléphone.',
         'calc': 'Devis', 'back': 'Retour à l’accueil', 'years': 'ans de métier',
+    },
+    'ru': {
+        'eyebrow': 'Мастер', 'works': 'Работы', 'styles': 'Стили', 'since': 'Бьёт с',
+        'city': 'База', 'langs': 'Языки', 'ig': 'Instagram', 'book': 'Записаться',
+        'crew': 'Вся команда', 'prev': 'Предыдущий', 'next': 'Следующий',
+        'soon': 'Описание этого мастера ещё готовим. Работы ниже говорят сами за себя, а дату согласуем в Instagram или по телефону.',
+        'calc': 'Оценка', 'back': 'На главную', 'years': 'лет в профессии',
     },
 }
 
@@ -153,11 +179,12 @@ def page(a, prev, nxt):
     </nav>
     <div class="navtools">
       <div class="lang" role="group" aria-label="Language">
-        <button type="button" data-lang="pl" aria-pressed="true">PL</button>
         <button type="button" data-lang="en" aria-pressed="false">EN</button>
-        <button type="button" data-lang="ua" aria-pressed="false">UA</button>
         <button type="button" data-lang="de" aria-pressed="false">DE</button>
         <button type="button" data-lang="fr" aria-pressed="false">FR</button>
+        <button type="button" data-lang="pl" aria-pressed="true">PL</button>
+        <button type="button" data-lang="ru" aria-pressed="false">RU</button>
+        <button type="button" data-lang="ua" aria-pressed="false">UA</button>
       </div>
     </div>
   </div>
@@ -279,7 +306,119 @@ document.addEventListener('keydown', function(e){{
 '''
 
 
+def norm_name(value):
+    """Klucz dopasowania: bez znaków diakrytycznych, bez interpunkcji, bez wielkości liter."""
+    text = unicodedata.normalize('NFKD', str(value or ''))
+    text = ''.join(c for c in text if not unicodedata.combining(c))
+    return re.sub(r'[^a-z0-9]+', ' ', text.lower()).strip()
+
+
+def fetch_panel_artists():
+    url = PANEL_URL.rstrip('/') + '/api/public/artists'
+    req = urllib.request.Request(url, headers={'Accept': 'application/json'})
+    with urllib.request.urlopen(req, timeout=20) as resp:
+        return json.loads(resp.read().decode('utf-8'))
+
+
+def sync_from_panel():
+    """Wciąga publiczne pola z panelu do _data/artists.json. Zwraca liczbę zmian."""
+    try:
+        payload = fetch_panel_artists()
+    except (urllib.error.URLError, TimeoutError, ValueError) as exc:
+        print(f'Nie udało się pobrać danych z panelu ({exc}). Buduję ze starych danych.')
+        return 0
+
+    remote = payload.get('items', [])
+    by_key = {}
+    for r in remote:
+        full = ' '.join(x for x in (r.get('firstName'), r.get('lastName')) if x)
+        by_key[norm_name(full)] = r
+        if r.get('nickname'):
+            by_key.setdefault(norm_name(r['nickname']), r)
+
+    changed, matched = 0, set()
+    for a in DATA:
+        r = by_key.get(norm_name(a['name']))
+        if not r:
+            continue
+        matched.add(id(r))
+        # Nadpisujemy tylko to, co panel faktycznie wie — pusta wartość nie kasuje ankiety.
+        fields = {
+            'country': r.get('country'),
+            'countryCode': r.get('countryCode'),
+            'city': r.get('city'),
+            'ig': (r.get('instagram') or '').lstrip('@') or None,
+            'since': r.get('startedYear'),
+            'styles': r.get('styles') or None,
+            'langs': [x.upper() for x in (r.get('languages') or [])] or None,
+        }
+        for key, value in fields.items():
+            if value in (None, '', []):
+                continue
+            if a.get(key) != value:
+                a[key] = value
+                changed += 1
+
+    unknown = [r for r in remote if id(r) not in matched]
+    missing = [a['name'] for a in DATA if not by_key.get(norm_name(a['name']))]
+
+    with open(DATA_PATH, 'w', encoding='utf-8') as f:
+        json.dump(DATA, f, ensure_ascii=False, indent=1)
+        f.write('\n')
+
+    print(f'Panel: {len(remote)} artystów, dopasowano {len(remote) - len(unknown)}, zmian pól: {changed}')
+    if unknown:
+        names = ', '.join(' '.join(x for x in (r.get('firstName'), r.get('lastName')) if x) for r in unknown)
+        print(f'  W panelu, ale nie ma ich w repozytorium (brak zdjęć — dodaj ręcznie): {names}')
+    if missing:
+        print(f'  Na stronie, ale panel ich nie zna ({len(missing)}): {", ".join(missing)}')
+    return changed
+
+
+def artists_block():
+    """Lista ekipy dla index.html. Kraj wchodzi tylko wtedy, gdy jest znany."""
+    rows = []
+    for a in DATA:
+        parts = [f'n:{json.dumps(a["name"], ensure_ascii=False)}',
+                 f's:{json.dumps(a["slug"], ensure_ascii=False)}']
+        if a.get('countryCode'):
+            parts.append(f'c:{json.dumps(a["countryCode"], ensure_ascii=False)}')
+            parts.append(f'cn:{json.dumps(a.get("country") or a["countryCode"], ensure_ascii=False)}')
+        rows.append('  {' + ','.join(parts) + '}')
+    return 'const ARTISTS=[\n' + ',\n'.join(rows) + '\n];'
+
+
+def write_index_artists():
+    """Podmienia listę ekipy w index.html między znacznikami ARTISTS:START/END."""
+    with open(INDEX_PATH, encoding='utf-8') as f:
+        page = f.read()
+
+    start = '/* ARTISTS:START — generowane przez build.py, nie edytować ręcznie */\n'
+    end = '\n/* ARTISTS:END */'
+    i = page.find(start)
+    j = page.find(end, i)
+    if i < 0 or j < 0:
+        print('index.html: brak znaczników ARTISTS:START/END, listy ekipy nie ruszam')
+        return False
+
+    updated = page[:i + len(start)] + artists_block() + page[j:]
+    if updated == page:
+        return False
+    with open(INDEX_PATH, 'w', encoding='utf-8') as f:
+        f.write(updated)
+    return True
+
+
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--sync', action='store_true',
+                        help='pobierz publiczne dane artystów z panelu InkRoute')
+    args = parser.parse_args()
+
+    if args.sync:
+        sync_from_panel()
+        DATA.sort(key=lambda a: a['name'].lower())
+
     n = len(DATA)
     for i, a in enumerate(DATA):
         prev = DATA[(i - 1) % n]
@@ -289,6 +428,12 @@ def main():
             f.write(page(a, prev, nxt))
     withbio = sum(1 for a in DATA if a.get('confidence') == 'high')
     print(f'{n} stron profilowych, w tym {withbio} z danymi z ankiety')
+
+    with_country = sum(1 for a in DATA if a.get('countryCode'))
+    if write_index_artists():
+        print(f'index.html: lista ekipy odświeżona, z krajem {with_country} z {n}')
+    if not with_country:
+        print('Kraje artystów puste — sekcja krajów na stronie się nie pokaże (czekamy na dane).')
 
 
 if __name__ == '__main__':

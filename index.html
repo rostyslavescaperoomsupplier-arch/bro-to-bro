@@ -45,11 +45,12 @@
     </nav>
     <div class="navtools">
       <div class="lang" role="group" aria-label="Language">
-        <button type="button" data-lang="pl" aria-pressed="true">PL</button>
         <button type="button" data-lang="en" aria-pressed="false">EN</button>
-        <button type="button" data-lang="ua" aria-pressed="false">UA</button>
         <button type="button" data-lang="de" aria-pressed="false">DE</button>
         <button type="button" data-lang="fr" aria-pressed="false">FR</button>
+        <button type="button" data-lang="pl" aria-pressed="true">PL</button>
+        <button type="button" data-lang="ru" aria-pressed="false">RU</button>
+        <button type="button" data-lang="ua" aria-pressed="false">UA</button>
       </div>
       <button class="burger" id="burger" aria-expanded="false" aria-controls="navlinks" aria-label="Menu">
         <i class="ph ph-list" aria-hidden="true"></i>
@@ -133,6 +134,7 @@
         <input class="inp" id="crewSearch" type="search" data-ph="crew.search" placeholder="Szukaj mistrza" aria-label="Szukaj mistrza">
       </div>
     </div>
+    <div class="seg crew-countries" id="crewCountries" role="group" hidden></div>
     <div class="crew-grid rv" data-d="1" id="crewGrid"></div>
     <p class="crew-empty" id="crewEmpty" hidden data-i18n="crew.empty">Nie znaleźliśmy takiego mistrza.</p>
   </div>
@@ -442,6 +444,7 @@ pl:{
  'crew.works':'3 prace',
  'crew.empty':'Nie znaleźliśmy takiego mistrza.',
  'crew.search':'Szukaj mistrza',
+ 'crew.allCountries':'Wszystkie kraje',
  'gal.alt':'Tatuaż, autor {name}',
  'gal.more':'Pokaż więcej',
  'gal.reset':'Wszystkie prace',
@@ -502,6 +505,7 @@ en:{
  'crew.works':'3 pieces',
  'crew.empty':'No artist by that name.',
  'crew.search':'Search for an artist',
+ 'crew.allCountries':'All countries',
  'gal.alt':'Tattoo by {name}',
  'gal.more':'Show more',
  'gal.reset':'All work',
@@ -562,6 +566,7 @@ ua:{
  'crew.works':'3 роботи',
  'crew.empty':'Такого майстра не знайшли.',
  'crew.search':'Пошук майстра',
+ 'crew.allCountries':'Усі країни',
  'gal.alt':'Татуювання, автор {name}',
  'gal.more':'Показати ще',
  'gal.reset':'Усі роботи',
@@ -665,6 +670,7 @@ de:{
  'crew.h':'Das Team',
  'crew.lead':'Residents in Stettin und Künstler, die ihr auf Konventen in Deutschland, Frankreich oder der Schweiz trefft. Klick einen Künstler an, um seine Arbeiten zu sehen.',
  'crew.search':'Künstler suchen',
+ 'crew.allCountries':'Alle Länder',
  'crew.empty':'Diesen Künstler haben wir nicht gefunden.',
  'crew.works':'3 Arbeiten',
  'cfg.eyebrow':'Konfigurator',
@@ -817,6 +823,7 @@ fr:{
  'crew.h':'L’équipe',
  'crew.lead':'Des résidents à Szczecin et des artistes que vous croisez en convention en Allemagne, en France ou en Suisse. Clique sur un artiste pour voir ses travaux.',
  'crew.search':'Chercher un artiste',
+ 'crew.allCountries':'Tous les pays',
  'crew.empty':'Aucun artiste à ce nom.',
  'crew.works':'3 travaux',
  'cfg.eyebrow':'Configurateur',
@@ -921,6 +928,66 @@ fr:{
  'contact.langs':'Nous parlons polonais, anglais, ukrainien et biélorusse.',
  'contact.cta':'Prendre rendez-vous',
  'foot.rights':'Tous les travaux appartiennent à leurs auteurs.'
+},ru:{
+ 'crew.works':'3 работы',
+ 'crew.empty':'Такого мастера не нашли.',
+ 'crew.search':'Поиск мастера',
+ 'crew.allCountries':'Все страны',
+ 'gal.alt':'Татуировка, автор {name}',
+ 'gal.more':'Показать ещё',
+ 'gal.reset':'Все работы',
+ 'gal.by':'Работы мастера {name}',
+ 'gal.state':'Все работы: {n} от {m} мастеров',
+ 'nav.style':'Стили','nav.crew':'Команда','nav.calc':'Оценка','nav.book':'Запись','nav.care':'Заживление','nav.contact':'Контакты','nav.giveaway':'Розыгрыш','nav.conv':'Конвенции','nav.screen':'Экран розыгрыша',
+ 'conv.eyebrow':'Конвенции','conv.next':'Ближайшая:','conv.liveNow':'Прямо сейчас мы здесь:','conv.h':'Где нас<br>застать','conv.lead':'Конвенции, куда команда едет дальше. Даты держим в актуальном виде.','conv.live':'Мы там прямо сейчас','conv.gw':'Розыгрыш на месте','conv.watch':'Смотреть розыгрыш','conv.site':'Сайт конвенции',
+ 'hero.h1':'Твоя кожа.<br><em>Наши краски.</em>',
+ 'hero.lead':'Коллектив татуировщиков из Щецина. Реализм, блэкворк, дотворк и хендпоук. Консультация и эскиз всегда бесплатно.',
+ 'hero.cta1':'Оценить татуировку','hero.cta2':'Посмотреть работы','hero.badge':'из 72 отзывов в Google',
+ 'stat.artists':'мастеров в коллективе','stat.awards':'наград с конвенций','stat.conv':'конвенций в году','stat.countries':'стран: PL, DE, FR, BE, CH, AT',
+ 'styles.eyebrow':'Портфолио','styles.h':'Работы<br>команды',
+ 'f.all':'Всё','f.realism':'Реализм','f.blackwork':'Блэкворк','f.dotwork':'Дотворк','f.oldschool':'Олдскул','f.linework':'Лайнворк','f.graphic':'Графика','f.abstract':'Абстракция','f.handpoke':'Хендпоук',
+ 'crew.h':'Команда',
+ 'crew.lead':'Резиденты в Щецине плюс мастера, которых можно поймать на конвенциях в Германии, Франции и Швейцарии. Нажми на мастера, чтобы увидеть его работы.',
+ 'cfg.eyebrow':'Конфигуратор','cfg.h':'Выбери место,<br>посмотри вилку',
+ 'cfg.lead':'Нажми на часть тела, задай размер и стиль. Посчитаем время, вилку цены и насколько будет больно.',
+ 'cfg.picked':'Выбранное место','cfg.size':'Размер, длинная сторона','cfg.style':'Стиль','cfg.color':'Цвет','cfg.detail':'Детализация',
+ 'cfg.bw':'Чёрно-серая','cfg.rgb':'Цветная','cfg.d1':'Простая','cfg.d2':'Средняя','cfg.d3':'Очень детальная',
+ 'cfg.price':'Вилка цены','cfg.time':'Время работы','cfg.sessions':'Сеансы','cfg.pain':'Боль в этом месте',
+ 'cfg.note':'Это прикидка по ставке 350 zł в час при минимуме 400 zł. Итоговую цену мастер называет после консультации и эскиза.',
+ 'cfg.send':'Перейти к записи','cfg.reset':'Сбросить',
+ 'book.h':'Запись','book.lead':'Три шага — и сообщение готово. Отправь его в Instagram или позвони. Консультация бесплатная.',
+ 'book.s1':'1. Идея','book.s2':'2. Сроки','book.s3':'3. Контакт','book.s4':'4. Отправить',
+ 'book.h1':'Что хочешь сделать','book.hint1':'Если пользовался конфигуратором, эти поля уже заполнены.',
+ 'book.fStyle':'Стиль','book.fPlace':'Место','book.fSize':'Размер','book.fFirst':'Первая татуировка','book.yes':'Да','book.no':'Нет',
+ 'book.fIdea':'Опиши идею','book.phIdea':'например: волк, графика, чёрная, внешняя часть предплечья',
+ 'book.h2':'Когда тебе удобно','book.hint2':'Команда ездит по конвенциям в Европе, так что назови промежуток — подберём дату.',
+ 'book.fWhen':'Удобный промежуток','book.w1':'Ближайшее окно','book.w2':'В течение двух недель','book.w3':'В этом месяце','book.w4':'Гибко',
+ 'book.fDay':'Время суток','book.p1':'Утро','book.p2':'День','book.p3':'Вечер','book.p4':'Любое',
+ 'book.h3':'Как с тобой связаться','book.hint3':'Достаточно имени и одного способа связи.',
+ 'book.fName':'Имя','book.phName':'Как к тебе обращаться','book.errName':'Напиши имя, чтобы мы знали, с кем говорим.',
+ 'book.fContact':'Instagram или телефон','book.phContact':'@ник или номер','book.errContact':'Укажи ник в Instagram или номер телефона.',
+ 'book.h4':'Твоё сообщение','book.hint4':'Скопируй его в Instagram или позвони. Отвечаем на польском, английском и украинском.',
+ 'book.copy':'Скопировать сообщение','book.copied':'Скопировано','book.next':'Дальше','book.back':'Назад',
+ 'sum.name':'Имя','sum.contact':'Контакт','sum.style':'Стиль','sum.place':'Место','sum.size':'Размер','sum.first':'Первая татуировка',
+ 'sum.idea':'Идея','sum.when':'Промежуток','sum.day':'Время суток','sum.est':'Прикидка','sum.empty':'не указано',
+ 'msg.hi':'Привет, пишу по поводу татуировки.',
+ 'care.eyebrow':'Заживление','care.h':'Тридцать дней<br>после сеанса',
+ 'care.lead':'Двигай ползунок и смотри, что происходит с кожей в этот день и чего в это время лучше не делать.',
+ 'care.avoid':'Чего избегать','care.day':'День {d} из 30',
+ 'faq.h':'Вопросы',
+ 'faq.q1':'Сколько стоит татуировка','faq.a1':'Считаем по часам, минимум 400 zł. Конфигуратор выше даёт вилку, а точную цену мастер называет, когда увидит эскиз.',
+ 'faq.q2':'Консультация платная','faq.a2':'Нет. Консультация и эскиз бесплатные, платишь только за сеанс.',
+ 'faq.q3':'Нужен ли задаток','faq.a3':'Да, задаток держит за тобой время и вычитается из итоговой суммы. Если отменяешь меньше чем за 48 часов, он сгорает.',
+ 'faq.q4':'Делаете ли перекрытия и правки','faq.a4':'Делаем. Для перекрытия пришли фото старой работы при хорошем свете — скажем, что реально сделать. Ещё сводим татуировки лазером.',
+ 'faq.q5':'С какого возраста','faq.a5':'С 18 и с документом. Несовершеннолетних не бьём даже с согласия родителей.',
+ 'faq.q6':'На каких языках говорите','faq.a6':'Польский, английский, украинский и белорусский.',
+ 'contact.h':'Где нас найти',
+ 'contact.addr':'Grizzly Barber Shop, Mickiewicza 36A, Щецин<small>Студия работает внутри барбершопа</small>',
+ 'contact.callHint':'Звонки и сообщения','contact.igHint':'Самый быстрый ответ и свободные окна','contact.ttHint':'Закулисье сеансов',
+ 'contact.hours':'Каждый день 10:00 - 20:00<small>Сеансы по предварительной записи</small>',
+ 'contact.tour':'Часть дат делаем на конвенциях<small>Германия, Франция, Бельгия, Швейцария, Австрия</small>',
+ 'contact.langs':'Говорим по-польски, по-английски, по-украински и по-белорусски.','contact.cta':'Записаться на консультацию',
+ 'foot.rights':'Все работы принадлежат их авторам.'
 }};
 
 const ZONE_NAMES = {
@@ -928,7 +995,8 @@ const ZONE_NAMES = {
  en:{glowa:'head',szyja:'neck',bark:'shoulder',klatka:'chest',zebra:'ribs',brzuch:'stomach',biodra:'hips',ramie:'upper arm',przedramie:'forearm',dlon:'hand',udo:'thigh',kolano:'knee',lydka:'calf',stopa:'foot'},
  ua:{glowa:'голова',szyja:'шия',bark:'плече',klatka:'груди',zebra:'ребра',brzuch:'живіт',biodra:'стегна',ramie:'верх руки',przedramie:'передпліччя',dlon:'кисть',udo:'стегно',kolano:'коліно',lydka:'литка',stopa:'ступня'},
  de:{glowa:'Kopf',szyja:'Hals',bark:'Schulter',klatka:'Brust',zebra:'Rippen',brzuch:'Bauch',biodra:'Hüfte',ramie:'Oberarm',przedramie:'Unterarm',dlon:'Hand',udo:'Oberschenkel',kolano:'Knie',lydka:'Wade',stopa:'Fuß'},
- fr:{glowa:'tête',szyja:'cou',bark:'épaule',klatka:'torse',zebra:'côtes',brzuch:'ventre',biodra:'hanches',ramie:'bras',przedramie:'avant-bras',dlon:'main',udo:'cuisse',kolano:'genou',lydka:'mollet',stopa:'pied'}
+ fr:{glowa:'tête',szyja:'cou',bark:'épaule',klatka:'torse',zebra:'côtes',brzuch:'ventre',biodra:'hanches',ramie:'bras',przedramie:'avant-bras',dlon:'main',udo:'cuisse',kolano:'genou',lydka:'mollet',stopa:'pied'},
+ ru:{glowa:'голова',szyja:'шея',bark:'плечо',klatka:'грудь',zebra:'рёбра',brzuch:'живот',biodra:'бёдра',ramie:'верх руки',przedramie:'предплечье',dlon:'кисть',udo:'бедро',kolano:'колено',lydka:'икра',stopa:'стопа'}
 };
 
 const CARE = {
@@ -1016,6 +1084,23 @@ const CARE = {
   {t:'Couleur pleine',d:'La couleur revient, la peau est lisse. On peut juger le résultat.',
    do:['SPF 50 pour toujours','Écris-nous si quelque chose est parti','Planifie la prochaine séance','Continue d’hydrater, sans excès'],
    no:['Bronzage sans protection','Le laser à côté d’un travail frais','Oublier l’écran solaire en été','Comparer avec la photo du premier jour']}
+ ],
+ru:[
+  {t:'Свежая рана',d:'Татуировка — это открытая рана. Плёнка остаётся ровно столько, сколько сказал мастер.',
+   do:['Сними плёнку в оговорённое время','Промой тёплой водой и простым мылом','Промокни одноразовым полотенцем','Спи на чистом белье'],
+   no:['Бассейн, озеро, сауна','Алкоголь и разжижающие кровь','Трогать грязными руками','Тесная одежда поверх свежей работы']},
+  {t:'Сукровица',d:'Кожа отдаёт плазму и лишнюю краску. Несколько дней это нормально.',
+   do:['Мой два раза в день','Тонкий слой мази, не толстый','Меняй бельё','Пей много воды'],
+   no:['Сдирать подсохшие корки','Долгие горячие ванны','Контактные тренировки','Солнце на голую кожу']},
+  {t:'Шелушение и зуд',d:'Начинают сходить чешуйки. Чешется — это хороший знак.',
+   do:['Похлопывай вместо того, чтобы чесать','Увлажняй тонко и часто','Свободная дышащая одежда','Следи, не расползается ли краснота'],
+   no:['Чесать и отрывать корки','Солярий','Брить это место','Кремы с отдушками']},
+  {t:'Мутная фаза',d:'Татуировка выглядит тусклой и будто выцветшей. Под ней нарастает новая кожа.',
+   do:['Обычного лосьона достаточно','Санскрин, когда выходишь на улицу','Возвращайся к обычным тренировкам','Сделай фото для сравнения'],
+   no:['Паниковать, что цвет ушёл','Правки раньше 30-го дня','Скрабы на это место','Долго отмокать']},
+  {t:'Полный цвет',d:'Цвет вернулся, кожа ровная. Пора оценивать результат и планировать правку.',
+   do:['SPF 50 с этого момента','Напиши нам, если что-то выпало','Планируй следующий сеанс','Продолжай увлажнять, без фанатизма'],
+   no:['Солярий без защиты','Лазер рядом со свежей краской','Забывать про санскрин летом','Сравнивать с фото первого дня']}
  ]
 };
 
@@ -1097,6 +1182,7 @@ document.querySelectorAll('[data-count]').forEach(function(el){ countIO.observe(
 /* =========================================================
    3. crew + works + lightbox
    ========================================================= */
+/* ARTISTS:START — generowane przez build.py, nie edytować ręcznie */
 const ARTISTS=[
   {n:"Aleksandr Gusev",s:"aleksandr-gusev"},
   {n:"Alexey Kushner KodeInk",s:"alexey-kushner-kodeink"},
@@ -1134,6 +1220,7 @@ const ARTISTS=[
   {n:"Vladyslav Trofimov",s:"vladyslav-trofimov"},
   {n:"Vladyslava Nazarenko",s:"vladyslava-nazarenko"}
 ];
+/* ARTISTS:END */
 
 /* one entry per photo; interleaved so the grid never shows 3 works of the
    same artist side by side */
@@ -1179,28 +1266,88 @@ function renderGal(){
 
 galMore.addEventListener('click', function(){ galShown += PAGE; renderGal(); });
 
+/* Мастера по странам. Страна берётся из панели (см. build.py --sync);
+   пока её нет ни у кого, ряд стран просто не показывается. */
+const crewCountriesEl = document.getElementById('crewCountries');
+const CREW_COUNTRIES = (function(){
+  const seen = new Map();
+  ARTISTS.forEach(function(a){
+    if(!a.c) return;
+    if(!seen.has(a.c)) seen.set(a.c, a.cn || a.c);
+  });
+  return [...seen.entries()]
+    .map(function(e){ return {code:e[0], name:e[1]}; })
+    .sort(function(x,y){ return x.name.localeCompare(y.name); });
+})();
+let crewCountry = '';
+
+function crewCard(a){
+  const card = document.createElement('a');
+  card.className = 'card-artist'; card.dataset.slug = a.s;
+  card.href = 'artysta-' + a.s + '.html';
+  const face = document.createElement('div'); face.className = 'ph-face';
+  const img = document.createElement('img');
+  img.loading = 'lazy'; img.decoding = 'async';
+  img.src = 'assets/artists/' + a.s + '/profile.jpg'; img.alt = a.n;
+  face.appendChild(img);
+  const body = document.createElement('div'); body.className = 'body';
+  const h = document.createElement('h3'); h.textContent = a.n;
+  const note = document.createElement('p'); note.className = 'note'; note.textContent = t('crew.works');
+  body.appendChild(h); body.appendChild(note);
+  card.appendChild(face); card.appendChild(body);
+  return card;
+}
+
+function renderCrewCountries(){
+  if(!CREW_COUNTRIES.length){ crewCountriesEl.hidden = true; return; }
+  crewCountriesEl.hidden = false;
+  crewCountriesEl.innerHTML = '';
+  const all = document.createElement('button');
+  all.type = 'button'; all.dataset.c = '';
+  all.textContent = t('crew.allCountries');
+  all.setAttribute('aria-pressed', String(crewCountry === ''));
+  crewCountriesEl.appendChild(all);
+  CREW_COUNTRIES.forEach(function(c){
+    const b = document.createElement('button');
+    b.type = 'button'; b.dataset.c = c.code;
+    b.textContent = c.name;
+    b.setAttribute('aria-pressed', String(crewCountry === c.code));
+    crewCountriesEl.appendChild(b);
+  });
+}
+
 function renderCrew(q){
   const needle = (q||'').trim().toLowerCase();
-  const list = needle ? ARTISTS.filter(function(a){ return a.n.toLowerCase().indexOf(needle) > -1; }) : ARTISTS;
+  let list = needle ? ARTISTS.filter(function(a){ return a.n.toLowerCase().indexOf(needle) > -1; }) : ARTISTS;
+  if(crewCountry) list = list.filter(function(a){ return a.c === crewCountry; });
   crewGrid.innerHTML = '';
-  list.forEach(function(a){
-    const card = document.createElement('a');
-    card.className = 'card-artist'; card.dataset.slug = a.s;
-    card.href = 'artysta-' + a.s + '.html';
-    const face = document.createElement('div'); face.className = 'ph-face';
-    const img = document.createElement('img');
-    img.loading = 'lazy'; img.decoding = 'async';
-    img.src = 'assets/artists/' + a.s + '/profile.jpg'; img.alt = a.n;
-    face.appendChild(img);
-    const body = document.createElement('div'); body.className = 'body';
-    const h = document.createElement('h3'); h.textContent = a.n;
-    const note = document.createElement('p'); note.className = 'note'; note.textContent = t('crew.works');
-    body.appendChild(h); body.appendChild(note);
-    card.appendChild(face); card.appendChild(body);
-    crewGrid.appendChild(card);
-  });
+
+  /* Группируем по странам только когда есть что группировать и не идёт поиск. */
+  const grouped = !needle && !crewCountry && CREW_COUNTRIES.length > 1;
+  if(grouped){
+    const order = CREW_COUNTRIES.map(function(c){ return c.code; }).concat(['']);
+    order.forEach(function(code){
+      const part = list.filter(function(a){ return (a.c || '') === code; });
+      if(!part.length) return;
+      const head = document.createElement('h3');
+      head.className = 'crew-country';
+      const found = CREW_COUNTRIES.find(function(c){ return c.code === code; });
+      head.textContent = found ? found.name : '';
+      if(found) crewGrid.appendChild(head);
+      part.forEach(function(a){ crewGrid.appendChild(crewCard(a)); });
+    });
+  } else {
+    list.forEach(function(a){ crewGrid.appendChild(crewCard(a)); });
+  }
   crewEmpty.hidden = list.length > 0;
+  renderCrewCountries();
 }
+
+crewCountriesEl.addEventListener('click', function(e){
+  const b = e.target.closest('button'); if(!b) return;
+  crewCountry = b.dataset.c || '';
+  renderCrew(document.getElementById('crewSearch').value);
+});
 
 document.getElementById('crewSearch').addEventListener('input', function(e){ renderCrew(e.target.value); });
 
@@ -1496,7 +1643,7 @@ const convGrid = document.getElementById('convGrid');
 let convItems = [];
 
 function convDates(item){
-  const locale = LANG === 'ua' ? 'uk-UA' : LANG === 'pl' ? 'pl-PL' : LANG === 'de' ? 'de-DE' : LANG === 'fr' ? 'fr-FR' : 'en-GB';
+  const locale = LANG === 'ua' ? 'uk-UA' : LANG === 'ru' ? 'ru-RU' : LANG === 'pl' ? 'pl-PL' : LANG === 'de' ? 'de-DE' : LANG === 'fr' ? 'fr-FR' : 'en-GB';
   const a = new Date(item.start + 'T12:00:00');
   const b = new Date(item.end + 'T12:00:00');
   const sameMonth = a.getMonth() === b.getMonth() && a.getFullYear() === b.getFullYear();

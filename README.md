@@ -21,11 +21,19 @@ _data/                     NIE w repo, patrz niżej
 
 ```bash
 python3 -m http.server 8731      # podgląd na http://127.0.0.1:8731
-python3 build.py                 # przegenerowanie 35 stron profilowych
+python3 build.py                 # 35 stron profilowych + lista ekipy w index.html
+python3 build.py --sync          # najpierw pobiera dane artystów z panelu InkRoute
 ```
 
 `build.py` czyta `_data/artists.json`. Po zmianie danych artysty trzeba go
 uruchomić ponownie, inaczej strona profilowa zostanie stara.
+
+Lista ekipy w `index.html` też jest generowana — siedzi między znacznikami
+`ARTISTS:START` / `ARTISTS:END` i ręcznie się jej nie edytuje.
+
+`--sync` celuje w produkcyjny panel. Na inny adres:
+`INKROUTE_URL=http://localhost:3000 python3 build.py --sync`.
+Gdy panel nie odpowiada, build leci dalej na starych danych — tylko o tym mówi.
 
 ## Co jest interaktywne
 
@@ -74,6 +82,37 @@ Kseniia Zhigulskaia, Maksym Sysoniuk, Maksym Verbov, Mikita Karabka,
 Oleksandr Voznyi, Ramy Hanna, Sabina Nikitina, Savva Kozakov, Vladyslav Trofimov.
 
 Do uzupełnienia jest `_data/bio-do-uzupelnienia.csv`.
+
+## Zgłoszenia klienta — co zrobione
+
+Pełna lista (13 punktów, głównie panel InkRoute) leży w `~/inkroute/docs/08-backlog.md`.
+Serwisu dotyczyły trzy i wszystkie są zrobione.
+
+**Synchronizacja artystów z panelem.** `python3 build.py --sync` pobiera dane z panelu
+(`/api/public/artists`), aktualizuje `_data/artists.json`, a potem przegenerowuje 35 stron
+profilowych **oraz** listę ekipy w `index.html` — ta ostatnia siedzi teraz między znacznikami
+`ARTISTS:START` / `ARTISTS:END` i ręcznie się jej nie edytuje.
+
+Z panelu przychodzą wyłącznie pola publiczne: imię, pseudonim, kraj, miasto, style, języki,
+rok startu, Instagram. Dwa bezpieczniki: na stronę trafiają tylko artyści z włączoną w panelu
+flagą „Publikuje się na stronie" (domyślnie wyłączona), a `--sync` **nie dodaje nowych osób** —
+nowy artysta bez zdjęć dałby połamane kafelki. Zamiast tego wypisuje, kogo brakuje po której
+stronie.
+
+Bez `--sync` `build.py` działa jak dotąd, offline, na danych z repozytorium.
+
+**Artyści wg krajów.** Nad siatką ekipy jest rząd krajów, a sama siatka grupuje się
+nagłówkami. Kraju nie ma jeszcze u nikogo — dopóki tak jest, rząd krajów się nie pokazuje
+i strona wygląda jak wcześniej. Klient ma przysłać, kto z jakiego kraju; wtedy włączy się samo.
+
+**Rosyjski i kolejność języków.** „GE" to niemiecki, który już był. Doszedł RU (pełne 150
+kluczy w `index.html`, nazwy części ciała, przewodnik po gojeniu, 37 kluczy w `giveaway.html`,
+profile w `build.py`), kolejność to teraz EN, DE, FR, PL, RU, UA. Ukraiński **został jako
+szósty** — klient nie odpowiedział, a usunięcie wyrzuciłoby gotowe tłumaczenia. Gdyby miał
+zniknąć: `data-lang="ua"` w `index.html`, `giveaway.html` i szablonie `build.py`, plus `LANGS`.
+
+`screen.html`, `regulamin.html` i `prywatnosc.html` to cienkie ramki na panel, własnego
+przełącznika języków nie mają — nie było tam czego zmieniać.
 
 ## Do sprawdzenia przed rozgłaszaniem strony
 
