@@ -445,6 +445,7 @@ pl:{
  'crew.empty':'Nie znaleźliśmy takiego mistrza.',
  'crew.search':'Szukaj mistrza',
  'crew.allCountries':'Wszystkie kraje',
+ 'crew.europe':'Europa','country.US':'USA','country.CA':'Kanada',
  'gal.alt':'Tatuaż, autor {name}',
  'gal.more':'Pokaż więcej',
  'gal.reset':'Wszystkie prace',
@@ -506,6 +507,7 @@ en:{
  'crew.empty':'No artist by that name.',
  'crew.search':'Search for an artist',
  'crew.allCountries':'All countries',
+ 'crew.europe':'Europe','country.US':'USA','country.CA':'Canada',
  'gal.alt':'Tattoo by {name}',
  'gal.more':'Show more',
  'gal.reset':'All work',
@@ -567,6 +569,7 @@ ua:{
  'crew.empty':'Такого майстра не знайшли.',
  'crew.search':'Пошук майстра',
  'crew.allCountries':'Усі країни',
+ 'crew.europe':'Європа','country.US':'США','country.CA':'Канада',
  'gal.alt':'Татуювання, автор {name}',
  'gal.more':'Показати ще',
  'gal.reset':'Усі роботи',
@@ -671,6 +674,7 @@ de:{
  'crew.lead':'Residents in Stettin und Künstler, die ihr auf Konventen in Deutschland, Frankreich oder der Schweiz trefft. Klick einen Künstler an, um seine Arbeiten zu sehen.',
  'crew.search':'Künstler suchen',
  'crew.allCountries':'Alle Länder',
+ 'crew.europe':'Europa','country.US':'USA','country.CA':'Kanada',
  'crew.empty':'Diesen Künstler haben wir nicht gefunden.',
  'crew.works':'3 Arbeiten',
  'cfg.eyebrow':'Konfigurator',
@@ -824,6 +828,7 @@ fr:{
  'crew.lead':'Des résidents à Szczecin et des artistes que vous croisez en convention en Allemagne, en France ou en Suisse. Clique sur un artiste pour voir ses travaux.',
  'crew.search':'Chercher un artiste',
  'crew.allCountries':'Tous les pays',
+ 'crew.europe':'Europe','country.US':'États-Unis','country.CA':'Canada',
  'crew.empty':'Aucun artiste à ce nom.',
  'crew.works':'3 travaux',
  'cfg.eyebrow':'Configurateur',
@@ -933,6 +938,7 @@ fr:{
  'crew.empty':'Такого мастера не нашли.',
  'crew.search':'Поиск мастера',
  'crew.allCountries':'Все страны',
+ 'crew.europe':'Европа','country.US':'США','country.CA':'Канада',
  'gal.alt':'Татуировка, автор {name}',
  'gal.more':'Показать ещё',
  'gal.reset':'Все работы',
@@ -1195,19 +1201,19 @@ const ARTISTS=[
   {n:"Dzmitry Darashenka",s:"dzmitry-darashenka"},
   {n:"Egor Klimchuk Shadow13",s:"egor-klimchuk-shadow13"},
   {n:"Krystsina Butskevich",s:"krystsina-butskevich"},
-  {n:"Kseniia Zhigulskaia",s:"kseniia-zhigulskaia"},
+  {n:"Kseniia Zhigulskaia",s:"kseniia-zhigulskaia",c:"US",cn:"USA"},
   {n:"MAKSIM BANADYSEU MaxMarker",s:"maksim-banadyseu-maxmarker"},
   {n:"Maksym Sysoniuk (MKVS)",s:"maksym-sysoniuk-mkvs"},
   {n:"Maksym Verbov Happy Max",s:"maksym-verbov-happy-max"},
   {n:"Marzhona Khamraieva",s:"marzhona-khamraieva"},
   {n:"Mikita Karabka",s:"mikita-karabka"},
   {n:"Nazar DENYSYOUK Nazlo",s:"nazar-denysyouk-nazlo"},
-  {n:"Nikita Miasnykov",s:"nikita-miasnykov"},
+  {n:"Nikita Miasnykov",s:"nikita-miasnykov",c:"CA",cn:"Kanada"},
   {n:"Nikolay Harus",s:"nikolay-harus"},
   {n:"Nikolay Mokhir",s:"nikolay-mokhir"},
   {n:"Oleksandr Voznyi",s:"oleksandr-voznyi"},
   {n:"Oleksii Shvetsov Levsha",s:"oleksii-shvetsov-levsha"},
-  {n:"Ramy Hanna",s:"ramy-hanna"},
+  {n:"Ramy Hanna",s:"ramy-hanna",c:"CA",cn:"Kanada"},
   {n:"Sabina Nikitina",s:"sabina-nikitina"},
   {n:"Savva Kozakov St19",s:"savva-kozakov-st19"},
   {n:"Stanislav Miasnykov",s:"stanislav-miasnykov"},
@@ -1266,20 +1272,36 @@ function renderGal(){
 
 galMore.addEventListener('click', function(){ galShown += PAGE; renderGal(); });
 
-/* Мастера по странам. Страна берётся из панели (см. build.py --sync);
-   пока её нет ни у кого, ряд стран просто не показывается. */
+/* Мастера по странам. Страна приходит из панели (см. build.py --sync).
+   Тех, у кого страна не проставлена, показываем одной европейской группой:
+   заказчик так и сказал — США, Канада, остальные Европа. Как только кому-то
+   поставят конкретную страну, он уедет из общей группы сам. */
 const crewCountriesEl = document.getElementById('crewCountries');
+
+/* Названия групп берём из словаря, а строку из данных держим как запасную:
+   панель отдаёт одно название, а сайт говорит на шести языках. */
+function countryLabel(code, fallback){
+  if(!code) return t('crew.europe');
+  const key = 'country.' + code;
+  const v = t(key);
+  return v === key ? (fallback || code) : v;
+}
+
 const CREW_COUNTRIES = (function(){
-  const seen = new Map();
+  const counts = new Map();
+  const names = new Map();
   ARTISTS.forEach(function(a){
-    if(!a.c) return;
-    if(!seen.has(a.c)) seen.set(a.c, a.cn || a.c);
+    const code = a.c || '';
+    counts.set(code, (counts.get(code) || 0) + 1);
+    if(code && !names.has(code)) names.set(code, a.cn || code);
   });
-  return [...seen.entries()]
-    .map(function(e){ return {code:e[0], name:e[1]}; })
-    .sort(function(x,y){ return x.name.localeCompare(y.name); });
+  return [...counts.entries()]
+    .map(function(e){ return {code:e[0], fallback:names.get(e[0]) || '', count:e[1]}; })
+    /* Крупная группа первой: 32 европейца выше двух канадцев. */
+    .sort(function(x,y){ return y.count - x.count; });
 })();
 let crewCountry = '';
+let crewCountrySet = false;
 
 function crewCard(a){
   const card = document.createElement('a');
@@ -1299,19 +1321,20 @@ function crewCard(a){
 }
 
 function renderCrewCountries(){
-  if(!CREW_COUNTRIES.length){ crewCountriesEl.hidden = true; return; }
+  /* Одна группа — делить нечего, ряд только мешал бы. */
+  if(CREW_COUNTRIES.length < 2){ crewCountriesEl.hidden = true; return; }
   crewCountriesEl.hidden = false;
   crewCountriesEl.innerHTML = '';
   const all = document.createElement('button');
-  all.type = 'button'; all.dataset.c = '';
+  all.type = 'button'; all.dataset.c = '__all__';
   all.textContent = t('crew.allCountries');
-  all.setAttribute('aria-pressed', String(crewCountry === ''));
+  all.setAttribute('aria-pressed', String(!crewCountrySet));
   crewCountriesEl.appendChild(all);
   CREW_COUNTRIES.forEach(function(c){
     const b = document.createElement('button');
-    b.type = 'button'; b.dataset.c = c.code;
-    b.textContent = c.name;
-    b.setAttribute('aria-pressed', String(crewCountry === c.code));
+    b.type = 'button'; b.dataset.c = c.code || '__none__';
+    b.textContent = countryLabel(c.code, c.fallback);
+    b.setAttribute('aria-pressed', String(crewCountrySet && crewCountry === c.code));
     crewCountriesEl.appendChild(b);
   });
 }
@@ -1319,21 +1342,19 @@ function renderCrewCountries(){
 function renderCrew(q){
   const needle = (q||'').trim().toLowerCase();
   let list = needle ? ARTISTS.filter(function(a){ return a.n.toLowerCase().indexOf(needle) > -1; }) : ARTISTS;
-  if(crewCountry) list = list.filter(function(a){ return a.c === crewCountry; });
+  if(crewCountrySet) list = list.filter(function(a){ return (a.c || '') === crewCountry; });
   crewGrid.innerHTML = '';
 
-  /* Группируем по странам только когда есть что группировать и не идёт поиск. */
-  const grouped = !needle && !crewCountry && CREW_COUNTRIES.length > 1;
+  /* Группируем, только когда есть что группировать и не идёт поиск. */
+  const grouped = !needle && !crewCountrySet && CREW_COUNTRIES.length > 1;
   if(grouped){
-    const order = CREW_COUNTRIES.map(function(c){ return c.code; }).concat(['']);
-    order.forEach(function(code){
-      const part = list.filter(function(a){ return (a.c || '') === code; });
+    CREW_COUNTRIES.forEach(function(c){
+      const part = list.filter(function(a){ return (a.c || '') === c.code; });
       if(!part.length) return;
       const head = document.createElement('h3');
       head.className = 'crew-country';
-      const found = CREW_COUNTRIES.find(function(c){ return c.code === code; });
-      head.textContent = found ? found.name : '';
-      if(found) crewGrid.appendChild(head);
+      head.textContent = countryLabel(c.code, c.fallback);
+      crewGrid.appendChild(head);
       part.forEach(function(a){ crewGrid.appendChild(crewCard(a)); });
     });
   } else {
@@ -1345,7 +1366,10 @@ function renderCrew(q){
 
 crewCountriesEl.addEventListener('click', function(e){
   const b = e.target.closest('button'); if(!b) return;
-  crewCountry = b.dataset.c || '';
+  /* Европейская группа — это пустой код, поэтому «всё» и «без страны»
+     различаются отдельным флагом, а не пустой строкой. */
+  crewCountrySet = b.dataset.c !== '__all__';
+  crewCountry = b.dataset.c === '__none__' ? '' : (b.dataset.c || '');
   renderCrew(document.getElementById('crewSearch').value);
 });
 
