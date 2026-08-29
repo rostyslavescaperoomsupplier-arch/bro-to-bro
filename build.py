@@ -346,7 +346,7 @@ def sync_from_panel(dry_run=False):
         payload = fetch_panel_artists()
     except (urllib.error.URLError, TimeoutError, ValueError) as exc:
         print(f'Nie udało się pobrać danych z panelu ({exc}). Buduję ze starych danych.')
-        return 0
+        return None
 
     remote = payload.get('items', [])
     for r in remote:
@@ -390,9 +390,9 @@ def sync_from_panel(dry_run=False):
             changed += 1
 
     unknown = [r for r in remote if id(r) not in matched]
-    matched_site = {a['name'] for a in DATA
+    matched_site = {a['slug'] for a in DATA
                     if any(same_person(r['_tokens'], name_tokens(a['name'])) for r in remote)}
-    missing = [a['name'] for a in DATA if a['name'] not in matched_site]
+    missing = [a['name'] for a in DATA if a['slug'] not in matched_site]
     for r in remote:
         r.pop('_tokens', None)
 
@@ -407,7 +407,7 @@ def sync_from_panel(dry_run=False):
         print(f'  W panelu, ale nie ma ich w repozytorium (brak zdjęć — dodaj ręcznie): {names}')
     if missing:
         print(f'  Na stronie, ale panel ich nie zna ({len(missing)}): {", ".join(missing)}')
-    return changed
+    return matched_site
 
 
 def artists_block():
@@ -458,8 +458,21 @@ def main():
         return
 
     if args.sync:
-        sync_from_panel()
+        published = sync_from_panel()
         DATA.sort(key=lambda a: a['name'].lower())
+        # Panel jest źródłem prawdy także co do składu: kogo tam zarchiwizowano,
+        # tego nie ma i tutaj. Pusta odpowiedź to awaria, a nie zwolnienie całej
+        # ekipy — wtedy zostawiamy skład z repozytorium.
+        if published:
+            dropped = [a for a in DATA if a['slug'] not in published]
+            if dropped:
+                for a in dropped:
+                    stale = f"artysta-{a['slug']}.html"
+                    if os.path.exists(stale):
+                        os.remove(stale)
+                names = ', '.join(a['name'] for a in dropped)
+                print(f'Poza składem wg panelu ({len(dropped)}), strony usunięte: {names}')
+                DATA[:] = [a for a in DATA if a['slug'] in published]
 
     n = len(DATA)
     for i, a in enumerate(DATA):

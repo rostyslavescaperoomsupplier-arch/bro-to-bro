@@ -1370,48 +1370,45 @@ document.querySelectorAll('[data-count]').forEach(function(el){ countIO.observe(
    ========================================================= */
 /* ARTISTS:START — generowane przez build.py, nie edytować ręcznie */
 const ARTISTS=[
-  {n:"Aleksandr Gusev",s:"aleksandr-gusev"},
-  {n:"Alexey Kushner KodeInk",s:"alexey-kushner-kodeink"},
-  {n:"Aliaksandr Yazykou Xander",s:"aliaksandr-yazykou-xander"},
-  {n:"Aliaksei Vasileuski (lutytatts)",s:"aliaksei-vasileuski-lutytatts"},
-  {n:"Anastasiya Barashko",s:"anastasiya-barashko"},
-  {n:"Anna Onishchuk",s:"anna-onishchuk"},
-  {n:"Anton Shmundiak Chinaski",s:"anton-shmundiak-chinaski"},
-  {n:"Daniil Korniienko",s:"daniil-korniienko"},
-  {n:"Dzmitry Darashenka",s:"dzmitry-darashenka"},
-  {n:"Egor Klimchuk Shadow13",s:"egor-klimchuk-shadow13"},
-  {n:"Krystsina Butskevich",s:"krystsina-butskevich"},
-  {n:"Kseniia Zhigulskaia",s:"kseniia-zhigulskaia",c:"US",cn:"USA"},
-  {n:"MAKSIM BANADYSEU MaxMarker",s:"maksim-banadyseu-maxmarker"},
-  {n:"Maksym Sysoniuk (MKVS)",s:"maksym-sysoniuk-mkvs"},
-  {n:"Maksym Verbov Happy Max",s:"maksym-verbov-happy-max"},
-  {n:"Marzhona Khamraieva",s:"marzhona-khamraieva"},
-  {n:"Mikita Karabka",s:"mikita-karabka"},
-  {n:"Nazar DENYSYOUK Nazlo",s:"nazar-denysyouk-nazlo"},
-  {n:"Nikita Miasnykov",s:"nikita-miasnykov",c:"CA",cn:"Kanada"},
-  {n:"Nikolay Harus",s:"nikolay-harus"},
-  {n:"Nikolay Mokhir",s:"nikolay-mokhir"},
-  {n:"Oleksandr Voznyi",s:"oleksandr-voznyi"},
-  {n:"Oleksii Shvetsov Levsha",s:"oleksii-shvetsov-levsha"},
-  {n:"Ramy Hanna",s:"ramy-hanna",c:"CA",cn:"Kanada"},
-  {n:"Sabina Nikitina",s:"sabina-nikitina"},
-  {n:"Savva Kozakov St19",s:"savva-kozakov-st19"},
-  {n:"Stanislav Miasnykov",s:"stanislav-miasnykov"},
-  {n:"Sławomir Sacharczuk Sławek",s:"slawomir-sacharczuk-slawek"},
-  {n:"Uladzislau Famiankou Straight line",s:"uladzislau-famiankou-straight-line"},
-  {n:"Valentin Kryshtul",s:"valentin-kryshtul"},
-  {n:"Varvara Shvetsova Varyabey.tattoo",s:"varvara-shvetsova-varyabeytattoo"},
-  {n:"Viktoriya Fedosova",s:"viktoriya-fedosova"},
-  {n:"Vlad Ostrohliad Teren",s:"vlad-ostrohliad-teren"},
-  {n:"Vladyslav Trofimov",s:"vladyslav-trofimov"},
-  {n:"Vladyslava Nazarenko",s:"vladyslava-nazarenko"}
+  {n:"Aleksandr Gusev",s:"aleksandr-gusev",c:"FR",cn:"France"},
+  {n:"Alexey Kushner KodeInk",s:"alexey-kushner-kodeink",c:"PL",cn:"Poland"},
+  {n:"Aliaksandr Yazykou Xander",s:"aliaksandr-yazykou-xander",c:"PL",cn:"Poland"},
+  {n:"Anna Onishchuk",s:"anna-onishchuk",c:"PL",cn:"Poland"},
+  {n:"Anton Shmundiak Chinaski",s:"anton-shmundiak-chinaski",c:"PL",cn:"Poland"},
+  {n:"Dzmitry Darashenka",s:"dzmitry-darashenka",c:"PL",cn:"Poland"},
+  {n:"Kseniia Zhigulskaia",s:"kseniia-zhigulskaia",c:"US",cn:"United States"},
+  {n:"MAKSIM BANADYSEU MaxMarker",s:"maksim-banadyseu-maxmarker",c:"PL",cn:"Poland"},
+  {n:"Marzhona Khamraieva",s:"marzhona-khamraieva",c:"PL",cn:"Poland"},
+  {n:"Nazar DENYSYOUK Nazlo",s:"nazar-denysyouk-nazlo",c:"PL",cn:"Poland"},
+  {n:"Nikita Miasnykov",s:"nikita-miasnykov",c:"CA",cn:"Canada"},
+  {n:"Nikolay Harus",s:"nikolay-harus",c:"PL",cn:"Poland"},
+  {n:"Nikolay Mokhir",s:"nikolay-mokhir",c:"PL",cn:"Poland"},
+  {n:"Oleksandr Voznyi",s:"oleksandr-voznyi",c:"PL",cn:"Poland"},
+  {n:"Oleksii Shvetsov Levsha",s:"oleksii-shvetsov-levsha",c:"PL",cn:"Poland"},
+  {n:"Ramy Hanna",s:"ramy-hanna",c:"CA",cn:"Canada"},
+  {n:"Savva Kozakov St19",s:"savva-kozakov-st19",c:"PL",cn:"Poland"},
+  {n:"Stanislav Miasnykov",s:"stanislav-miasnykov",c:"PL",cn:"Poland"},
+  {n:"Uladzislau Famiankou Straight line",s:"uladzislau-famiankou-straight-line",c:"PL",cn:"Poland"},
+  {n:"Valentin Kryshtul",s:"valentin-kryshtul",c:"PL",cn:"Poland"},
+  {n:"Viktoriya Fedosova",s:"viktoriya-fedosova",c:"PL",cn:"Poland"},
+  {n:"Vladyslav Trofimov",s:"vladyslav-trofimov",c:"PL",cn:"Poland"},
+  {n:"Vladyslava Nazarenko",s:"vladyslava-nazarenko",c:"PL",cn:"Poland"}
 ];
 /* ARTISTS:END */
 
+/* ARTISTS — весь состав, который есть в репозитории вместе с фотографиями.
+   VISIBLE — те, кого показываем: панель может убрать человека из состава,
+   и тогда он должен исчезнуть и из сетки мастеров, и из галереи работ. */
+let VISIBLE = ARTISTS.slice();
+
 /* one entry per photo; interleaved so the grid never shows 3 works of the
    same artist side by side */
-const WORKS = [];
-[1,2,3].forEach(function(i){ ARTISTS.forEach(function(a){ WORKS.push({a:a, i:i}); }); });
+let WORKS = [];
+function buildWorks(){
+  WORKS = [];
+  [1,2,3].forEach(function(i){ VISIBLE.forEach(function(a){ WORKS.push({a:a, i:i}); }); });
+}
+buildWorks();
 
 const PAGE = 24;
 let galShown  = PAGE;
@@ -1446,7 +1443,7 @@ function renderGal(){
   });
   galState.innerHTML = t('gal.state')
     .replace('{n}', '<b>' + WORKS.length + '</b>')
-    .replace('{m}', '<b>' + ARTISTS.length + '</b>');
+    .replace('{m}', '<b>' + VISIBLE.length + '</b>');
   galMore.parentNode.hidden = galShown >= galList.length;
 }
 
@@ -1470,7 +1467,7 @@ function countryLabel(code, fallback){
 function computeCrewCountries(){
   const counts = new Map();
   const names = new Map();
-  ARTISTS.forEach(function(a){
+  VISIBLE.forEach(function(a){
     const code = a.c || '';
     counts.set(code, (counts.get(code) || 0) + 1);
     if(code && !names.has(code)) names.set(code, a.cn || code);
@@ -1522,7 +1519,7 @@ function renderCrewCountries(){
 
 function renderCrew(q){
   const needle = (q||'').trim().toLowerCase();
-  let list = needle ? ARTISTS.filter(function(a){ return a.n.toLowerCase().indexOf(needle) > -1; }) : ARTISTS;
+  let list = needle ? VISIBLE.filter(function(a){ return a.n.toLowerCase().indexOf(needle) > -1; }) : VISIBLE;
   if(crewCountrySet) list = list.filter(function(a){ return (a.c || '') === crewCountry; });
   crewGrid.innerHTML = '';
 
@@ -1877,23 +1874,34 @@ fetch(ARTISTS_API, {cache:'no-store'})
       return { tokens: nameTokens([r.firstName, r.lastName].filter(Boolean).join(' ')), row: r };
     });
 
-    let touched = 0;
+    const shown = [];
     ARTISTS.forEach(function(a){
       const tokens = nameTokens(a.n);
       const hits = remote.filter(function(r){ return samePerson(r.tokens, tokens); });
-      /* Двусмысленность оставляем как есть: лучше не показать страну, чем чужую. */
-      if(hits.length !== 1) return;
+      /* Двусмысленность решаем в пользу показа: лучше оставить человека на сайте,
+         чем убрать не того из-за похожих имён. */
+      if(hits.length !== 1){
+        if(hits.length > 1) shown.push(a);
+        return;
+      }
       const r = hits[0].row;
-      if(!r.countryCode || r.countryCode === a.c) return;
-      a.c = r.countryCode;
-      a.cn = r.country || r.countryCode;
-      touched++;
+      if(r.countryCode){
+        a.c = r.countryCode;
+        a.cn = r.country || r.countryCode;
+      }
+      shown.push(a);
     });
 
-    if(touched){
-      CREW_COUNTRIES = computeCrewCountries();
-      renderCrew(document.getElementById('crewSearch').value);
-    }
+    /* Панель — источник правды по составу: кого там убрали, того нет и здесь.
+       Страховка одна: пустой ответ считаем сбоем, а не увольнением всей команды,
+       и тогда оставляем состав из репозитория. */
+    VISIBLE = shown.length ? shown : ARTISTS.slice();
+
+    buildWorks();
+    galShown = PAGE;
+    CREW_COUNTRIES = computeCrewCountries();
+    renderCrew(document.getElementById('crewSearch').value);
+    renderGal();
   })
   .catch(function(){ /* панель недоступна — сайт живёт на данных из репозитория */ });
 
