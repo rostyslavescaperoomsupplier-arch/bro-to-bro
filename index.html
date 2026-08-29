@@ -1287,7 +1287,7 @@ function countryLabel(code, fallback){
   return v === key ? (fallback || code) : v;
 }
 
-const CREW_COUNTRIES = (function(){
+function computeCrewCountries(){
   const counts = new Map();
   const names = new Map();
   ARTISTS.forEach(function(a){
@@ -1299,7 +1299,8 @@ const CREW_COUNTRIES = (function(){
     .map(function(e){ return {code:e[0], fallback:names.get(e[0]) || '', count:e[1]}; })
     /* Крупная группа первой: 32 европейца выше двух канадцев. */
     .sort(function(x,y){ return y.count - x.count; });
-})();
+}
+let CREW_COUNTRIES = computeCrewCountries();
 let crewCountry = '';
 let crewCountrySet = false;
 
@@ -1657,6 +1658,64 @@ function fillList(id, arr, icon){
   });
 }
 daySlider.addEventListener('input', updateCare);
+
+/* =========================================================
+   6a. мастера: страна приезжает из панели сама
+   =========================================================
+   Список мастеров и их фотографии лежат в репозитории — панель их не заменяет.
+   Из панели приходит только страна: менеджер поставил её в карточке, и на сайте
+   она видна при следующем заходе, без пересборки и без коммита.
+
+   Панель ничего не убирает: мастер, которого она не знает или не опубликовала,
+   остаётся на сайте как был. Иначе одна забытая галка в панели снесла бы
+   с сайта всю команду.
+   ========================================================= */
+const ARTISTS_API = 'https://inkroute-q2pp.onrender.com/api/public/artists';
+
+function nameTokens(v){
+  return new Set(String(v || '')
+    .normalize('NFKD').replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim().split(' ').filter(Boolean));
+}
+
+/* Требуем минимум два общих токена и полное вхождение одного набора в другой.
+   В репозитории люди записаны вместе с псевдонимом («MAKSIM BANADYSEU MaxMarker»),
+   а панель хранит имя и фамилию отдельно, поэтому сравнивать строки целиком нельзя.
+   Одной фамилии мало: в составе есть и Nikita, и Stanislav Miasnykov. */
+function samePerson(a, b){
+  if(a.size < 2 || b.size < 2) return false;
+  const sub = (x, y) => [...x].every(function(t){ return y.has(t); });
+  return sub(a, b) || sub(b, a);
+}
+
+fetch(ARTISTS_API, {cache:'no-store'})
+  .then(function(r){ return r.json(); })
+  .then(function(data){
+    const items = (data && data.items) || [];
+    if(!items.length) return;
+    const remote = items.map(function(r){
+      return { tokens: nameTokens([r.firstName, r.lastName].filter(Boolean).join(' ')), row: r };
+    });
+
+    let touched = 0;
+    ARTISTS.forEach(function(a){
+      const tokens = nameTokens(a.n);
+      const hits = remote.filter(function(r){ return samePerson(r.tokens, tokens); });
+      /* Двусмысленность оставляем как есть: лучше не показать страну, чем чужую. */
+      if(hits.length !== 1) return;
+      const r = hits[0].row;
+      if(!r.countryCode || r.countryCode === a.c) return;
+      a.c = r.countryCode;
+      a.cn = r.country || r.countryCode;
+      touched++;
+    });
+
+    if(touched){
+      CREW_COUNTRIES = computeCrewCountries();
+      renderCrew(document.getElementById('crewSearch').value);
+    }
+  })
+  .catch(function(){ /* панель недоступна — сайт живёт на данных из репозитория */ });
 
 /* =========================================================
    6b. konwenty (lista z panelu InkRoute)

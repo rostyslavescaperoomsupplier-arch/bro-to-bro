@@ -313,6 +313,26 @@ def norm_name(value):
     return re.sub(r'[^a-z0-9]+', ' ', text.lower()).strip()
 
 
+def name_tokens(value):
+    return set(norm_name(value).split())
+
+
+def same_person(panel_tokens, site_tokens):
+    """
+    Dopasowanie po tokenach, nie po całym łańcuchu: w repozytorium artyści bywają
+    zapisani razem z pseudonimem („MAKSIM BANADYSEU MaxMarker"), a panel trzyma
+    imię i nazwisko osobno. Porównanie całych napisów takich osób nie łączy.
+
+    Wymagane są **co najmniej dwa wspólne tokeny** i pełne zawieranie jednego
+    zbioru w drugim. Słabsze dopasowanie już raz podłączyło cudzą ankietę
+    (Maksym Sysoniuk dostał ankietę MAKSIMA BANADYSEU), a samo nazwisko nie
+    wystarcza: w składzie są Nikita i Stanislav Miasnykov.
+    """
+    if len(panel_tokens) < 2 or len(site_tokens) < 2:
+        return False
+    return panel_tokens <= site_tokens or site_tokens <= panel_tokens
+
+
 def fetch_panel_artists():
     url = PANEL_URL.rstrip('/') + '/api/public/artists'
     req = urllib.request.Request(url, headers={'Accept': 'application/json'})
@@ -320,7 +340,7 @@ def fetch_panel_artists():
         return json.loads(resp.read().decode('utf-8'))
 
 
-def sync_from_panel():
+def sync_from_panel(dry_run=False):
     """Wciąga publiczne pola z panelu do _data/artists.json. Zwraca liczbę zmian."""
     try:
         payload = fetch_panel_artists()
@@ -329,18 +349,21 @@ def sync_from_panel():
         return 0
 
     remote = payload.get('items', [])
-    by_key = {}
     for r in remote:
         full = ' '.join(x for x in (r.get('firstName'), r.get('lastName')) if x)
-        by_key[norm_name(full)] = r
-        if r.get('nickname'):
-            by_key.setdefault(norm_name(r['nickname']), r)
+        r['_tokens'] = name_tokens(full)
 
     changed, matched = 0, set()
     for a in DATA:
-        r = by_key.get(norm_name(a['name']))
-        if not r:
+        site_tokens = name_tokens(a['name'])
+        hits = [r for r in remote if same_person(r['_tokens'], site_tokens)]
+        # Dwuznaczność zostawiamy człowiekowi: lepiej nie dopasować niż podłączyć cudze dane.
+        if len(hits) != 1:
+            if len(hits) > 1:
+                names = ', '.join(' '.join(x for x in (h.get('firstName'), h.get('lastName')) if x) for h in hits)
+                print(f'  Niejednoznaczne dopasowanie dla „{a["name"]}": {names} — pomijam')
             continue
+        r = hits[0]
         matched.add(id(r))
         # Nadpisujemy tylko to, co panel faktycznie wie — pusta wartość nie kasuje ankiety.
         fields = {
@@ -355,16 +378,28 @@ def sync_from_panel():
         for key, value in fields.items():
             if value in (None, '', []):
                 continue
-            if a.get(key) != value:
+            old = a.get(key)
+            if old == value:
+                continue
+            # Nadpisania pokazujemy zawsze. Panel bywa wypełniony ubożej niż ankieta
+            # i po cichu zubożyłby profil — decyzja, czy tak ma być, należy do człowieka.
+            if old not in (None, '', []):
+                print(f'  {a["name"]}: {key}: {old!r} -> {value!r}')
+            if not dry_run:
                 a[key] = value
-                changed += 1
+            changed += 1
 
     unknown = [r for r in remote if id(r) not in matched]
-    missing = [a['name'] for a in DATA if not by_key.get(norm_name(a['name']))]
+    matched_site = {a['name'] for a in DATA
+                    if any(same_person(r['_tokens'], name_tokens(a['name'])) for r in remote)}
+    missing = [a['name'] for a in DATA if a['name'] not in matched_site]
+    for r in remote:
+        r.pop('_tokens', None)
 
-    with open(DATA_PATH, 'w', encoding='utf-8') as f:
-        json.dump(DATA, f, ensure_ascii=False, indent=1)
-        f.write('\n')
+    if not dry_run:
+        with open(DATA_PATH, 'w', encoding='utf-8') as f:
+            json.dump(DATA, f, ensure_ascii=False, indent=1)
+            f.write('\n')
 
     print(f'Panel: {len(remote)} artystów, dopasowano {len(remote) - len(unknown)}, zmian pól: {changed}')
     if unknown:
@@ -413,7 +448,14 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--sync', action='store_true',
                         help='pobierz publiczne dane artystów z panelu InkRoute')
+    parser.add_argument('--dry-run', action='store_true',
+                        help='pokaż, co zmieniłby --sync, ale niczego nie zapisuj')
     args = parser.parse_args()
+
+    if args.dry_run:
+        sync_from_panel(dry_run=True)
+        print('(--dry-run: nic nie zapisano)')
+        return
 
     if args.sync:
         sync_from_panel()
