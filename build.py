@@ -388,6 +388,18 @@ def sync_from_panel(dry_run=False):
         # Zdjęcia dociągamy tylko brakujące: te, które już leżą w repo, zostają.
         pull_photos(a, r)
         apply_facts(a)
+
+        # Imię też bierzemy z panelu. Bez tego build lokalny (z ankietami, gdzie
+        # nazwiska bywają KAPSEM) i build w CI (tylko panel) dawałyby inne pliki
+        # i przepisywałyby się nawzajem w nieskończoność.
+        pname = ' '.join(x for x in (r.get('firstName'), r.get('lastName')) if x).strip()
+        pnick = (r.get('nickname') or '').strip()
+        display = f'{pname} {pnick}'.strip() if pnick and a['slug'] != slugify(pname) else pname
+        if display and a['name'] != display:
+            print(f'  {a["name"]}: name: -> {display!r}')
+            if not dry_run:
+                a['name'] = display
+            changed += 1
         # Nadpisujemy tylko to, co panel faktycznie wie — pusta wartość nie kasuje ankiety.
         fields = {
             'country': r.get('country'),
