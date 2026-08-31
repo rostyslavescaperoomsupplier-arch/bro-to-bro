@@ -14,6 +14,7 @@ których już znamy: nowy człowiek bez zdjęć dałby połamane kafelki.
 """
 import argparse
 import html
+import shutil
 import json
 import os
 import re
@@ -366,6 +367,8 @@ def sync_from_panel(dry_run=False):
             continue
         r = hits[0]
         matched.add(id(r))
+        # Zdjęcia dociągamy tylko brakujące: te, które już leżą w repo, zostają.
+        pull_photos(a, r)
         # Nadpisujemy tylko to, co panel faktycznie wie — pusta wartość nie kasuje ankiety.
         fields = {
             'country': r.get('country'),
@@ -390,6 +393,31 @@ def sync_from_panel(dry_run=False):
                 a[key] = value
             changed += 1
 
+    # Nowi ludzie z panelu: dopisujemy ich do repozytorium razem ze zdjęciami.
+    # Bez zdjęć strona profilowa byłaby połamana, więc taki artysta czeka,
+    # aż menedżer wgra portret i prace w panelu.
+    for r in remote:
+        if id(r) in matched:
+            continue
+        name = ' '.join(x for x in (r.get('firstName'), r.get('lastName')) if x).strip()
+        if not name:
+            continue
+        nick = (r.get('nickname') or '').strip()
+        display = f'{name} {nick}'.strip() if nick else name
+        slug = slugify(display)
+        if not slug:
+            continue
+        entry = {'name': display, 'slug': slug, 'works': 3, 'confidence': 'none'}
+        pulled = pull_photos(entry, r)
+        if not has_photos(slug):
+            print(f'  Nowy w panelu, ale brak kompletu zdjęć: {display} '
+                  f'(portret + 3 prace, pobrano {pulled})')
+            continue
+        DATA.append(entry)
+        matched.add(id(r))
+        changed += 1
+        print(f'  Nowy artysta z panelu: {display}')
+
     unknown = [r for r in remote if id(r) not in matched]
     matched_site = {a['slug'] for a in DATA
                     if any(same_person(r['_tokens'], name_tokens(a['name'])) for r in remote)}
@@ -409,6 +437,60 @@ def sync_from_panel(dry_run=False):
     if missing:
         print(f'  Na stronie, ale panel ich nie zna ({len(missing)}): {", ".join(missing)}')
     return matched_site
+
+
+def slugify(name):
+    """Adres strony artysty. Musi być stabilny: zmiana slug to zerwane linki."""
+    text = unicodedata.normalize('NFKD', str(name or ''))
+    text = ''.join(c for c in text if not unicodedata.combining(c))
+    text = text.replace('\u0142', 'l').replace('\u0141', 'L')
+    return re.sub(r'-+', '-', re.sub(r'[^a-z0-9]+', '-', text.lower())).strip('-')
+
+
+def fetch_photo(url):
+    req = urllib.request.Request(PANEL_URL.rstrip('/') + url, headers={'Accept': 'image/*'})
+    with urllib.request.urlopen(req, timeout=90) as resp:
+        return resp.read()
+
+
+def pull_photos(artist, remote):
+    """
+    Ściąga zdjęcia z panelu do repozytorium: portret i trzy prace.
+
+    Pliki lądują w repo na stałe — strona ma działać, gdy panel śpi albo go nie ma.
+    Zdjęcie, które już leży na dysku, zostawiamy: panel jest źródłem prawdy dla
+    danych, ale nie każe co build ściągać po kilkanaście megabajtów od nowa.
+    """
+    folder = os.path.join('assets', 'artists', artist['slug'])
+    wanted = [('profile.jpg', remote.get('profilePhoto'))]
+    for i, url in enumerate(remote.get('workPhotos') or [], start=1):
+        if i > 3:
+            break
+        wanted.append((f'work{i}.jpg', url))
+
+    pulled = 0
+    for filename, url in wanted:
+        if not url:
+            continue
+        target = os.path.join(folder, filename)
+        if os.path.exists(target):
+            continue
+        try:
+            blob = fetch_photo(url)
+        except (urllib.error.URLError, TimeoutError) as exc:
+            print(f'  Nie udało się pobrać {filename} dla {artist["name"]}: {exc}')
+            continue
+        os.makedirs(folder, exist_ok=True)
+        with open(target, 'wb') as f:
+            f.write(blob)
+        pulled += 1
+    return pulled
+
+
+def has_photos(slug):
+    folder = os.path.join('assets', 'artists', slug)
+    return all(os.path.exists(os.path.join(folder, f))
+               for f in ('profile.jpg', 'work1.jpg', 'work2.jpg', 'work3.jpg'))
 
 
 def gone_stub():
