@@ -24,6 +24,7 @@ import urllib.error
 import urllib.request
 
 DATA_PATH = '_data/artists.json'
+FACTS_PATH = '_data/public-facts.json'
 INDEX_PATH = 'index.html'
 
 # Adres panelu. Nadpisywalny zmienną środowiskową, żeby dało się celować w localhost.
@@ -34,6 +35,20 @@ PANEL_URL = os.environ.get('INKROUTE_URL', 'https://inkroute-q2pp.onrender.com')
 # prawdy, a zdjęcia leżą w repo — z tego da się zbudować całą stronę.
 DATA = json.load(open(DATA_PATH, encoding='utf-8')) if os.path.exists(DATA_PATH) else []
 DATA.sort(key=lambda a: a['name'].lower())
+
+# Publiczny wyciąg z ankiet: style, rok startu, języki, miasto, Instagram.
+# Panel jest źródłem prawdy, ale nie wie wszystkiego — czego nie poda, bierzemy
+# stąd. Bez tego automatyczny build w CI kasowałby ze stron dane, których nigdzie
+# indziej nie ma, łącznie z linkami do Instagrama.
+FACTS = json.load(open(FACTS_PATH, encoding='utf-8')) if os.path.exists(FACTS_PATH) else {}
+
+
+def apply_facts(entry):
+    """Uzupełnia puste pola artysty wyciągiem z ankiet. Nie nadpisuje panelu."""
+    for key, value in FACTS.get(entry['slug'], {}).items():
+        if entry.get(key) in (None, '', []) and value not in (None, '', []):
+            entry[key] = value
+    return entry
 
 # Kolejność jest kolejnością przycisków na stronie: EN, DE, FR, PL, RU, UA.
 LANGS = ('en', 'de', 'fr', 'pl', 'ru', 'ua')
@@ -372,6 +387,7 @@ def sync_from_panel(dry_run=False):
         matched.add(id(r))
         # Zdjęcia dociągamy tylko brakujące: te, które już leżą w repo, zostają.
         pull_photos(a, r)
+        apply_facts(a)
         # Nadpisujemy tylko to, co panel faktycznie wie — pusta wartość nie kasuje ankiety.
         fields = {
             'country': r.get('country'),
@@ -425,7 +441,7 @@ def sync_from_panel(dry_run=False):
             print(f'  Nowy w panelu, ale brak kompletu zdjęć: {display} '
                   f'(portret + 3 prace, pobrano {pulled})')
             continue
-        DATA.append(entry)
+        DATA.append(apply_facts(entry))
         matched.add(id(r))
         changed += 1
         print(f'  Nowy artysta z panelu: {display}')

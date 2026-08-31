@@ -1,5 +1,12 @@
 # Dane osobowe artystów z ankiety - nigdy nie trafiają do publicznego repo
-_data/
+# Ankiety zawierają dane osobowe (telefony, daty urodzenia, komunikatory)
+# i do repozytorium nie trafiają. Wzorzec z gwiazdką, bo git nie zagląda
+# do wykluczonego katalogu i wyjątek poniżej inaczej by nie zadziałał.
+_data/*
+# Wyjątek: publiczna wyciąg z ankiet — tylko to, co i tak jest wydrukowane
+# na stronie (style, rok startu, języki, miasto, Instagram). Potrzebny
+# buildowi w CI, gdzie pełnych ankiet nie ma i być nie powinno.
+!_data/public-facts.json
 _incoming/
 
 .DS_Store
