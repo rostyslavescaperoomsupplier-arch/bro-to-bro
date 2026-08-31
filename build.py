@@ -336,7 +336,8 @@ def same_person(panel_tokens, site_tokens):
 def fetch_panel_artists():
     url = PANEL_URL.rstrip('/') + '/api/public/artists'
     req = urllib.request.Request(url, headers={'Accept': 'application/json'})
-    with urllib.request.urlopen(req, timeout=20) as resp:
+    # Panel na darmowym planie zasypia; zimny start potrafi zająć pół minuty.
+    with urllib.request.urlopen(req, timeout=90) as resp:
         return json.loads(resp.read().decode('utf-8'))
 
 
@@ -410,6 +411,38 @@ def sync_from_panel(dry_run=False):
     return matched_site
 
 
+def gone_stub():
+    '''
+    Strona artysty, którego nie ma już w składzie.
+
+    Nie kasujemy pliku, tylko go nadpisujemy: Render publikuje statykę
+    przyrostowo i **nie usuwa** z CDN plików, które zniknęły z repozytorium —
+    skasowana strona dalej otwierała się pod starym adresem. Nadpisanie działa
+    zawsze, bo ścieżka zostaje w deployu.
+
+    Odwiedzający trafia do ekipy, wyszukiwarki dostają noindex i canonical.
+    '''
+    return '''<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="index.html">
+<meta http-equiv="refresh" content="0; url=index.html#artysci">
+<title>BRO TO BRO Tattoo Art Studio Szczecin</title>
+<link rel="icon" href="assets/logo-mark.png">
+<style>html,body{margin:0;height:100%;background:#0b0b0c;color:#918d86;
+font:400 15px/1.5 'Archivo',system-ui,sans-serif;display:grid;place-items:center}
+a{color:#fff}</style>
+</head>
+<body>
+<p>Ten artysta nie jest już w składzie. <a href="index.html#artysci">Zobacz ekipę</a>.</p>
+<script>location.replace('index.html#artysci');</script>
+</body>
+</html>
+'''
+
 def artists_block():
     """Lista ekipy dla index.html. Kraj wchodzi tylko wtedy, gdy jest znany."""
     rows = []
@@ -467,11 +500,10 @@ def main():
             dropped = [a for a in DATA if a['slug'] not in published]
             if dropped:
                 for a in dropped:
-                    stale = f"artysta-{a['slug']}.html"
-                    if os.path.exists(stale):
-                        os.remove(stale)
+                    with open(f"artysta-{a['slug']}.html", 'w', encoding='utf-8') as f:
+                        f.write(gone_stub())
                 names = ', '.join(a['name'] for a in dropped)
-                print(f'Poza składem wg panelu ({len(dropped)}), strony usunięte: {names}')
+                print(f'Poza składem wg panelu ({len(dropped)}), strony przekierowane: {names}')
                 DATA[:] = [a for a in DATA if a['slug'] in published]
 
     n = len(DATA)
