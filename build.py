@@ -29,7 +29,10 @@ INDEX_PATH = 'index.html'
 # Adres panelu. Nadpisywalny zmienną środowiskową, żeby dało się celować w localhost.
 PANEL_URL = os.environ.get('INKROUTE_URL', 'https://inkroute-q2pp.onrender.com')
 
-DATA = json.load(open(DATA_PATH, encoding='utf-8'))
+# Ankiety zawierają dane osobowe i leżą poza repozytorium (.gitignore), więc
+# w CI tego pliku po prostu nie ma. To nie jest awaria: panel jest źródłem
+# prawdy, a zdjęcia leżą w repo — z tego da się zbudować całą stronę.
+DATA = json.load(open(DATA_PATH, encoding='utf-8')) if os.path.exists(DATA_PATH) else []
 DATA.sort(key=lambda a: a['name'].lower())
 
 # Kolejność jest kolejnością przycisków na stronie: EN, DE, FR, PL, RU, UA.
@@ -403,11 +406,20 @@ def sync_from_panel(dry_run=False):
         if not name:
             continue
         nick = (r.get('nickname') or '').strip()
-        display = f'{name} {nick}'.strip() if nick else name
-        slug = slugify(display)
+        slug = resolve_slug(name, nick)
         if not slug:
             continue
+        # Nazwa na stronie: tak, jak zapisano ją w katalogu ze zdjęciami, żeby
+        # ludzie znani z pseudonimu nie zmienili nagle podpisu.
+        display = f'{name} {nick}'.strip() if nick and slug != slugify(name) else name
         entry = {'name': display, 'slug': slug, 'works': 3, 'confidence': 'none'}
+        for key, value in (('country', r.get('country')), ('countryCode', r.get('countryCode')),
+                           ('city', r.get('city')), ('since', r.get('startedYear')),
+                           ('styles', r.get('styles') or None),
+                           ('langs', [x.upper() for x in (r.get('languages') or [])] or None),
+                           ('ig', (r.get('instagram') or '').lstrip('@') or None)):
+            if value not in (None, '', []):
+                entry[key] = value
         pulled = pull_photos(entry, r)
         if not has_photos(slug):
             print(f'  Nowy w panelu, ale brak kompletu zdjęć: {display} '
@@ -425,7 +437,9 @@ def sync_from_panel(dry_run=False):
     for r in remote:
         r.pop('_tokens', None)
 
-    if not dry_run:
+    # Plik z ankietami zapisujemy tylko wtedy, gdy już istnieje: w CI katalogu
+    # _data nie ma i tworzenie go tam nie ma sensu — i tak nie trafi do repo.
+    if not dry_run and os.path.isdir(os.path.dirname(DATA_PATH)):
         with open(DATA_PATH, 'w', encoding='utf-8') as f:
             json.dump(DATA, f, ensure_ascii=False, indent=1)
             f.write('\n')
@@ -445,6 +459,21 @@ def slugify(name):
     text = ''.join(c for c in text if not unicodedata.combining(c))
     text = text.replace('\u0142', 'l').replace('\u0141', 'L')
     return re.sub(r'-+', '-', re.sub(r'[^a-z0-9]+', '-', text.lower())).strip('-')
+
+
+def resolve_slug(name, nick):
+    """
+    Adres strony artysty. Najpierw szukamy katalogu, który już jest w repo:
+    zmiana sluga to zerwane linki i zdjęcia szukane pod złą ścieżką.
+
+    W panelu „nickname" bywa nazwą z Instagrama, a katalog nazywa się po samym
+    imieniu i nazwisku — dlatego sprawdzamy oba warianty.
+    """
+    candidates = ([slugify(f'{name} {nick}')] if nick else []) + [slugify(name)]
+    for cand in candidates:
+        if cand and os.path.isdir(os.path.join('assets', 'artists', cand)):
+            return cand
+    return candidates[-1]
 
 
 def fetch_photo(url):
@@ -560,6 +589,7 @@ def write_index_artists():
 
 
 def main():
+    """Zwraca kod wyjścia: 0 gdy zbudowano, 1 gdy nie było z czego."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--sync', action='store_true',
                         help='pobierz publiczne dane artystów z panelu InkRoute')
@@ -570,10 +600,16 @@ def main():
     if args.dry_run:
         sync_from_panel(dry_run=True)
         print('(--dry-run: nic nie zapisano)')
-        return
+        return 0
 
     if args.sync:
         published = sync_from_panel()
+        # Bez ankiet w repo (CI) i bez odpowiedzi panelu nie ma z czego budować.
+        # Lepiej wyjść błędem i zostawić stronę taką, jaka jest, niż wygenerować
+        # pustą listę i zdjąć z serwisu całą ekipę.
+        if not DATA:
+            print('Brak danych: panel nie odpowiedział, a lokalnych ankiet nie ma. Nic nie zmieniam.')
+            return 1
         DATA.sort(key=lambda a: a['name'].lower())
         # Panel jest źródłem prawdy także co do składu: kogo tam zarchiwizowano,
         # tego nie ma i tutaj. Pusta odpowiedź to awaria, a nie zwolnienie całej
@@ -603,7 +639,8 @@ def main():
         print(f'index.html: lista ekipy odświeżona, z krajem {with_country} z {n}')
     if not with_country:
         print('Kraje artystów puste — sekcja krajów na stronie się nie pokaże (czekamy na dane).')
+    return 0
 
 
 if __name__ == '__main__':
-    main()
+    sys.exit(main() or 0)

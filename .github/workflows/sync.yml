@@ -1,0 +1,53 @@
+# Синхронизация сайта с панелью InkRoute.
+#
+# Панель — источник правды: состав, страны, фотографии. Часть изменений сайт
+# подхватывает сам при заходе посетителя (состав и страны в сетке мастеров),
+# но страницы профилей и сами фотографии живут в репозитории, поэтому их
+# обновляет этот планировщик.
+#
+# Если панель не ответила, build.py выходит с кодом 1 и ничего не меняет —
+# спящий сервис не должен снимать с сайта всю команду.
+name: sync
+
+on:
+  schedule:
+    # Каждые полчаса. Чаще нет смысла: состав и страны и так видны сразу,
+    # а фотографии добавляют не ежеминутно.
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+
+# Два прогона одновременно подрались бы за один и тот же коммит.
+concurrency:
+  group: sync
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Забрать данные и фотографии из панели
+        run: python3 build.py --sync
+
+      - name: Закоммитить, если что-то изменилось
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "Изменений нет."
+            exit 0
+          fi
+          git config user.name "inkroute-sync"
+          git config user.email "actions@github.com"
+          git add -A
+          git commit -m "Синхронизация с панелью
+
+          Автоматический прогон: состав, страны и фотографии приведены
+          к тому, что сейчас в InkRoute."
+          git push
